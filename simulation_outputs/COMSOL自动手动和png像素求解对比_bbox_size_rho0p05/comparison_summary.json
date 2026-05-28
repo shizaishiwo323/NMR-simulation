@@ -1,0 +1,26 @@
+{
+  "comsol_xlsx": "C:\\Users\\imgw\\Documents\\Codex\\RTSPHEM-main\\outputs\\rtm_runs\\rtm_20260502_220315_980_hex\\comsol_results\\T2_t0001.xlsx",
+  "extra_comsol_xlsx": "C:\\Users\\imgw\\Documents\\Codex\\RTSPHEM-main\\outputs\\rtm_runs\\rtm_20260502_220315_980_hex\\comsol_results\\COMSOL手动划分边界T2_t0001.xlsx",
+  "png_decay_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\rtm_20260502_220315_980_hex_t0001_bbox_size_5500ms_rho0p05\\timestep_0001_nmr_decay.csv",
+  "decay_comparison_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\COMSOL自动手动和png像素求解对比_bbox_size_rho0p05\\timestep_0001_decay_comparison.png",
+  "t2_comparison_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\COMSOL自动手动和png像素求解对比_bbox_size_rho0p05\\timestep_0001_t2_inversion_comparison_alpha0p1.png",
+  "inversion_config": {
+    "num_bins": 200,
+    "regularization": 0.1,
+    "t2_min_ms": 1.0,
+    "t2_max_ms": 10000.0,
+    "min_points_after_trim": 10
+  },
+  "comsol_peak_time_ms_raw": 0.0035009014713833866,
+  "extra_comsol_peak_time_ms_raw": 0.00350090151715693,
+  "png_peak_time_ms_raw": 0.0,
+  "comsol_decay_points": 1586,
+  "extra_comsol_decay_points": 1586,
+  "png_decay_points": 1101,
+  "comsol_residual_norm": 16.658841238987794,
+  "extra_comsol_residual_norm": 17.815154959083483,
+  "png_residual_norm": 5.953465000004743,
+  "comsol_peak_t2_ms": 195.63983435170647,
+  "extra_comsol_peak_t2_ms": 195.63983435170647,
+  "png_peak_t2_ms": 148.20207057988586
+}

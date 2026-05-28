@@ -127,6 +127,7 @@ advanced_tools/      高级脚本，需要时再看
 
 - `Auto_T1.py`: T1 模拟
 - `image_slice_simulation.py`: 玻璃珠/CT 分割图输入
+- `png_phase_nmr_decay.py`: 红/黄/白 PNG phase map 输入，输出 NMR T2 弛豫曲线
 - `run_triangle_contact_angle_cases.py`: 多接触角/三角形批量计算
 - `triangle_contact_angle_full_suite.py`: 单组三角孔完整 T2/T2-T2/D-T2
 - `CA_Drain_and_imbi.py`: 接触角排水/吸水水分分布
@@ -139,6 +140,31 @@ advanced_tools/      高级脚本，需要时再看
 $env:PYTHONPATH='.'
 python advanced_tools/image_slice_simulation.py
 ```
+
+红色代表水相、黄色代表固体、白色代表外部区域的 PNG 可以直接运行：
+
+```powershell
+$env:PYTHONPATH='.'
+python advanced_tools/png_phase_nmr_decay.py "C:\path\to\interface_images" --output-dir simulation_outputs/png_phase_nmr_decay --pattern "timestep_*.png"
+```
+
+如果知道图像对应的实际物理尺寸，建议直接传入横向和纵向长度：
+
+```powershell
+$env:PYTHONPATH='.'
+python advanced_tools/png_phase_nmr_decay.py "C:\path\to\interface_images\timestep_0002.png" --output-dir simulation_outputs/png_phase_nmr_decay --length-x-cm 0.0575 --length-y-cm 0.042
+```
+
+默认边界解释为：内部红-黄接触是固液边界，左/右白边接触是气液边界，上/下白边接触是固液边界。`--rho-solid-um-per-ms`、`--rho-gas-um-per-ms`、`--diffusion-um2-per-ms`、`--bulk-t2-ms`、`--length-x-cm` 和 `--length-y-cm` 应按实验或文献参数确认后设置。
+
+如果需要三角网格而不是像素有限差分网格，可以启用：
+
+```powershell
+$env:PYTHONPATH='.'
+python advanced_tools/png_phase_nmr_decay.py "C:\path\to\interface_images\timestep_0001.png" --output-dir simulation_outputs/png_tri_mesh --length-x-cm 0.0575 --length-y-cm 0.037176914536239794 --solver triangular --mesh-bulk-size-um 10 --mesh-boundary-size-um 2.5
+```
+
+`--mesh-bulk-size-um` 控制水相内部点间距，数值越小整体越细；`--mesh-boundary-size-um` 控制水-固/水-气边界采样间距，建议小于 bulk size，使靠近边界的网格更密。三角网格会同时输出预览图、pyGIMLi 可读取的 `.bms` 网格文件、逐单元质量 CSV 和网格质量直方图。
 
 ## 示例
 
