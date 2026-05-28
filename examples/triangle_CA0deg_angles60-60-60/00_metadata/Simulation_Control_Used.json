@@ -1,0 +1,110 @@
+{
+  "run": {
+    "interactive": false,
+    "output_dir": "simulation_outputs/Auto_NMR_controlled",
+    "show_figures": false
+  },
+  "modules": {
+    "uncoupled_t2": true,
+    "coupled_t2": true,
+    "t2_t2": true,
+    "dt2": true,
+    "effective_exchange_rate": false
+  },
+  "inversion": {
+    "mode": "fixed",
+    "alpha": 1.0,
+    "image_mode": "l_curve"
+  },
+  "saturation": {
+    "target_saturations": [
+      0.0226,
+      0.12,
+      0.153,
+      0.38,
+      1.0
+    ]
+  },
+  "geometry": {
+    "mode": "verified_triangle",
+    "triangle_angles_deg": [
+      60.0,
+      60.0,
+      60.0
+    ],
+    "contact_angle_deg": 0.0,
+    "process": "Drainage",
+    "slice_path": null
+  },
+  "triangle_ca": {
+    "enabled": true,
+    "output_dir": "simulation_outputs/triangle_60_60_60_contact_0",
+    "contact_angle_deg": 0.0,
+    "triangle_angles_deg": [
+      60.0,
+      60.0,
+      60.0
+    ],
+    "processes": [
+      "Drainage",
+      "Imbibition"
+    ],
+    "selected_rm_mode": "default"
+  },
+  "triangle_full": {
+    "output_dir": "simulation_outputs/triangle_full_CA0p0deg_angles_60-60-60",
+    "strict_dt2_b_log_points": 9,
+    "strict_dt2_te_points": 16
+  },
+  "image_slice": {
+    "enabled": true,
+    "input_path": "Result.tif",
+    "output_dir": "simulation_outputs/image_slice_Result",
+    "pixel_size_um": 1.0,
+    "solid_value": 255,
+    "water_value": 102,
+    "air_value": 153,
+    "outside_value": 0,
+    "unknown_values": [
+      204
+    ],
+    "smooth_radius_px": 2,
+    "interface_sigma_px": 1.25,
+    "max_grid_size": null,
+    "run_t2": true,
+    "run_t2_t2": true,
+    "run_dt2": true
+  },
+  "t2_t2": {
+    "t1_points": 25,
+    "t2_points": 35,
+    "bin_points": 35,
+    "t_axis_min_ms": 1.0,
+    "t_axis_max_ms": 1258.9254117941675,
+    "bin_min_ms": 3.1622776601683795,
+    "bin_max_ms": 3162.2776601683795,
+    "mixing_time_ms": 30.0,
+    "alpha": 0.05
+  },
+  "dt2": {
+    "b_axis": [
+      0.0
+    ],
+    "b_log_min": -3.0,
+    "b_log_max": 0.55,
+    "b_log_points": 13,
+    "te_min_ms": 25.0,
+    "te_max_ms": 1300.0,
+    "te_points": 24,
+    "d_log_min": -3.0,
+    "d_bin_scale_to_bulk_D": 1.5,
+    "d_bins": 32,
+    "t2_bin_min_ms": 3.1622776601683795,
+    "t2_bin_max_ms": 3162.2776601683795,
+    "t2_bins": 40,
+    "delta_ms": 20.0,
+    "pde_dt_ms": 8.0,
+    "grad_axis": "y",
+    "alpha": 0.025
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "input_path": "C:\\Users\\Yu\\PyCharmMiscProject\\Triangle\\nmr_t2\\Result.tif",
+  "raw_shape": [
+    483,
+    459
+  ],
+  "simulation_shape": [
+    483,
+    459
+  ],
+  "downsample_scale": 1.0,
+  "pixel_size_um_used": 1.0,
+  "phase_counts_cleaned": {
+    "0": 59084,
+    "102": 41842,
+    "153": 12155,
+    "255": 108616
+  },
+  "water_components_downsampled": 50,
+  "uncoupled_components_used": 50,
+  "largest_water_components_px": [
+    [
+      2,
+      23432
+    ],
+    [
+      6,
+      4299
+    ],
+    [
+      5,
+      2038
+    ],
+    [
+      18,
+      1555
+    ],
+    [
+      8,
+      1527
+    ],
+    [
+      15,
+      1311
+    ],
+    [
+      32,
+      1171
+    ],
+    [
+      3,
+      1078
+    ],
+    [
+      29,
+      941
+    ],
+    [
+      30,
+      552
+    ]
+  ],
+  "coupling_interpretation": "For this segmented image, water exists as disconnected components. A full-water coupled solve is block-diagonal unless a physical water throat connects components; therefore coupled and uncoupled outputs are expected to be nearly identical for the current segmentation.",
+  "selected_alpha_coupled": 10.0,
+  "selected_alpha_uncoupled": 10.0,
+  "fixed_alpha_for_comparison": 1.0,
+  "model_limitations": [
+    "Uses existing segmented water phase only.",
+    "Does not solve Young-Laplace/minimum-energy saturation redistribution.",
+    "T2-T2 and D-T2 are reduced maps derived from the full-resolution PDE T2 response; strict PFG complex PDE is not enabled in this quick run."
+  ]
+}

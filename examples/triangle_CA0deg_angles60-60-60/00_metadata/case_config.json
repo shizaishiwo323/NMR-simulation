@@ -1,0 +1,21 @@
+{
+  "case_id": "triangle_CA0deg_angles60-60-60",
+  "geometry_type": "triangle_two_pore",
+  "contact_angle_deg": 0.0,
+  "inner_angles_deg": [
+    60.0,
+    60.0,
+    60.0
+  ],
+  "source_outputs": {
+    "full_suite": "simulation_outputs\\triangle_full_CA0p0deg_angles_60-60-60",
+    "ca_water_distribution": "simulation_outputs\\triangle_60_60_60_contact_0",
+    "combined_figures": "simulation_outputs\\combined_figures"
+  },
+  "organized_at": "2026-05-18T14:14:58",
+  "notes": [
+    "Original files are copied, not moved.",
+    "T2 corrected tables use component-wise Large/Small spectra and saturation-scaled amplitudes.",
+    "Effective coupling follows the Zhou et al. 2026 GRL-style phi_c/lambda_mean parameterization."
+  ]
+}

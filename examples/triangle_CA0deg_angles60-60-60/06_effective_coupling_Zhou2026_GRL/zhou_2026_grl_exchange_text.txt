@@ -1,0 +1,1117 @@
+
+---PAGE 1---
+How Does Fluid Exchange Between Pores in Unsaturated
+Porous Media?
+Junwen Zhou
+1
+, Laurenz Schröer
+2
+, Veerle Cnudde
+2,3
+, and Chi Zhang
+1
+1
+Department of Meteorology and Geophysics, University of Vienna, Vienna, Austria,
+2
+PProGRess‐UGCT, Department of
+Geology, Ghent University, Ghent, Belgium,
+3
+Environmental Hydrogeology, Department of Earth Sciences, Utrecht
+University, Utrecht, The Netherlands
+Abstract The inter‐pore fluid exchange, driven by molecular diffusion, is referred to as pore coupling. The
+pore coupling affects subsurface pore‐scale physicochemical dynamics. Monitoring pore coupling is essential
+for understanding numerous hydrological and ecological processes. Nuclear magnetic resonance (NMR) has
+effectively tracked pore coupling in saturated porous media. However, monitoring unsaturated pore coupling
+with NMR is challenging due to the complex pore network architecture and dynamic water‐pathway
+connectivity. Based on X‐ray computed tomography imaging, we develop a framework to simulate the NMR
+T
+2
+‐distribution and T
+2
+‐store‐ T
+2
+map of samples with distinct‐sized pore environments at different water
+saturations, validated against measurements. NMR results, combined with visualized pore networks and phase
+distributions, demonstrate that reduced saturation induces increasingly tortuous and eventually disconnected
+water‐pathways, thus restricting and ultimately blocking pore coupling. Our work enhances NMR applications
+in unsaturated media, providing accurate insights into the complex architecture and hydrodynamics in the pore
+network.
+Plain Language Summary Fluid is widely retained within the pore network in shallow vadose zone
+soils, weathered bedrock, and deep oil and gas formations. Monitoring inter‐pore fluid diffusion and exchange
+(pore coupling) through the pore network is crucial for managing groundwater resources, preserving
+ecosystems, and mitigating environmental hazards. Nuclear magnetic resonance (NMR) is a powerful
+geophysical method to investigate pore‐scale fluid dynamics. Although NMR can provide detailed insights into
+pore coupling within saturated soils and rocks, its application in unsaturated subsurface materials remains
+challenging, even at the laboratory scale. To address this challenge, we developed a framework to integrate
+measurements and simulations to track the pore coupling and its NMR response under the unsaturated state.
+First, using X‐ray micro computed tomography, we visualize detailed pore network structures and phase
+distributions to simulate NMR results validated against measurements, investigating how pore coupling affects
+unsaturated NMR responses. The results also show that as saturation decreases, weakening pore coupling
+tracked by NMR detects more tortuous and eventually disconnected water‐pathways, enabling the evaluation of
+connectivity in unsaturated pore networks by applying NMR to monitor pore coupling. Our framework
+enhances our understanding of how NMR can be applied in tracking hydrodynamics within a partially saturated
+subsurface environment.
+1. Introduction
+Extensive pore networks exist throughout subsurface porous media, from shallow vadose zone soils to deep
+aquifers and hydrocarbon reservoirs, governing underground fluid migration and storage. Within these pore
+networks, fluid molecules continuously diffuse and exchange between pores (e.g., Anand & Hirasaki, 2007 ;
+Grunewald & Knight, 2009 ; Toumelin et al., 2003 ), a process known as diffusional pore coupling. This inter‐pore
+exchange influences pore‐environment behaviors, enhancing pore‐scale heat redistribution (Koch et al., 2021 ),
+promoting solute mixing (e.g., Baqer & Chen, 2022 ; Sadeghi et al., 2003 ; Jiménez‐Martínez et al., 2020 ; Perez
+et al., 2023 ), and affecting pore‐scale fluid‐rock interactions by modifying local concentration gradients.
+Consequently, pore coupling alters key hydrodynamic and thermodynamic processes and regulates reaction ki-
+netics within the subsurface. These effects influence natural processes such as freeze–thaw dynamics in
+permafrost aggregates (Rooney et al., 2022 ) and contaminant migration in the vadose zone (Chen et al., 2023 ), as
+well as engineered applications such as recovery and management of hydrocarbon reservoirs (Li et al., 2024 ).
+RESEARCH LETTER
+10.1029/2025GL120450
+Key Points:
+• We develop a framework that
+combines Nuclear magnetic resonance
+simulation and measurement to
+investigate pore coupling in
+unsaturated porous media
+• Our simulation and measurement
+results reflect that the decrease in
+saturation weakens the degree of pore
+coupling
+• Weakening pore coupling corresponds
+to more tortuous and eventually
+disconnected water‐pathways due to
+reduced saturation
+Supporting Information:
+Supporting Information may be found in
+the online version of this article.
+Correspondence to:
+C. Zhang,
+chi.zhang@univie.ac.at
+Citation:
+Zhou, J., Schröer, L., Cnudde, V., &
+Zhang, C. (2026). How does fluid
+exchange between pores in unsaturated
+porous media? Geophysical Research
+Letters , 53 , e2025GL120450. https://doi.
+org/10.1029/2025GL120450
+Received 12 NOV 2025
+Accepted 19 JAN 2026
+Author Contributions:
+Conceptualization: Chi Zhang
+Formal analysis: Junwen Zhou
+Funding acquisition: Laurenz Schröer,
+Veerle Cnudde, Chi Zhang
+Investigation: Junwen Zhou, Chi Zhang
+Methodology: Junwen Zhou,
+Laurenz Schröer, Veerle Cnudde
+Project administration: Chi Zhang
+Resources: Laurenz Schröer,
+Veerle Cnudde, Chi Zhang
+Validation: Junwen Zhou,
+Laurenz Schröer, Veerle Cnudde,
+Chi Zhang
+Visualization: Junwen Zhou,
+Laurenz Schröer
+Writing – original draft: Junwen Zhou
+© 2026. The Author(s).
+This is an open access article under the
+terms of the Creative Commons
+Attribution License, which permits use,
+distribution and reproduction in any
+medium, provided the original work is
+properly cited.
+ZHOU ET AL. 1 of 11
+
+
+---PAGE 2---
+Despite its importance, the mechanisms controlling pore coupling remain poorly understood. Previous experi-
+mental studies have visualized diffusion‐driven transport and its effects on pore‐scale fluid kinetics in millifluidic
+or microfluidic devices with simplified pore systems using imaging techniques such as scanning electrochemical
+microscopy or high‐speed camera (e.g., Jiménez‐Martínez et al., 2015 ; Liu et al., 2016 ; Zhang et al., 2025 ; Zhou
+et al., 2022 ). Numerical simulations have also been applied to model pore‐scale diffusion reactions based on
+idealized pore network models (e.g., Collin et al., 2025 ; Li et al., 2017 ). However, these idealized frameworks
+lack the complexity of natural pore network architectures and cannot capture the dynamic connectivity of water‐
+pathways in partially saturated materials, where solid–liquid–vapor interactions strongly influence molecular
+diffusion. In particular, how the degree of pore coupling changes with decreasing saturation, and how this change
+can be observed and quantified, remains unresolved.
+Low‐field nuclear magnetic resonance (NMR) provides a powerful, non‐invasive way to investigate fluid
+behavior within porous media due to its sensitivity to hydrogen in fluid molecules (Coates et al., 1999 ; Kirkland &
+Codd, 2018 ; Prammer, 2004 ). NMR measures magnetization and relaxation times ( T
+1
+or T
+2
+) of protons after an
+applied magnetic field removal to estimate water content, pore size distribution, and hydraulic conductivity
+(Behroozmand et al., 2015 ). In multimodal pore systems, pore coupling drives inter‐pore exchange of magnetized
+protons, as shown in Figures 1a and 1b . This exchange averages NMR relaxation behavior (Soto Bravo &
+Zhang, 2023 ), causing T
+2
+peaks to shift or merge, which masks individual pore signatures and can make a
+multimodal system appear unimodal (Ramakrishnan et al., 1999 ). The 2D T
+2
+‐store‐ T
+2
+map captures this process
+through asymmetric off‐diagonal peaks, which indicate magnetized proton exchange between pores and reflect
+both proton chemical shifts and inter‐pore molecular exchange during mixing periods (Song, 2013 ; F. Zhang &
+Zhang, 2021 ). While NMR effectively tracks pore coupling in fully saturated materials (e.g., Anand & Hir-
+asaki, 2007 ; Grunewald & Knight, 2009 ), variations in water‐pathway geometry and connectivity complicate its
+application under unsaturated conditions. Accurately quantifying pore coupling and its NMR responses in un-
+saturated porous media is crucial to fully leverage NMR's potential for investigating pore‐scale hydrodynamics
+and advancing understanding of subsurface physicochemical processes such as mineral dissolution and soil
+swelling.
+To address this knowledge gap, we develop a framework combining NMR simulation and measurement with X‐
+ray micro computed tomography (μCT) imaging to investigate pore coupling evolution in unsaturated
+multimodal‐pore systems. Specifically, we: (a) integrate μCT imaging to visualize detailed pore network
+structures and phase distributions; (b) simulate NMR T
+2
+‐distributions and T
+2
+‐store‐ T
+2
+map at varying saturations
+and validate against laboratory measurements; (c) quantify how decreasing saturation weakens pore coupling by
+tracking increasingly tortuous and eventually disconnected water pathways. Our results substantially enhance
+NMR applications for characterizing unsaturated media and reveal how water‐pathway connectivity governs pore
+coupling evolution, with implications for field‐scale NMR investigations of subsurface hydrodynamics.
+2. Experimental and Simulation Methods
+2.1. NMR Theory and Relaxation Mechanisms
+The spatiotemporal evolution of magnetization during NMR excitation and relaxation of protons in pore fluids is
+described by the Bloch‐Torrey equation (Bloch, 1946 ; Torrey, 1956 ). The relaxation process manifests as
+transverse ( T
+2
+) or longitudinal ( T
+1
+) relaxation (Brownstein & Tarr, 1979 ), dominated by three mechanisms: bulk
+( T
+1B , 2B
+), surface ( T
+1S , 2S
+), and diffusion relaxation ( T
+2D
+). These combined relaxation rate can be expressed as:
+1
+T
+1 , 2
+=
+1
+T
+1B , 2B
++
+1
+T
+1S , 2S
++
+1
+T
+2D
+( 1 )
+Bulk relaxation takes place spontaneously in the fluid and depends on fluid properties. Diffusion relaxation occurs
+in inhomogeneous magnetic fields and only affects T
+2
+. Surface relaxation occurs in confined pore systems, and
+the relaxation rate of excited nuclei is enhanced by surface interactions at the fluid‐solid interfaces, driven by the
+magnetic dipolar interactions between fluid spins and interfacial magnetic dipoles (Foley et al., 1996 ; Tor-
+rey, 1956 ). The active boundary condition is defined to reflect these molecular interactions at the solid‐fluid
+boundary. In geologic media, the surface relaxation mechanism governs the relaxation process in the absence
+of magnetic field inhomogeneities. As a result, Equation 1 can be written as
+Writing – review & editing:
+Laurenz Schröer, Veerle Cnudde,
+Chi Zhang
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 2 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 3---
+1
+T
+1 , 2
+≈
+1
+T
+1S , 2S
+= ρ
+s
+S
+V
+( 2 )
+Here, S represents the surface area of water‐filled pores, ρ
+s
+is the surface relaxivity, and V is fluid‐filled pore
+volume. Equation 2 reflects a well‐perceived correlation between NMR relaxation time and pore size. In the
+unsaturated system, as air is the non‐contributing passive volume to NMR responses (Mohnke & Klitzsch, 2010 ),
+the passive boundary condition is defined to qualify the magnetization at fluid‐air interfaces. For complete details
+on Bloch‐Torrey equation, boundary conditions, and derivations, refer to Section 1 . Theory of NMR simulation
+and measurement of Text S1 in Supporting Information S1 .
+2.2. NMR Measurement Protocol
+Multimodal pore samples were prepared by mixing glass beads of varying sizes and packing them into thin‐wall
+polypropylene tubes (10 mm inner diameter and 20 mm length). Each sample at a specific water saturation S
+w
+was
+placed into a cylindrical holder and loaded into the 12 MHz NMR core analyzer from Niumag MacroMR
+(Figure 1c ). Here, S
+w
+= V
+w
+/ V
+pore
+, where V
+w
+is water volume and V
+pore
+is total pore volume.
+Figure 1. Scenarios of (a) uncoupled and (b) coupled pore system and their respective relaxation time distributions; schematic
+diagram of (c) Sample preparation and (d) Nuclear magnetic resonance (NMR) experiment, (e) numerical simulation of
+NMR based on μCT imaging, and (f) NMR outputs.
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 3 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 4---
+Two types of NMR measurements were applied. First, we performed T
+2
+relaxation measurements on samples at
+different saturations using the Carr‐Purcell‐Meiboom‐Gill (CPMG) pulse sequence. Subsequently, we conducted
+2D T
+2
+‐store‐ T
+2
+measurements for these samples using Transverse Relaxation Exchange (TREx) pulse sequence.
+The TREx sequence consists of two CPMG trains separated by a storage period, during which the magnetization
+is stored along the z ‐axis (Montrazi et al., 2018 ). During this storage time, magnetized protons diffuse between
+pore environments, enabling inter‐pore magnetization exchange. A 600 ms storage time was selected to ensure
+sufficient inter‐pore proton exchange and thereby accurately and quantitatively capture the degree of pore
+coupling in multimodal systems. The collected NMR signals were inverted to obtain T
+2
+‐distributions and 2D T
+2
+‐
+store‐ T
+2
+maps of samples at different saturations. Complete details on pulse sequence parameters, and inversion
+methods are provided in Section 2 . T
+2
+‐distribution simulation and measurement and 3. T
+2
+‐store‐ T
+2
+map simu-
+lation and measurement of Text S1 in Supporting Information S1 , while details on sample preparation procedures
+are provided in Sample for NMR measurement of Text S2 in Supporting Information S1 .
+2.3. μCT Imaging and NMR Responses Simulation
+The μCT imaging of samples was conducted using the HECTOR system (Masschaele et al., 2013 ) at the Ghent
+University Centre for X‐ray Tomography (UGCT). The μCT setup is shown in Figure 1d . To achieve high‐
+resolution imaging of phase distributions, smaller sample tubes (5 mm inner diameter and 20 mm length) were
+used compared to those for NMR measurements. Samples with different water saturations were prepared with
+2.5% potassium iodide (KI) solution to enhance phase contrast. Sealed samples were scanned at 3 μm voxel
+resolution, and three‐phase segmentation (solid, fluid, and air) was performed on reconstructed 2D grayscale
+cross‐sections along the vertical height (Figure 1b ). These segmented images form a 3D volume visualizing pore
+network structures and phase distribution in samples.
+To reduce computational cost and uncertainty, pore network models were constructed directly from 2D phase‐
+segmented images and used to simulate NMR responses via a commercial finite element software. Images of
+each sample were clustered by vertical position, which is identified by similar phase distribution and pore ge-
+ometry. Each cluster containing an equal number of images represents an equal‐length height range. One
+representative image from each cluster was selected for pore network model construction. The fluid‐occupied
+space from selected images was meshed, incorporating boundary conditions at fluid–air and fluid–solid in-
+terfaces, to solve the Bloch–Torrey equation for time‐dependent magnetization distribution. Temporal variations
+in the external magnetic field in the Bloch‐Torrey equation were accounted for to accurately simulate both CPMG
+and TREx pulse sequences. Magnetization signals from ten representative simulations were superimposed and
+inverted to T
+2
+‐distributions and 2D T
+2
+‐store‐ T
+2
+maps. Sample information refers to Sample for μCT imaging of
+Text S2 in Supporting Information S1 . Image processing procedures (Step 1 to 3), μCT imaging analysis (Step 4
+and 5), and simulation parameters specifications (e.g., ρ
+s
+calculated by Equation S11 and S12 in Supporting
+Information S1 ) (Step 4 and 5) are provided in Text S3 in Supporting Information S1 .
+3. Results and Discussions
+We combined μCT‐based NMR simulation with experimental validation to quantify how pore coupling evolves
+with saturation. Both T
+2
+‐distribution and T
+2
+‐store‐ T
+2
+map reveal progressive weakening of pore coupling as
+saturation decreases, corresponding to increasingly tortuous and eventually disconnected water‐pathways. This
+framework provides quantitative metrics for tracking pore coupling in unsaturated multimodal‐pore networks.
+3.1. The Pore Coupling Effect on T
+2
+‐Distribution in Unsaturated Media
+The T
+2
+‐distribution captures hydrogen relaxation signatures in the individual pore environment, with amplitudes
+reflecting their pore‐water content. Inter‐pore magnetization exchange distorts the T
+2
+‐distribution at different
+saturations, directly manifesting the pore coupling effect on NMR responses.
+At full saturation ( S
+w
+= 100 % ), both simulated and measured T
+2
+‐distribution show multiple peaks corresponding
+to large and small pores (Figure 2a ). With decreasing saturation, the amplitude of the longest‐relaxation time peak
+decreases more significantly than that of the shorter‐relaxation components, reflecting the preferential moisture
+reduction within the largest pores (Figures 2c and 2d ). Notably, at S
+w
+= 70 % , the shorter‐relaxation component
+amplitude exceeds that at S
+w
+= 100 % and 85%. This suggests that in the largest pores, unsaturated conditions
+enhance surface interactions, accelerating proton relaxation. As a result, some protons in large pores exhibit
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 4 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 5---
+relaxation behavior similar to those in smaller pores, contributing to the increased short‐relaxation signal (J. Zhou
+& Zhang, 2025 ). As saturation decreases to 40%, the longest‐relaxation time peak (largest pores) disappears
+entirely, leaving only shorter‐relaxation components (Figure 2b ), suggesting that water is retained only in small
+pores.
+At the S
+w
+= 100 % , the two main relaxation time peaks nearly merged (Figures 2c and 2d ). As saturation de-
+creases, the peaks progressively separate, producing a clearer distinction between the long‐ and short‐relaxation
+components at S
+w
+= 85 % and 70%. This comparison implies that under saturated conditions, the strong pore
+coupling facilitates inter‐pore magnetization exchange, resulting in merged relaxation time peaks. As saturation
+Figure 2. Measured and simulated T
+2
+‐distribution and T
+2
+‐store‐ T
+2
+maps of samples at different saturation states: Comparison of simulated and measured T
+2
+‐
+distributions at (a) S
+w
+= 100 % , (b) S
+w
+= 40 % ; (c) Measured and (d) simulated T
+2
+‐distributions for samples at different saturations; Measured T
+2
+‐store‐ T
+2
+maps at
+(e) S
+w
+= 100 % , (f) S
+w
+= 85 % , (g) S
+w
+= 70 % , and (h) S
+w
+= 25 % ; Simulated T
+2
+‐store‐ T
+2
+maps at (i) S
+w
+= 100 % (j) S
+w
+= 85 % (k) S
+w
+= 70 % , and (l) S
+w
+= 25 % .
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 5 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 6---
+decreases, pore coupling weakens, restricting inter‐pore magnetization exchange and leading to clearer separation
+of the relaxation time peaks. While these observations directly reveal pore coupling evolution, the underlying
+mechanisms, such as the influence of pore channels' width, length, connectivity, and surface geochemistry (i.e.
+quantified by surface relaxivity ( ρ
+s
+) require further analysis. We will examine what factors weaken pore coupling
+in multi‐pore systems as saturation decreases in the following discussion.
+This weakened pore coupling effect on NMR relaxation can also arise from variations in pore network geometry
+and connectivity characteristics, including reduced pore channel width (e.g., Anand & Hirasaki, 2007 ), longer
+lengths (e.g., Mohnke & Klitzsch, 2010 ), and fewer connecting channels (Chi & Heidari, 2015 ). Mineral surface
+geochemistry, as quantified by surface relaxivity ( ρ
+s
+), can also regulate the inter‐pore magnetization exchange.
+Higher ρ
+s
+accelerates relaxation and thus weakens observable pore coupling effects (e.g., Grunewald &
+Knight, 2009 ). While our study focuses on geometric controls, ρ
+s
+remains an important external factor that can
+influence NMR sensitivity to pore coupling. We further investigate the role of pore structure in governing
+coupling behavior as saturation decreases in the following discussion.
+3.2. Quantitative Analysis of Unsaturated Pore Coupling From T
+2
+‐Store‐ T
+2
+Map
+The T
+2
+‐store‐ T
+2
+map enables a qualitative assessment of inter‐pore magnetization exchange, providing insight
+into the degree of pore coupling in unsaturated pore networks. In both measured (Figures 2e–2h )and simulated
+(Figures 2i–2l ) T
+2
+‐store‐ T
+2
+maps, peak amplitudes are normalized by the maximum amplitude value in each map.
+The horizontal and vertical axes correspond to the T
+2
+relaxation times of the same proton population before and
+after exchange. Thus, in Figure 2e , diagonal peaks P
+11 , 22
+respectively represent magnetized protons remaining
+within large and small pore environments, while off‐diagonal peaks P
+12 , 21
+correspond to protons diffusing from
+large to small pores and small to large pores, respectively (Schwartz et al., 2013 ). Monitoring these off‐diagonal
+peaks enables quantitative estimation of pore coupling under saturated conditions (e.g., Fleury & Soualem, 2009 ;
+Song et al., 2014 ; Washburn & Callaghan, 2006 ).
+Generally, an equal number of exchanged protons between coupled pores produces symmetric off‐diagonal peaks
+about the diagonal ( T
+2
+/ T
+2
+= 1). In this study, Figure 2 shows that only P
+12
+appears in both simulated and
+measured T
+2
+‐store– T
+2
+maps, particularly at S
+w
+= 100 % and 85%. This asymmetry is attributed to the stronger
+surface relaxation in the small pore population, accelerating NMR relaxation of protons. Consequently, even if
+sufficient and balanced inter‐pore exchange occurs, the magnetization carried by protons may decay before
+migrating from small to large pores, suppressing the NMR signal corresponding to P
+21
+. This work utilizes the
+saturation‐dependent evolution of P
+12
+to monitor magnetized proton migration from large to small pores, thereby
+quantitatively tracking the progressive weakening of pore coupling with decreasing saturation.
+Both measured (Figures 2e–2h ) and simulated (Figures 2i–2l ) T
+2
+‐store‐ T
+2
+maps exhibit that the amplitude of off‐
+diagonal peak P
+12
+decreases with reducing sample saturation. This evolution implies a decreasing proportion of
+magnetized protons migrating from the large to small pore population. Figure 3a shows the total amplitude of the
+off‐diagonal peaks A
+od
+relative to the total peaks' amplitude A
+tot
+( A
+od
+/ A
+tot
+) (Monteilhet et al., 2006 ), as a function
+of saturation. Both simulated and measured A
+od
+/ A
+tot
+decline with decreasing saturation and approach zero at low
+saturation ( S
+w
+= 25 % ), coinciding with the disappearance of the off‐diagonal peak. This quantitative trend re-
+flects the reduced proportion of inter‐pore magnetized proton exchange and demonstrates that T
+2
+‐store– T
+2
+maps
+provide insight into quantitatively tracking the weakening pore coupling in multi‐pore systems as saturation
+decreases.
+3.3. Comparison Between Simulation and Experimental Results
+This work establishes pore‐network models based on 3D μCT imaging of real porous media to simulate NMR
+responses. First, we simulate T
+2
+distributions at different saturations to directly manifest the pore coupling effect
+on NMR responses. The simulation results are consistent with measurements, validating our frame-
+work. Compared with previous studies that only simulated T
+2
+‐store‐ T
+2
+maps for idealized saturated pore models
+(e.g., Fleury & Soualem, 2009 ), our framework simulates these maps to monitor the saturation‐dependent pore
+coupling strength. While the simulated and measured T
+2
+‐distributions align well, some differences are observed
+in the peak shapes and relative positions of off‐diagonal peaks in the T
+2
+‐store– T
+2
+maps. The observed discrep-
+ancies between the simulated and experimental T
+2
+‐store– T
+2
+maps mainly arise from two factors. For the simu-
+lation, NMR responses were obtained by superimposing results from 2D phase‐segmented images at different
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 6 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 7---
+heights of the sample columns, which may potentially neglect vertical pore coupling. For the measurement,
+previous studies have presented that signal noise during data acquisition can cause deviations of off‐diagonal
+peaks in inverted T
+2
+‐store– T
+2
+maps (via inverse Laplace transform) from the theoretical square positions
+formed with the diagonal peaks (Figures 2f and 2g ) (e.g., Fleury & Soualem, 2009 ). This noise may also
+contribute to the trailing artifacts of the off‐diagonal peaks observed in Figures 2e and 2f .
+Despite these differences, the evolution of peak distribution and amplitude in simulated T
+2
+‐store‐ T
+2
+maps with
+varying saturations is broadly consistent with the experimental results. Specifically, the variation trend of A
+od
+/ A
+tot
+with saturation derived from both simulation and measurement also matches well. Together, these results
+demonstrate that T
+2
+‐store– T
+2
+maps can be utilized to quantify pore coupling strength in pore networks with
+different structures and dynamic unsaturated pore‐water distributions. Our simulation framework can predict
+NMR responses of unsaturated pore networks and provide insights into qualifying complex inter‐pore water
+dynamics within subsurface porous media from NMR measurement data, thereby advancing our understanding of
+subsurface hydrological behaviors and processes.
+3.4. Determinants of Pore Coupling Effect Under Unsaturated Conditions
+In the following discussion, 3D μCT volumes of the samples are used to visualize the pore network structure and
+phase distribution. Based on the visualization, we elucidate factors responsible for the weakened pore coupling in
+multi‐pore systems as saturation decreases, as revealed by the previous NMR simulation and measurement re-
+sults. Multiple water‐retained pores are interconnected by water‐pathways, forming distinct water‐occupied
+spaces within the unsaturated system. To demonstrate irregular water‐pathways, the mean water‐pathway tor-
+tuosity λ
+mean
+is derived from skeletonized pathways in 3D μCT volumes. The effective diffusion coefficient is
+Figure 3. (a) The variation of A
+od
+/ A
+tot
+during the desaturation process; The evolution of (b) α
+r
+, (c) λ
+mean
+, and φ
+c
+during the de‐
+saturation process; (d) The cumulative distributions of V
+f
+/ S
+f
+for connected pores and pore fractions at four saturations.
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 7 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 8---
+defined as D
+eff
+= D / λ
+mean
+. The connectivity for water movement is quantified by the connectivity ratio ( φ
+c
+),
+representing the probability that two randomly selected points belong to the same interconnected water‐occupied
+region extracted from 3D μCT volumes. Details of λ
+mean
+and φ
+c
+are provided in the Step 5. Analysis of fluid
+distribution, fluid pathways tortuosity, and connectivity of Text S3 in Supporting Information S1 . Surface
+relaxation occurs at the fluid‐solid interface. The fluid volume ( V
+i
+f
+) and surface area ( S
+i
+f
+) of each connected space,
+and total values ( V
+tot
+f
+, S
+tot
+f
+) of the entire system, are used to calculate the characteristic diffusion length
+L
+i
+2
+= V
+i
+f
+/ S
+i
+f
+. L
+i
+2
+represents the average distance that surface‐relaxing spins must diffuse throughout the space.
+Thereby quantifying the effective geometric size of the space. In the unsaturated system, Equation 2 can be
+expressed as T
+2 , c
+= V
+tot
+f
+/ ( ρ
+s
+S
+tot
+f
+) to define the characteristic relaxation time of system.
+The coupling parameter α =   L
+2
+/
+̅̅̅̅̅̅̅̅̅̅ ̅
+DT
+2 , c
+√
+)
+2
+, proposed by Anand and Hirasaki ( 2007 ), quantifies pore coupling
+effect on NMR relaxation in saturated systems with fully connected and regular pore networks. We propose the
+re‐normalized coupling parameter of one connected space, expressed as α
+r
+=   L
+2
+/ φ
+c
+̅̅̅̅̅̅̅̅̅̅̅̅̅̅ ̅
+D
+eff
+T
+2 , c
+√
+)
+2
+, to account for
+the effects of the surface geochemistry and irregular geometry of a partially connected water‐pathway network in
+this space. The α
+r
+of the entire unsaturated system can be expressed as
+α
+r
+= ∑
+i
+V
+i
+f
+[ L
+i
+2
+/   φ
+c
+̅̅̅̅̅̅̅̅̅̅̅̅̅̅ ̅
+D
+eff
+T
+2 , c
+√
+) ]
+2
+∑
+i
+V
+i
+f
+( 3 )
+to enable quantification of the pore coupling effect on NMR relaxation in the unsaturated pore network. Equa-
+tion 3 indicates that magnetization decay in coupled‐pore systems is governed by surface relaxation of spins and
+inter‐pore exchange. When the diffusion length is much smaller than the diffusion distance within the charac-
+teristic relaxation time (i.e., L
+i
+2
+≪ φ
+c
+̅̅̅̅̅̅̅̅̅̅̅̅̅̅ ̅
+D
+eff
+T
+2 , c
+√
+), magnetized protons can diffuse between distinct pore environ-
+ments before complete relaxation of their magnetization, leading to effective inter‐pore magnetization exchange
+and thus strong pore coupling effect on NMR relaxation.
+The α
+r
+increases with decreasing saturation (Figure 3b ). The system remains in an intermediate coupling regime
+(1 < α
+r
+< 250) for S
+w
+> 40 % (where α
+r
+< 1 represents total coupling in Anand & Hirasaki, 2007 ) and transitions to
+a decoupled state ( α
+r
+> 250) at S
+w
+≤ 40 % . This trend aligns with the weakening observable pore coupling qualified
+by the evolution of A
+od
+/ A
+tot
+with saturation. Figure 3b also presents that while the α changes slightly, the α
+r
+varies
+significantly with saturation. These evolutions imply that variations in saturation primarily alter the water‐
+pathway tortuosity and inter‐pore connectivity in the irregular and partially connected pore network, which
+may potentially influence the degree of pore coupling. Figure 3c further illustrates the evolution of λ
+mean
+and φ
+c
+with saturation. As saturation decreases from 100% to 85%, the λ
+mean
+increases significantly while the φ
+c
+changes
+slightly. This implies that although the unsaturated pores remain well‐connected at S
+w
+= 85 % , the reduced inter‐
+pore channel water induces narrower and more tortuous water‐pathways. When saturation further decreases from
+S
+w
+= 85 % to 70%, both λ
+mean
+and φ
+c
+change significantly, implying that some pathways become narrower and
+more tortuous, while others disconnect due to insufficient water. From S
+w
+= 70 % to 25%, φ
+c
+decreases sharply
+while λ
+mean
+remains nearly constant, suggesting that further moisture reduction no longer alters water‐pathway
+geometry but directly blocks inter‐pore connectivity.
+The comparison of cumulative distributions of V
+f
+/ S
+f
+in interconnected water‐occupied spaces (dashed line) and
+individual unsaturated pore fractions (dashed line) at four saturations (Figure 3d ) also illustrates how varying
+saturation influences the inter‐pore connectivity. L
+2 , c
+= V
+tot
+f
+/ S
+tot
+f
+reflects the characteristic length for surface‐
+relaxing spins to diffuse throughout the system under the total coupling state (Fleury & Soualem, 2009 ). At
+high saturation, the two curves differ significantly, with pore fractions exhibiting a much larger maximum V
+f
+/ S
+f
+.
+This indicates that water‐occupied spaces are formed by the connection of numerous unsaturated pores, with the
+effective geometry size of spaces represented by the average characteristic size of pores forming them. Especially,
+at S
+w
+= 100 % and 85 % , the water‐occupied space curve displays a sharp rise near V
+f
+/ S
+f
+= L
+2 , c
+, implying that
+most unsaturated pores are well‐connected to form a main water‐occupied space. As saturation decreases, two
+curves gradually evolve toward convergence. These pores no longer form a single interconnected space but
+segregate into isolated smaller pore clusters with limited connectivity, due to partial disconnection of water‐
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 8 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 9---
+pathways. At low saturation, most pores become completely isolated, forming numerous independent water‐
+occupied spaces.
+The aforementioned evolution illustrates how saturation‐induced variations in water‐pathway geometry and inter‐
+pore connectivity govern the pore coupling strength. As saturation decreases, reduced water content in inter‐pore
+channels induces narrower and more tortuous pathways. This variation results in longer fluid diffusion paths,
+thereby restricting the inter‐pore molecular exchange. At low saturation, insufficient water fails to maintain inter‐
+pore connectivity. The interconnected water‐occupied space progressively segregates into several smaller pore
+clusters with limited connectivity. Eventually, these clusters fragments into isolated and individual pore envi-
+ronments as most water‐pathways become completely disconnected. Consequently, the inter‐pore fluid diffusion
+is blocked, eliminating the pore coupling.
+4. Geophysical Implications and Broader Applications
+Our results demonstrate that decreasing water saturation leads to progressively weaker pore coupling due to
+increased tortuosity and disconnection of water pathways. This process is directly reflected in the merging or
+broadening of T
+2
+peaks and the loss of off‐diagonal features in T
+2
+–store– T
+2
+maps. This relationship has broad
+implications for interpreting NMR data in hydrological models that can be used for groundwater management and
+environmental remediation.
+By quantifying coupling strength under variable saturation, NMR can inform parameterizations in dual‐porosity
+or mobile‐immobile domain models, especially in predicting the retention, release, or accessibility of water and
+solutes across pore scales. Furthermore, common NMR‐derived permeability estimation models such as the
+Schlumberger Doll Research (Kenyon et al., 1988 ) and Timur‐Coates (Coates et al., 1999 ; Timur, 1969 ) models
+are calibrated for saturated conditions and may significantly misestimate hydraulic conductivity in unsaturated
+vadose zones. While several previous studies have applied NMR‐derived parameters to estimate subsurface
+hydraulic conductivity in unsaturated media (e.g., Legchenko et al., 2004 ; Legchenko & Vouillamoz, 2011 ;
+Vouillamoz et al., 2003 ), these approaches generally rely on averaged relaxation properties and do not explicitly
+account for pore coupling, which reflects saturation‐dependent inter‐pore connectivity. As a result, permeability
+estimates may be inaccurate under partially saturated conditions. The degree of pore coupling, quantified through
+A
+od
+/ A
+tot
+and α
+r
+, provides correction factors for estimating hydraulic conductivity in partially saturated conditions.
+Field NMR instruments, including surface NMR and borehole NMR, detect T
+2
+‐distribution profiles along depth
+in the natural subsurface (e.g., Guérin, 2005 ; Jiang et al., 2020 ; Kirkland & Codd, 2018 ). Our findings clarify that
+vertical variations in T
+2
+spectra might reflect pore coupling evolution due to saturation changes. This distinction
+enhances field data interpretation, particularly in heterogeneous formations where saturation gradients are strong.
+Beyond NMR, other geophysical methods such as spectral induced polarization (SIP) are sensitive to pore‐scale
+connectivity and diffusion‐controlled charge transport (Tsukanov et al., 2021 ), the same processes quantified
+through our pore coupling framework. Integrating NMR measurements with SIP and other geophysical methods
+enables more robust characterization of subsurface fluid dynamics and reactive transport, improving predictive
+models of water–rock interactions in complex geologic environments.
+5. Conclusion
+This study aims to clarify how NMR responds to the pore coupling in unsaturated porous media, and how
+variation in saturation governs the pore coupling strength. Specifically, this paper develops a framework
+combining simulation and measurement to investigate pore coupling and its NMR responses in unsaturated
+porous media and provides insights into investigating hydrodynamics within complex subsurface geologic en-
+vironments through NMR observation.
+Realistic pore‐network models constructed from 3D μCT imaging are used to simulate the evolution of T
+2
+‐
+distribution and T
+2
+‐store‐ T
+2
+map from saturated to unsaturated states, validated against NMR measurement re-
+sults. The evolution of T
+2
+‐distribution reveals that the decreased saturation weakens the pore coupling effect on
+NMR relaxation. This weakened pore coupling strength can be quantitatively tracked by T
+2
+‐store‐ T
+2
+maps.
+Based on μCT imaging, we introduce the mean water‐pathway tortuosity λ
+mean
+and connectivity ratio φ
+c
+into the
+re‐normalized coupling parameter α
+r
+. The α
+r
+quantitatively evaluated the attenuation of the degree of pore
+coupling effect on NMR relaxation with saturation decreasing. The evolution of λ
+mean
+and φ
+c
+, combined with the
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 9 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 10---
+comparison of cumulative distribution curves of V
+f
+/ S
+f
+for interconnected water‐occupied space and individual
+pore fractions at different saturations, clarify the factors responsible for weakened pore coupling: from fully
+saturated state to high saturation condition, water‐pathways become increasingly tortuous, as indicated by the rise
+in λ
+mean
+, which restrict the inter‐pore fluid exchange; as saturation further decreases, these tortuous pathways
+progressively disconnect, and the interconnected water‐occupied space progressively segregates into numerous
+independent unsaturated pores, leading to a sharp decline in φ
+c
+and ultimately blocking pore coupling. This
+mechanism suggests that NMR tools can be used to monitor the degree of pore coupling, thereby enabling the
+evaluation of pore‐scale connectivity and diffusion‐controlled transport under unsaturated conditions.
+Conflict of Interest
+The authors declare no conflicts of interest relevant to this study.
+Data Availability Statement
+All data of CT images, NMR responses simulation, and NMR measurement in the article are available at Science
+Data Bank, via J. Zhou ( 2025 ), with CC‐BY 4.0.
+References
+Anand, V., & Hirasaki, G. J. (2007). Diffusional coupling between micro and macroporosity for NMR relaxation in sandstones and grainstones.
+Petrophysics , 48 (4), 289–307.
+Baqer, Y., & Chen, X. (2022). A review on reactive transport model and porosity evolution in the porous media. Environmental Science and
+Pollution Research , 29 (32), 47873–47901. https://doi.org/10.1007/s11356‐022‐20466‐w
+Behroozmand, A. A., Keating, K., & Auken, E. (2015). A review of the principles and applications of the NMR technique for near‐surface
+characterization. Surveys in Geophysics , 36 (1), 27–85. https://doi.org/10.1007/s10712‐014‐9304‐0
+Bloch, F. (1946). Nuclear induction. Physical Review , 70 (7–8), 460–474. https://doi.org/10.1103/physrev.70.460
+Brownstein, K. R., & Tarr, C. E. (1979). Importance of classical diffusion in NMR studies of water in biological cells. Physical Review A , 19 (6),
+2446–2453. https://doi.org/10.1103/physreva.19.2446
+Chen, Z., J, L., Yu, C., Wang, S., & Wu, W. (2023). Analytical solutions to thermal gradient enhanced diffusion of organic contaminants through
+unsaturated composite liner: Considering the existence of capillary fringe. Acta Geotechnica , 18 (9), 4801–4820. https://doi.org/10.1007/
+s11440‐023‐01872‐x
+Chi, L., & Heidari, Z. (2015). Diffusional coupling between microfractures and pore structure and its impact on nuclear magnetic resonance
+measurements in multiple‐porosity systems. Geophysics , 80 (1), D31–D42. https://doi.org/10.1190/geo2013‐0467.1
+Coates, G. R., Xiao, L., & Prammer, M. G. (1999). NMR logging: Principles and interpretation . Halliburton Energy Service.
+Collin, M., Gin, S., Dazas, B., Mahadevan, T., Du, J., & Bourg, I. C. (2025). Molecular dynamics simulations of water structure and diffusion in a
+1 nm diameter silica nanopore as a function of surface charge and alkali metal counterion identity. Journal of Physical Chemistry C , 122 (31),
+17764–17776. https://doi.org/10.1021/acs.jpcc.8b03902
+Fleury, M., & Soualem, J. (2009). Quantitative analysis of diffusional pore coupling from T
+2
+‐store‐T
+2
+NMR experiments. Journal of Colloid and
+Interface Science , 336 (1), 250–259. https://doi.org/10.1016/j.jcis.2009.03.051
+Foley, I., Farooqui, S. A., & Kleinberg, R. L. (1996). Effect of paramagnetic ions on NMR relaxation of fluids at solid surfaces. Journal of
+Magnetic Resonance, Series A , 123 (1), 95–104. https://doi.org/10.1006/jmra.1996.0218
+Grunewald, E., & Knight, R. (2009). A laboratory study of NMR relaxation times and pore coupling in heterogeneous media. Geophysics , 74 (6),
+E215–E221. https://doi.org/10.1190/1.3223712
+Guérin, R. (2005). Borehole and surface‐based hydrogeophysics. Hydrogeology Journal , 13 (1), 251–254. https://doi.org/10.1007/s10040‐004‐
+0415‐4
+Jiang, C., Igel, J., Dlugosch, R., Müller‐Petke, M., Günther, T., Helms, J., & Winsemann, J. (2020). Magnetic resonance tomography constrained
+by ground‐penetrating radar for improved hydrogeophysical characterization. Geophysics , 85 (6), JM13–JM26. https://doi.org/10.1190/geo
+2020‐0052.1
+Jiménez‐Martínez, J., Alcolea, A., Straubhaar, J. A., & Renard, P. (2020). Impact of phases distribution on mixing and reactions in unsaturated
+porous media. Advances in Water Resources , 144 , 103697.
+Jiménez‐Martínez, J., Anna, P. d., Tabuteau, H., Turuban, R., Borgne, T. L., & Méheust, Y. (2015). Pore‐scale mechanisms for the enhancement of
+mixing in unsaturated porous media and implications for chemical reactions. Geophysical Research Letters , 42 (13), 5316–5324. https://doi.org/
+10.1002/2015GL064513
+Kenyon, W. E., Day, P. I., Straley, C., & Willemsen, J. F. (1988). A three‐part study of NMR longitudinal relaxation properties of water‐saturated
+sandstones. SPE Formation Evaluation , 3 (3), 622–636. https://doi.org/10.2118/15643‐pa
+Kirkland, C. M., & Codd, S. L. (2018). Low‐field borehole NMR applications in the near‐surface environment. Vadose Zone Journal , 17 (1), 1–11.
+https://doi.org/10.2136/vzj2017.01.0007
+Koch, T., Weishaupt, K., Müller, J., Weigand, B., & Helmig, R. (2021). A (dual) network model for heat transfer in porous media: Toward
+efficient model concepts for coupled systems from fuel cells to heat exchangers. Transport in Porous Media , 140 (1), 107–141. https://doi.org/
+10.1007/s11242‐021‐01602‐5
+Legchenko, A., Baltassat, J.‐M., Bobachev, A., Martin, C., Robain, H., & Vouillamoz, J.‐M. (2004). Magnetic resonance sounding applied to
+aquifer characterization. Groundwater Series , 42 (3), 363–373. https://doi.org/10.1111/j.1745‐6584.2004.tb02684.x
+Legchenko, A., & Vouillamoz, J.‐M. (2011). Large‐scale NMR measurements in porous media. AIP Conference Proceedings , 1330 , 47–50.
+Li, Y., Zhao, M., Li, C., & Ge, W. (2017). Simulation study on the reaction‐diffusion coupling in simple pore structures. Langmuir , 33 (42),
+11804–11816. https://doi.org/10.1021/acs.langmuir.7b02559
+Acknowledgments
+This project has received funding from the
+European Union's Horizon Europe
+research and innovation programme under
+Grant agreement No 101131765
+(EXCITE2) for Transnational Access
+conducted at the Center for X‐ray
+Tomography (UGCT) of Ghent University
+(BOF.COR.2022.008), and for image
+processing and analysis performed using
+Avizo on the Virtual Desktop
+Infrastructure (VDI) of University of Oslo.
+Junwen Zhou gratefully acknowledges the
+financial support from the China
+Scholarship Council (No. 202204910096).
+Open Access funding provided by
+Universitat Wien/KEMÖ.
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 10 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
+
+
+---PAGE 11---
+Li, Z., Luo, X., Kanjibayi, B., Wu, Y., Yang, G., Zhao, H., et al. (2024). Experimental investigation into the enhancement of oil recovery and
+analysis of influencing factors for hydrocarbon gas flooding in high‐water‐cut ultra‐deep oil reservoirs. Physics of Fluids, 36 (12), 126631.
+https://doi.org/10.1063/5.0243682
+Liu, Y., Holzinger, A., Knittel, P., Poltorak, L., Gamero‐Quijano, A., Rickard, W. D., et al. (2016). Visualization of diffusion within nanoarrays.
+Analytical Chemistry, 88 (13), 6689–6695. https://doi.org/10.1021/acs.analchem.6b00513
+Masschaele, B., Dierick, M., Van Loo, D., Boone, M. N., Brabant, L., Pauwels, E., & Van Hoorebeke, L. (2013). Hector: A 240kv micro‐ct setup
+optimized for research. In Journal of Physics: Conference Series (Vol. 463, p. 012012). https://doi.org/10.1088/1742‐6596/463/1/012012
+Mohnke, O., & Klitzsch, N. (2010). Microscale simulations of NMR relaxation in porous media considering internal field gradients. Vadose Zone
+Journal, 9 (4), 846–857. https://doi.org/10.2136/vzj2009.0161
+Monteilhet, L., Korb, J. P., Mitchell, J., & McDonald, P. J. (2006). Observation of exchange of micropore water in cement pastes by two‐
+dimensional T
+2
+‐T
+2
+nuclear magnetic resonance relaxometry. Physical review E—statistical, nonlinear, and. Soft Matter Physics, 74 (6),
+061404. https://doi.org/10.1103/PhysRevE.74.061404
+Montrazi, E. T., Lucas‐Oliveira, E., Araujo‐Ferreira, A. G., Barsi‐Andreeta, M., & Bonagamba, T. J. (2018). Simultaneous acquisition for T
+2
+‐T
+2
+exchange and T
+1
+‐T
+2
+correlation NMR experiments. Journal of Magnetic Resonance, 289, 63–71. https://doi.org/10.1016/j.jmr.2018.02.008
+Perez, L. J., Puyguiraud, A., Hidalgo, J. J., Jiménez‐Martínez, J., Parashar, R., & Dentz, M. (2023). Upscaling mixing‐controlled reactions in
+unsaturated porous media. Transport in Porous Media, 146 (1), 177–196. https://doi.org/10.1007/s11242‐021‐01710‐2
+Prammer, M. G. (2004). NMR in well logging and hydrocarbon exploration. Applied Magnetic Resonance, 25 (3), 637–649. https://doi.org/10.
+1007/bf03166554
+Ramakrishnan, T. S., Schwartz, L. M., Fordham, E. J., Kenyon, W. E., & Wilkinson, D. J. (1999). Forward models for nuclear magnetic resonance
+in carbonate rocks. Log Analyst, 40 (4), 260–270.
+Rooney, E. C., Bailey, V. L., Patel, K. F., Dragila, M., Battu, A. K., Buchko, A. C., et al. (2022). Soil pore network response to freeze‐thaw cycles
+in permafrost aggregates. Geoderma, 411, 115674. https://doi.org/10.1016/j.geoderma.2021.115674
+Sadeghi, M. A., Aghighi, M., Barralet, J., & Gostick, J. T. (2003). Pore network modeling of reaction‐diffusion in hierarchical porous particles:
+The effects of microstructure. Petrophysics, 44 (2), 91–107.
+Schwartz, L. M., Johnson, D. L., Mitchell, J., Chandrasekera, T. C., & Fordham, E. J. (2013). Modeling two‐dimensional magnetic resonance
+measurements in coupled pore systems. Physical Review E: Statistical, Nonlinear, and Soft Matter Physics, 88 (3), 032813. https://doi.org/10.
+1103/physreve.88.032813
+Song, Y. Q. (2013). Magnetic resonance of porous media (mrpm): A perspective. Journal of Magnetic Resonance, 229, 12–24. https://doi.org/10.
+1016/j.jmr.2012.11.010
+Song, Y. Q., Carneiro, G., Schwartz, L. M., & Johnson, D. L. (2014). Experimental identification of diffusive coupling using 2d NMR. Physical
+Review Letters, 113 (23), 235503. https://doi.org/10.1103/physrevlett.113.235503
+Soto Bravo, F., & Zhang, C. (2023). A critical mini‐review on the low‐field nuclear magnetic resonance investigation of pore coupling effects in
+near‐surface environments. Frontiers in Water, 5, 1059128. https://doi.org/10.3389/frwa.2023.1059128
+Timur, A. (1969). Producible porosity and permeability of sandstones investigated through nuclear magnetic resonance principle. Log Analyst,
+10 (1), 3–11.
+Torrey, H. C. (1956). Bloch equations with diffusion terms. Physical Review, 104 (3), 563–565. https://doi.org/10.1103/physrev.104.563
+Toumelin, E., Torres‐Verdon, C., Chen, S., & Fischer, D. (2003). Reconciling NMR measurements and numerical simulations: Assessment of
+temperature and diffusive coupling effects on two‐phase carbonate samples. Petrophysics, 44 (2), 91–107.
+Tsukanov, K., Assa, I., & Schwartz, N. (2021). Modeling and experimental study of the effect of pore water velocity on the spectral induced
+polarization signature in porous media. Water Resources Research, 57 (9), e2021WR030479. https://doi.org/10.1029/2021wr030479
+Vouillamoz, J., Legchenko, A., Albouy, Y., Bakalowicz, M., Baltassat, J.‐M., & Al‐Fares, W. (2003). Localization of saturated karst aquifer with
+magnetic resonance sounding and resistivity imagery. Groundwater Series, 41 (5), 578–586. https://doi.org/10.1111/j.1745‐6584.2003.
+tb02396.x
+Washburn, K. E., & Callaghan, P. T. (2006). Tracking pore to pore exchange using relaxation exchange spectroscopy. Physical Review Letters,
+97 (17), 175502. https://doi.org/10.1103/physrevlett.97.175502
+Zhang, F., & Zhang, C. (2021). Probing water partitioning in unsaturated weathered rock using nuclear magnetic resonance. Geophysics, 86 (5),
+WB131–WB147. https://doi.org/10.1190/geo2020‐0591.1
+Zhang, X., Dou, Z., Hamada, M., de Anna, P., & Jimenez‐Martinez, J. (2025). Enhanced reaction kinetics in stationary two‐phase flow through
+porous media. Environmental Science & Technology, 59 (2), 1334–1343. https://doi.org/10.1021/acs.est.4c09449
+Zhou, C. X., Hu, R., Li, H. W., Yang, Z., & F, C. Y. (2022). Pore‐scale visualization and quantification of dissolution in microfluidic rough
+channels. Water Resources Research, 58 (11), e2022WR032255. https://doi.org/10.1029/2022wr032255
+Zhou, J. (2025). NMR pore coupling (version 3) [Dataset]. Science Data Bank. https://doi.org/10.57760/sciencedb.30300
+Zhou, J., & Zhang, C. (2025). How does pore structure affect the NMR relaxation in unsaturated porous media: A simulation study. Water
+Resources Research, 61 (2), e2024WR038139. https://doi.org/10.1029/2024wr038139
+References From the Supporting Information
+Carr, H. Y., & Purcell, E. M. (1954). Effects of diffusion on free precession in nuclear magnetic resonance experiments. Physical review, 94 (3),
+630–638. https://doi.org/10.1103/physrev.94.630
+Ge, X., Myers, M. T., Liu, J., Fan, Y., Zahid, M. A., Zhao, J., & Hathon, L. (2021). Determining the transverse surface relaxivity of reservoir rocks:
+A critical review and perspective. Marine and Petroleum Geology, 126, 104934. https://doi.org/10.1016/j.marpetgeo.2021.104934
+Meiboom, S., & Gill, D. (1958). Modified spin‐echo method for measuring nuclear relaxation times. Review of Scientific Instruments, 29 (8), 688–
+691. https://doi.org/10.1063/1.1716296
+Oliveira, I. S. (2021). Nmr of confined fluids: A numerical study using comsol with application in petrophysics. arXiv preprint arXiv:2105.11395.
+Sommer, C., Straehle, C., Koethe, U., & Hamprecht, F. A. (2011). Ilastik: Interactive learning and segmentation toolkit. In 2011 ieee international
+symposium on biomedical imaging: From nano to macro (pp. 230–233).
+Zhang, Y., & Dong, Y. (2024). Morphology characteristics of the liquid–vapour interface in porous media. Applied Sciences, 14 (7), 2881. https://
+doi.org/10.3390/app14072881
+Geophysical Research Letters 10.1029/2025GL120450
+ZHOU ET AL. 11 of 11
+ 19448007, 2026, 5, Downloaded from https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025GL120450 by CochraneAustria, Wiley Online Library on [18/05/2026]. See the Terms and Conditions (https://onlinelibrary.wiley.com/terms-and-conditions) on Wiley Online Library for rules of use; OA articles are governed by the applicable Creative Commons License
