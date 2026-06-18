@@ -1,0 +1,939 @@
+{
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\论文复现\\pore-scale-simulation-reproduction\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\CT_slices\\1-CTseg\\5-16seged.tiff",
+  "source_label_convention": {
+    "2": "pore space treated as water-filled simulation domain",
+    "1": "solid matrix"
+  },
+  "random_seed": 20260616,
+  "selected_slice_indices_0_based": [
+    14,
+    21,
+    121,
+    193,
+    428,
+    574,
+    582,
+    616,
+    640,
+    691
+  ],
+  "selected_slice_indices_1_based": [
+    15,
+    22,
+    122,
+    194,
+    429,
+    575,
+    583,
+    617,
+    641,
+    692
+  ],
+  "simulation_params": {
+    "pixel_size_x_um": 1.92,
+    "pixel_size_y_um": 1.92,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_gas_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "max_grid_size": 256,
+    "solver": "triangular",
+    "mesh_bulk_size_um": 12.0,
+    "mesh_boundary_size_um": 5.0,
+    "mesh_max_points": 50000
+  },
+  "inversion_mode": "fixed",
+  "lcurve_config": {
+    "num_bins": 200,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "alpha_min": 1e-06,
+    "alpha_max": 100.0,
+    "alpha_count": 60,
+    "slope_reciprocal_target": 0.25,
+    "slope_reciprocal_valid_range": [
+      0.1,
+      10.0
+    ],
+    "min_points_after_trim": 10
+  },
+  "fixed_inversion_config": {
+    "num_bins": 200,
+    "regularization": 476.4,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "min_points_after_trim": 10
+  },
+  "average_outputs": {
+    "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_average_10_slices_t2_inversion.csv",
+    "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_average_10_slices_lcurve_metrics.csv",
+    "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_average_10_slices_lcurve_fit.csv",
+    "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_average_10_slices_t2_inversion.png",
+    "best_regularization": 476.4,
+    "best_index": 0,
+    "average_decay_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\average_and_slice_decay_curves.png",
+    "average_inversion_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\average_t2_inversion.png"
+  },
+  "mesh_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\mesh_summary.csv",
+  "per_slice_summaries": [
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0014.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 64028,
+        "solid_px": 379528
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 8195,
+        "mesh_triangles": 11489,
+        "plc_outer_contours": 196,
+        "plc_hole_contours": 21,
+        "unused_pygimli_nodes_dropped": 0,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 20782.241513225763,
+        "gas_liquid_boundary_length_um": 354.9999999999999,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 8195,
+        "boundary_edges": 4549,
+        "min_element_quality": 6.871987345179765e-14,
+        "mean_element_quality": 0.9386278870151219,
+        "median_element_quality": 0.9596196310617077,
+        "p05_element_quality": 0.8174982044455553,
+        "p95_element_quality": 0.9972083144261618,
+        "min_element_area_um2": 2.3294396033338283e-13,
+        "mean_element_area_um2": 20.018081396284995,
+        "max_element_area_um2": 75.62436410629286,
+        "element_area_ratio_min_over_max": 3.0802766156945323e-15,
+        "mesh_area_um2": 229987.7371619183,
+        "max_aspect_edge_ratio": 19.62955220302929,
+        "mean_aspect_edge_ratio": 1.3291296235848704
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 14,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 64028,
+        "solid_px": 379528,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0014_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0021.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 68911,
+        "solid_px": 374645
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 8787,
+        "mesh_triangles": 12294,
+        "plc_outer_contours": 204,
+        "plc_hole_contours": 10,
+        "unused_pygimli_nodes_dropped": 9,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 22282.935919448777,
+        "gas_liquid_boundary_length_um": 494.99999999999966,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 8787,
+        "boundary_edges": 4886,
+        "min_element_quality": 3.4322372927672386e-16,
+        "mean_element_quality": 0.9385824159920656,
+        "median_element_quality": 0.9600251552684602,
+        "p05_element_quality": 0.8156591413028391,
+        "p95_element_quality": 0.9969976739106303,
+        "min_element_area_um2": 2.220446049250313e-15,
+        "mean_element_area_um2": 20.205611800545178,
+        "max_element_area_um2": 70.21847433674557,
+        "element_area_ratio_min_over_max": 3.162196373851356e-17,
+        "mesh_area_um2": 248407.79147590243,
+        "max_aspect_edge_ratio": 16.738254921759076,
+        "mean_aspect_edge_ratio": 1.3208565876118867
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 21,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 68911,
+        "solid_px": 374645,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0021_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0121.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 103747,
+        "solid_px": 339809
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 7183,
+        "mesh_triangles": 9244,
+        "plc_outer_contours": 299,
+        "plc_hole_contours": 17,
+        "unused_pygimli_nodes_dropped": 1008,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 20596.386731993236,
+        "gas_liquid_boundary_length_um": 195.0,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 7183,
+        "boundary_edges": 4540,
+        "min_element_quality": 1.1570402097323217e-13,
+        "mean_element_quality": 0.9331807287933291,
+        "median_element_quality": 0.9581574717512661,
+        "p05_element_quality": 0.7991184060394879,
+        "p95_element_quality": 0.997052283716463,
+        "min_element_area_um2": 4.675932232325237e-13,
+        "mean_element_area_um2": 18.281581707637965,
+        "max_element_area_um2": 79.31204252078021,
+        "element_area_ratio_min_over_max": 5.8956144410227696e-15,
+        "mesh_area_um2": 168994.94130540534,
+        "max_aspect_edge_ratio": 17.27132127217621,
+        "mean_aspect_edge_ratio": 1.344766221626557
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 121,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 103747,
+        "solid_px": 339809,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0121_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0193.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 96456,
+        "solid_px": 347100
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 10576,
+        "mesh_triangles": 15015,
+        "plc_outer_contours": 325,
+        "plc_hole_contours": 17,
+        "unused_pygimli_nodes_dropped": 31,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 25338.02190744034,
+        "gas_liquid_boundary_length_um": 109.99999999999996,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 10576,
+        "boundary_edges": 5513,
+        "min_element_quality": 1.425038883132472e-16,
+        "mean_element_quality": 0.943129591389802,
+        "median_element_quality": 0.9632873625927861,
+        "p05_element_quality": 0.8251266672911335,
+        "p95_element_quality": 0.9977447558671086,
+        "min_element_area_um2": 7.923955941434967e-16,
+        "mean_element_area_um2": 22.797416277356675,
+        "max_element_area_um2": 77.41808408805129,
+        "element_area_ratio_min_over_max": 1.0235277758130353e-17,
+        "mesh_area_um2": 342303.2054045105,
+        "max_aspect_edge_ratio": 16.69754257020407,
+        "mean_aspect_edge_ratio": 1.3082436221158005
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 193,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 96456,
+        "solid_px": 347100,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0193_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0428.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 69796,
+        "solid_px": 373760
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 6405,
+        "mesh_triangles": 9775,
+        "plc_outer_contours": 138,
+        "plc_hole_contours": 14,
+        "unused_pygimli_nodes_dropped": 8,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 12735.575239864864,
+        "gas_liquid_boundary_length_um": 155.0,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 6405,
+        "boundary_edges": 2785,
+        "min_element_quality": 0.05422757193051115,
+        "mean_element_quality": 0.9453730337419661,
+        "median_element_quality": 0.9650738584310826,
+        "p05_element_quality": 0.8314858681290236,
+        "p95_element_quality": 0.9974248525673799,
+        "min_element_area_um2": 0.23788717985208252,
+        "mean_element_area_um2": 25.37470339940409,
+        "max_element_area_um2": 77.23013222915911,
+        "element_area_ratio_min_over_max": 0.0030802378940154853,
+        "mesh_area_um2": 248037.72572917497,
+        "max_aspect_edge_ratio": 18.66847081638583,
+        "mean_aspect_edge_ratio": 1.3046196702283306
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 428,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 69796,
+        "solid_px": 373760,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0428_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0574.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 90260,
+        "solid_px": 353296
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 9416,
+        "mesh_triangles": 13441,
+        "plc_outer_contours": 194,
+        "plc_hole_contours": 18,
+        "unused_pygimli_nodes_dropped": 104,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 22971.690211620917,
+        "gas_liquid_boundary_length_um": 464.99999999999983,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 9416,
+        "boundary_edges": 5027,
+        "min_element_quality": 0.1001165531017091,
+        "mean_element_quality": 0.9407610366614075,
+        "median_element_quality": 0.9604300158518916,
+        "p05_element_quality": 0.8236020746352465,
+        "p95_element_quality": 0.9972087370348667,
+        "min_element_area_um2": 0.2273971699571074,
+        "mean_element_area_um2": 20.55952192712437,
+        "max_element_area_um2": 75.75814099368134,
+        "element_area_ratio_min_over_max": 0.0030016202479951778,
+        "mesh_area_um2": 276340.5342224786,
+        "max_aspect_edge_ratio": 17.271321272169324,
+        "mean_aspect_edge_ratio": 1.314376089138607
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 574,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 90260,
+        "solid_px": 353296,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0574_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0582.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 92329,
+        "solid_px": 351227
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 9407,
+        "mesh_triangles": 13448,
+        "plc_outer_contours": 221,
+        "plc_hole_contours": 28,
+        "unused_pygimli_nodes_dropped": 74,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 22606.677886610283,
+        "gas_liquid_boundary_length_um": 460.0000000000001,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 9407,
+        "boundary_edges": 4974,
+        "min_element_quality": 0.012437247876018225,
+        "mean_element_quality": 0.9393073784468894,
+        "median_element_quality": 0.9608404534419897,
+        "p05_element_quality": 0.8184630423438819,
+        "p95_element_quality": 0.9971894953909033,
+        "min_element_area_um2": 0.0017731300775862674,
+        "mean_element_area_um2": 20.63582551981752,
+        "max_element_area_um2": 78.75281053109391,
+        "element_area_ratio_min_over_max": 2.251513394415535e-05,
+        "mesh_area_um2": 277510.581590506,
+        "max_aspect_edge_ratio": 112.66679729062128,
+        "mean_aspect_edge_ratio": 1.3291033684812552
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 582,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 92329,
+        "solid_px": 351227,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0582_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0616.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 107913,
+        "solid_px": 335643
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 10125,
+        "mesh_triangles": 14466,
+        "plc_outer_contours": 250,
+        "plc_hole_contours": 14,
+        "unused_pygimli_nodes_dropped": 35,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 23890.67225199153,
+        "gas_liquid_boundary_length_um": 700.0000000000005,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 10125,
+        "boundary_edges": 5304,
+        "min_element_quality": 0.008005237910711142,
+        "mean_element_quality": 0.9404126925935097,
+        "median_element_quality": 0.9610271929565122,
+        "p05_element_quality": 0.8178252632546159,
+        "p95_element_quality": 0.9972732721706274,
+        "min_element_area_um2": 0.0006067064415596021,
+        "mean_element_area_um2": 20.995315143595008,
+        "max_element_area_um2": 84.27530439950505,
+        "element_area_ratio_min_over_max": 7.199101158786978e-06,
+        "mesh_area_um2": 303718.2288672454,
+        "max_aspect_edge_ratio": 116.81275585316602,
+        "mean_aspect_edge_ratio": 1.3419690038925247
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 616,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 107913,
+        "solid_px": 335643,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0616_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0640.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 116665,
+        "solid_px": 326891
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 10277,
+        "mesh_triangles": 14767,
+        "plc_outer_contours": 258,
+        "plc_hole_contours": 16,
+        "unused_pygimli_nodes_dropped": 96,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 23860.123766539196,
+        "gas_liquid_boundary_length_um": 704.9999999999999,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 10277,
+        "boundary_edges": 5295,
+        "min_element_quality": 0.08961047828024418,
+        "mean_element_quality": 0.942885495640854,
+        "median_element_quality": 0.962955959357516,
+        "p05_element_quality": 0.8258623527239117,
+        "p95_element_quality": 0.9974312226766618,
+        "min_element_area_um2": 0.14650030001965736,
+        "mean_element_area_um2": 22.53509880959327,
+        "max_element_area_um2": 82.71449034741798,
+        "element_area_ratio_min_over_max": 0.0017711564129129706,
+        "mesh_area_um2": 332775.8041212638,
+        "max_aspect_edge_ratio": 17.518847017721065,
+        "mean_aspect_edge_ratio": 1.305773647052486
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 640,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 116665,
+        "solid_px": 326891,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0640_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    },
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\phase_png\\sample16_slice_0691.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_nmr_decay.png",
+      "raw_shape": [
+        666,
+        666
+      ],
+      "simulation_shape": [
+        256,
+        256
+      ],
+      "downsample_scale": 2.6015625,
+      "params_used": {
+        "pixel_size_x_um": 4.995,
+        "pixel_size_y_um": 4.995,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 256,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "mesh_max_points": 50000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 120659,
+        "solid_px": 322897
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 11536,
+        "mesh_triangles": 16482,
+        "plc_outer_contours": 276,
+        "plc_hole_contours": 20,
+        "unused_pygimli_nodes_dropped": 164,
+        "triangle_max_area_um2": 62.35382907247958,
+        "solid_liquid_boundary_length_um": 27562.203333149868,
+        "gas_liquid_boundary_length_um": 629.9999999999995,
+        "mesh_bulk_size_um": 12.0,
+        "mesh_boundary_size_um": 5.0,
+        "pygimli_bms_written": true,
+        "mesh_vertices": 11536,
+        "boundary_edges": 6074,
+        "min_element_quality": 0.10011655310173753,
+        "mean_element_quality": 0.9420009588502978,
+        "median_element_quality": 0.9613617299903224,
+        "p05_element_quality": 0.8256120739097237,
+        "p95_element_quality": 0.9971416837707456,
+        "min_element_area_um2": 0.13437446748989396,
+        "mean_element_area_um2": 20.874207485598756,
+        "max_element_area_um2": 75.75757806184149,
+        "element_area_ratio_min_over_max": 0.00177374291691589,
+        "mesh_area_um2": 344048.68777763867,
+        "max_aspect_edge_ratio": 17.271321272164403,
+        "mean_aspect_edge_ratio": 1.3101848338266195
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 691,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 120659,
+        "solid_px": 322897,
+        "total_px": 443556
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_slice_0691_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    }
+  ],
+  "model_dimension_note": "Each selected plane is simulated as an independent 2D slice extracted from a 3D segmented digital rock. The result is therefore a 10-slice 2D ensemble summary, not a full 3D NMR solve.",
+  "scientific_assumptions": [
+    "All 0-valued pore pixels are treated as water-filled NMR-active pore space.",
+    "255-valued pixels are treated as solid matrix.",
+    "No gas phase or separate outside/container label is present in this binary input.",
+    "rho_gas is kept at the explicit default 0.0 um/ms; solid-water surface relaxation uses rho_solid."
+  ]
+}

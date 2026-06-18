@@ -1,0 +1,12 @@
+ObjectType =  Image
+NDims =       3
+ElementType = MET_UCHAR
+ElementByteOrderMSB = False
+DimSize =     30 30 30
+ElementSize =  1.92 1.92 1.92
+Offset =       0 0 0
+ElementDataFile = smoke.raw
+threshold 0 0
+write_elements false
+write_cnm true
+overwrite true

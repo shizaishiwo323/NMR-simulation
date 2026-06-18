@@ -1,0 +1,40 @@
+{
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\CT_slices\\1-CTseg\\5-16seged.tiff",
+  "pnextract_exe": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\code\\vendor\\pnextract\\bin\\pnextract.exe",
+  "mhd_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\sample16_pnextract_binary.mhd",
+  "raw_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\sample16_pnextract_binary.raw",
+  "node2_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\sample16_pnextract_binary_node2.dat",
+  "experiment_spectrum": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\NMR_original\\16-1\\T2CPMG\\Spectra\\spectrum.csv",
+  "simulation_spectrum": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_random10_nmr_px1p92_b5\\sample16_average_10_slices_t2_inversion.csv",
+  "output_figure": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\sample16_pnextract_pore_histogram_vs_t2.png",
+  "pore_table_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\pnextract_pore_radius_table.csv",
+  "histogram_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_pnextract_t2_overlay_aligned\\pnextract_pore_histogram_equivalent_t2.csv",
+  "label_convention": {
+    "2": "pore space mapped to 0 for pnextract",
+    "1": "solid matrix mapped to 1"
+  },
+  "voxel_size_um": 1.92,
+  "dims_xyz": [
+    666,
+    666,
+    800
+  ],
+  "voxel_counts": {
+    "pore_voxels": -1,
+    "solid_voxels": -1
+  },
+  "pore_count_from_node2": 6836,
+  "rho_um_per_ms": 0.015,
+  "conversion": {
+    "formula": "1/T2 ~= rho2*S/V; using the cited cylindrical-pore approximation r_um=rho_um_per_ms*T2_ms, so d_um=2*rho_um_per_ms*T2_ms",
+    "assumption": "fast-diffusion, surface-relaxation-dominated, cylindrical equivalent pore diameter"
+  },
+  "display": {
+    "align_peaks_for_display": true,
+    "display_alignment_mode": "shift",
+    "histogram_display_alignment_scale": 1.0,
+    "histogram_display_alignment_shift_ms": -10399.628145138739,
+    "xlim_min_ms": 30.0,
+    "xlim_max_ms": 10000.0
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "model_dimension": "2D",
+  "geometry": {
+    "description": "two coupled equilateral triangular pores",
+    "triangle_angles_deg": [
+      60.0,
+      60.0,
+      60.0
+    ],
+    "contact_angle_deg": 0.0,
+    "large_base_um": 20.0,
+    "small_base_um": 8.0,
+    "large_depth_um": 20.0,
+    "small_depth_um": 8.0,
+    "throat_length_um": 5.0,
+    "throat_width_um": 1.0,
+    "water_state": "full water in both triangular pores and throat"
+  },
+  "pde_parameters": {
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "surface_relaxivity_um_per_ms": 0.005,
+    "time_step_ms": 2.0,
+    "time_max_ms": 1498.0
+  },
+  "mesh": {
+    "node_count": 3867,
+    "cell_count": 7402,
+    "boundary_count": 11268,
+    "total_cell_area_um2": 205.91789367798975
+  },
+  "inversion": {
+    "mode": "fixed",
+    "t2_alpha": 1.0,
+    "t2_t2_alpha": 0.05,
+    "t2_t2_mixing_time_ms": 30.0
+  },
+  "outputs": {
+    "mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\mesh\\ideal_coupled_triangle_mesh.bms",
+    "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\figures\\ideal_coupled_triangle_mesh.png",
+    "mesh_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\tables\\ideal_triangle_mesh_summary.csv",
+    "decay_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\figures\\ideal_triangle_t2_decay.png",
+    "decay_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\tables\\ideal_triangle_t2_decay.csv",
+    "t2_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\figures\\ideal_triangle_t2_fixed_alpha.png",
+    "t2_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\tables\\ideal_triangle_t2_spectra.csv",
+    "t2_t2_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\figures\\ideal_triangle_t2_t2_fixed_alpha.png",
+    "t2_t2_signal_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\tables\\ideal_triangle_t2_t2_signal.csv",
+    "t2_t2_map_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\tables\\ideal_triangle_t2_t2_map.csv",
+    "manifest_json": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_triangle_t2_t2_CA0p0deg_angles60-60-60\\run_manifest.json"
+  },
+  "notes": [
+    "This is a 2D idealized mesh simulation, not a true 3D pore structure.",
+    "Fixed inversion parameters are read from local simulation_control.py defaults unless overridden by CLI output path only."
+  ]
+}

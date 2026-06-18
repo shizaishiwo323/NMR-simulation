@@ -1,0 +1,6 @@
+simulation_outputs/sample_16_rev336_pygimli_native_3d_poly_guarded/native_pore_surface.1.edge filter=lfs diff=lfs merge=lfs -text
+simulation_outputs/sample_16_rev336_pygimli_native_3d_poly_guarded/native_pore_surface.1.face filter=lfs diff=lfs merge=lfs -text
+simulation_outputs/sample_16_rev336_pygimli_native_3d_poly_guarded/native_pore_surface.1.node filter=lfs diff=lfs merge=lfs -text
+simulation_outputs/sample_16_rev336_pygimli_native_3d_poly_guarded/native_pore_surface.poly filter=lfs diff=lfs merge=lfs -text
+simulation_outputs/sample_16_rev336_pygimli_native_3d_poly_guarded/native_pore_surface.1.ele filter=lfs diff=lfs merge=lfs -text
+simulation_outputs/sample_16_pnextract_t2_overlay/sample16_pnextract_binary.raw filter=lfs diff=lfs merge=lfs -text

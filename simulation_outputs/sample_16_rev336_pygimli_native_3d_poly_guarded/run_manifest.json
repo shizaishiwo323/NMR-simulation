@@ -1,0 +1,88 @@
+{
+  "run_status": "paused_resource_guard",
+  "pause_reason": "TetGen generated 13758957 tetrahedra, exceeding --native-max-tetrahedra-before-read=8000000. This run is paused before reading the mesh into pyGIMLi.",
+  "pause_details": {
+    "pause_stage": "tetgen_tetrahedra_guard",
+    "mesh_tetrahedra": 13758957,
+    "max_tetrahedra_before_read": 8000000,
+    "downsampling": "none",
+    "geometry_simplification": "none",
+    "tetgen_stats": {
+      "input_points": 1862942,
+      "input_facets": 3732044,
+      "input_segments": 1780403,
+      "input_holes": 0,
+      "input_regions": 3027,
+      "mesh_points": 3292926,
+      "mesh_tetrahedra": 13758957,
+      "mesh_faces": 29598709,
+      "mesh_faces_on_exterior_boundary": 4161590,
+      "mesh_faces_on_input_facets": 4166604,
+      "mesh_edges_on_input_segments": 1973261,
+      "steiner_points_on_input_facets": 24366,
+      "steiner_points_on_input_segments": 193026,
+      "steiner_points_inside_domain": 1212592
+    },
+    "tetgen_base": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_rev336_pygimli_native_3d_poly_guarded\\native_pore_surface.1",
+    "poly_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_rev336_pygimli_native_3d_poly_guarded\\native_pore_surface.poly",
+    "poly_nodes": 1862942,
+    "poly_facets": 3732044,
+    "poly_region_markers": 3027
+  },
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\CT_slices\\1-CTseg\\rev336.tiff",
+  "source_label_convention": {
+    "0": "pore voxel before open/closed filtering",
+    "255": "solid matrix"
+  },
+  "volume_shape_zyx": [
+    336,
+    336,
+    336
+  ],
+  "downsample_factor": 1,
+  "downsampling": "none",
+  "geometry_simplification": "none",
+  "model_dimension_note": "This run attempted native pyGIMLi 3D tetrahedral meshing on the full-resolution saturated 3D pore domain and paused before meshing. No 2D slice or downsampled substitute was used.",
+  "meshing_backend": "pygimli_native",
+  "connectivity": 6,
+  "pore_domain": "all",
+  "nmr_params": {
+    "voxel_size_um": 1.92,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_external_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "external_boundary": "no_flux"
+  },
+  "detection_summary": {
+    "z_slices": 336,
+    "rows": 336,
+    "cols": 336,
+    "total_voxels": 37933056,
+    "voxel_size_um": 1.92,
+    "voxel_volume_um3": 7.077887999999999,
+    "total_pore_voxels": 7247310,
+    "open_pore_voxels": 7149179,
+    "closed_pore_voxels": 98131,
+    "total_porosity_fraction": 0.19105526325113378,
+    "open_porosity_fraction": 0.18846831112157164,
+    "closed_porosity_fraction": 0.0025869521295621423,
+    "open_fraction_of_pore_voxels": 0.986459665724248,
+    "pore_component_count": 3027,
+    "open_component_count": 268,
+    "closed_component_count": 2759,
+    "open_pore_volume_um3": 50601088.25395199,
+    "closed_pore_volume_um3": 694560.2273279999
+  },
+  "timings_s": {
+    "tetra_array_build": 270.37967560000016,
+    "total": 271.21275570000034
+  },
+  "outputs": {
+    "open_closed_pore_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_rev336_pygimli_native_3d_poly_guarded\\open_closed_pore_summary.csv",
+    "pore_component_table_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_rev336_pygimli_native_3d_poly_guarded\\pore_component_table.csv",
+    "projection_preview_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_rev336_pygimli_native_3d_poly_guarded\\all_pore_3d_projection_preview.png"
+  }
+}

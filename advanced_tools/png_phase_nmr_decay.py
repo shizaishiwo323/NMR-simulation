@@ -309,19 +309,31 @@ def choose_region_marker(labels: np.ndarray, polygon_xy: np.ndarray, params: Sim
     return [float(center[0]), float(center[1])]
 
 
-def pg_mesh_to_arrays(mesh) -> dict[str, object]:
-    points = np.asarray([[node.pos().x(), node.pos().y()] for node in mesh.nodes()], dtype=float)
-    triangles = []
+def pg_mesh_to_arrays(mesh, labels: np.ndarray | None = None, params: SimulationParams | None = None) -> dict[str, object]:
+    raw_points = np.asarray([[node.pos().x(), node.pos().y()] for node in mesh.nodes()], dtype=float)
+    raw_triangles = []
+    discarded_nonwater_cells = 0
     for cell in mesh.cells():
         node_ids = [node.id() for node in cell.nodes()]
         if len(node_ids) == 3:
-            triangles.append(node_ids)
-    if not triangles:
+            if labels is not None and params is not None:
+                centroid = np.mean(raw_points[node_ids], axis=0)
+                if sample_label_at_xy(labels, float(centroid[0]), float(centroid[1]), params) != WATER:
+                    discarded_nonwater_cells += 1
+                    continue
+            raw_triangles.append(node_ids)
+    if not raw_triangles:
         raise ValueError("pyGIMLi/Triangle returned no triangular cells.")
+    raw_triangles_arr = np.asarray(raw_triangles, dtype=np.int64)
+    used_nodes = np.unique(raw_triangles_arr.ravel())
+    node_map = -np.ones(raw_points.shape[0], dtype=np.int64)
+    node_map[used_nodes] = np.arange(used_nodes.size)
     return {
-        "points": points,
-        "triangles": np.asarray(triangles, dtype=np.int64),
+        "points": raw_points[used_nodes],
+        "triangles": node_map[raw_triangles_arr],
         "pygimli_mesh": mesh,
+        "unused_pygimli_nodes_dropped": int(raw_points.shape[0] - used_nodes.size),
+        "discarded_nonwater_cells": int(discarded_nonwater_cells),
     }
 
 
@@ -368,14 +380,15 @@ def build_triangular_water_mesh(labels: np.ndarray, params: SimulationParams) ->
             )
             outer_count += 1
         else:
-            hole = orient_polygon(xy, ccw=False)
+            hole = orient_polygon(xy, ccw=True)
             marker_pos = [float(np.mean(hole[:, 0])), float(np.mean(hole[:, 1]))]
             plcs.append(
                 mt.createPolygon(
                     hole.tolist(),
                     isClosed=True,
-                    isHole=True,
+                    marker=0,
                     markerPosition=marker_pos,
+                    area=max_area,
                     boundaryMarker=20,
                 )
             )
@@ -398,7 +411,7 @@ def build_triangular_water_mesh(labels: np.ndarray, params: SimulationParams) ->
             f"pyGIMLi/Triangle mesh node count {mesh.nodeCount()} exceeds --mesh-max-points={params.mesh_max_points}. "
             "Increase --mesh-bulk-size-um/--mesh-boundary-size-um or raise the guard after checking runtime."
         )
-    out = pg_mesh_to_arrays(mesh)
+    out = pg_mesh_to_arrays(mesh, labels, params)
     out["plc_outer_contours"] = outer_count
     out["plc_hole_contours"] = hole_count
     out["triangle_max_area_um2"] = max_area
@@ -479,6 +492,7 @@ def assemble_triangular_operator(labels: np.ndarray, params: SimulationParams):
         "mesh_triangles": int(triangles.shape[0]),
         "plc_outer_contours": int(mesh.get("plc_outer_contours", 0)),
         "plc_hole_contours": int(mesh.get("plc_hole_contours", 0)),
+        "unused_pygimli_nodes_dropped": int(mesh.get("unused_pygimli_nodes_dropped", 0)),
         "triangle_max_area_um2": float(mesh.get("triangle_max_area_um2", np.nan)),
         "solid_liquid_boundary_length_um": float(solid_length),
         "gas_liquid_boundary_length_um": float(gas_length),
