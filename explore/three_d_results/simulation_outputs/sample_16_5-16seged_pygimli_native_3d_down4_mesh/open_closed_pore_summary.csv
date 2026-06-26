@@ -1,0 +1,2 @@
+﻿z_slices,rows,cols,total_voxels,voxel_size_um,voxel_volume_um3,total_pore_voxels,open_pore_voxels,closed_pore_voxels,total_porosity_fraction,open_porosity_fraction,closed_porosity_fraction,open_fraction_of_pore_voxels,pore_component_count,open_component_count,closed_component_count,open_pore_volume_um3,closed_pore_volume_um3
+200,167,167,5577800,7.68,452.9848319999999,1059316,1000691,58625,0.18991645451611747,0.17940603822295528,0.010510416293162178,0.9446576847701724,7764,535,7229,453297844.5189119,26556235.775999997

@@ -1,0 +1,194 @@
+{
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\CT_slices\\1-CTseg\\5-16seged.tiff",
+  "source_label_convention": {
+    "2": "pore voxel before open/closed filtering",
+    "1": "solid matrix"
+  },
+  "original_volume_shape_zyx": [
+    800,
+    666,
+    666
+  ],
+  "volume_shape_zyx": [
+    100,
+    84,
+    84
+  ],
+  "downsample_factor": 8,
+  "downsampling": "volume_preserving_binary",
+  "downsampling_stats": {
+    "method": "volume_preserving_binary",
+    "factor": 8,
+    "original_shape_zyx": [
+      800,
+      666,
+      666
+    ],
+    "padded_shape_zyx": [
+      800,
+      672,
+      672
+    ],
+    "pad_width_zyx": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        6
+      ],
+      [
+        0,
+        6
+      ]
+    ],
+    "padding_label": 1,
+    "coarse_shape_zyx": [
+      100,
+      84,
+      84
+    ],
+    "original_voxel_size_um": 1.92,
+    "coarse_voxel_size_um": 15.36,
+    "original_pore_voxels": 67796248,
+    "target_coarse_pore_voxels": 132415,
+    "represented_original_pore_voxels": 67796480,
+    "absolute_pore_voxel_error": 232,
+    "relative_pore_volume_error": 3.422018280421654e-06,
+    "original_porosity_fraction": 0.19105887418950482,
+    "coarse_porosity_fraction": 0.19105952799646495,
+    "porosity_absolute_error": 6.538069601132664e-07,
+    "tie_break": "descending pore occupancy, then increasing z-y-x block index"
+  },
+  "model_dimension_note": "This is a true 3D tetrahedral finite-element solve on the saturated 3D pore domain. If downsample_factor > 1, the input was converted to an equivalent binary lower-resolution volume with global pore-volume conservation recorded in downsampling_stats.",
+  "meshing_backend": "pygimli_native",
+  "tetra_meshing_note": "pygimli_native calls pyGIMLi meshtools.createMesh on a marching-cubes PLC at the original voxel spacing. voxel_conformal is the legacy explicit fallback and is only used when requested.",
+  "connectivity": 6,
+  "pore_domain": "all",
+  "pore_domain_note": "'all' keeps every pore voxel, including isolated/closed components. 'open' keeps only pore components connected to at least one external volume face.",
+  "nmr_params": {
+    "voxel_size_um": 15.36,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_external_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "external_boundary": "no_flux"
+  },
+  "inversion_config": {
+    "num_bins": 200,
+    "regularization": 476.4,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "min_points_after_trim": 10
+  },
+  "mesh_summary": {
+    "pore_domain": "all",
+    "responsive_pore_voxels": 132415,
+    "total_pore_voxels": 132415,
+    "open_voxels": 108417,
+    "closed_pore_voxels": 23998,
+    "node_count": 238124,
+    "tetra_cell_count": 832077,
+    "tetra_per_open_voxel": 7.674783474916295,
+    "all_boundary_triangles": 1863043,
+    "solid_boundary_triangles": 1862413,
+    "external_boundary_triangles": 630,
+    "solid_boundary_voxel_faces": 1862413,
+    "external_boundary_voxel_faces": 630,
+    "voxel_size_um": 15.36,
+    "external_boundary": "no_flux",
+    "stiffness_nonzeros": 2781144,
+    "timing_tetra_array_build_s": 66.45067240000026,
+    "timing_mesh_preview_s": 2.1610780999999406,
+    "timing_fem_assembly_s": 1.0394242000002123
+  },
+  "native_mesh_stats": {
+    "surface_vertices": 167782,
+    "surface_triangles": 345324,
+    "region_markers": 2625,
+    "native_mesh_nodes": 238124,
+    "native_mesh_tetrahedra": 832077,
+    "native_mesh_boundaries": 1863043,
+    "tetgen_executable": "C:\\Users\\imgw\\.codex\\tools\\tetgen-1.6.0-win64\\Library\\bin\\tetgen.exe",
+    "native_quality": 1.2,
+    "native_max_cell_volume_um3": 0.0,
+    "poly_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\native_pore_surface.poly",
+    "poly_nodes": 167782,
+    "poly_facets": 345324,
+    "poly_region_markers": 2625,
+    "tetgen_stats": {
+      "input_points": 167782,
+      "input_facets": 345324,
+      "input_segments": 265599,
+      "input_holes": 0,
+      "input_regions": 2625,
+      "mesh_points": 238124,
+      "mesh_tetrahedra": 832077,
+      "mesh_faces": 1863043,
+      "mesh_faces_on_exterior_boundary": 397778,
+      "mesh_faces_on_input_facets": 397946,
+      "mesh_edges_on_input_segments": 290185,
+      "steiner_points_on_input_facets": 1688,
+      "steiner_points_on_input_segments": 24697,
+      "steiner_points_inside_domain": 43957
+    }
+  },
+  "quality_summary": {
+    "tetra_count": 832077.0,
+    "volume_min_um3": 3.1639588581262,
+    "volume_mean_um3": 559.3378604095919,
+    "volume_max_um3": 266305.1976776855,
+    "edge_min_um": 3.437240696124366,
+    "edge_mean_um": 16.730037652649397,
+    "edge_max_um": 151.76005926815705,
+    "aspect_min": 1.0,
+    "aspect_mean": 1.7262439378221253,
+    "aspect_max": 4.634993958531123
+  },
+  "detection_summary": {
+    "z_slices": 100,
+    "rows": 84,
+    "cols": 84,
+    "total_voxels": 705600,
+    "voxel_size_um": 15.36,
+    "voxel_volume_um3": 3623.8786559999994,
+    "total_pore_voxels": 132415,
+    "open_pore_voxels": 108417,
+    "closed_pore_voxels": 23998,
+    "total_porosity_fraction": 0.18766298185941044,
+    "open_porosity_fraction": 0.15365221088435374,
+    "closed_porosity_fraction": 0.03401077097505669,
+    "open_fraction_of_pore_voxels": 0.8187667560321715,
+    "pore_component_count": 2625,
+    "open_component_count": 246,
+    "closed_component_count": 2379,
+    "open_pore_volume_um3": 392890052.2475519,
+    "closed_pore_volume_um3": 86965839.98668799
+  },
+  "timings_s": {
+    "tetra_array_build": 66.45067240000026,
+    "mesh_preview": 2.1610780999999406,
+    "fem_assembly": 1.0394242000002123,
+    "tetra_decay_solve": 22.609886299998834,
+    "total": 95.67944890000035
+  },
+  "outputs": {
+    "mesh_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_mesh_summary.csv",
+    "quality_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_quality_summary.csv",
+    "quality_sample_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_quality_sample.csv",
+    "mesh_preview_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_mesh_preview.png",
+    "mesh_geometry_npz": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_mesh_geometry.npz",
+    "open_closed_pore_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\open_closed_pore_summary.csv",
+    "pore_component_table_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pore_component_table.csv",
+    "projection_preview_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\all_pore_3d_projection_preview.png",
+    "pygimli_export_skipped": true,
+    "decay_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_nmr_decay.csv",
+    "decay_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_nmr_decay.png",
+    "cg_iteration_history_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_cg_iteration_history.csv",
+    "inversion_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_nmr_t2_inversion.csv",
+    "inversion_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down8_full\\pygimli_tetra_nmr_t2_inversion.png"
+  }
+}

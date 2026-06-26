@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -35,6 +36,17 @@ DEFAULT_SIM_SPECTRUM = Path(
     r"\simulation_outputs\sample_16_random10_nmr_px1p92_b5"
     r"\sample16_average_10_slices_t2_inversion.csv"
 )
+DEFAULT_SIM_3D_SPECTRUM = Path(
+    r"C:\Users\imgw\Documents\Codex\NMR模拟"
+    r"\simulation_outputs\sample_16_rev336_pygimli_native_3d_down4_full"
+    r"\pygimli_tetra_nmr_t2_inversion.csv"
+)
+
+
+def safe_console_text(value: object) -> str:
+    text = str(value)
+    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    return text.encode(encoding, errors="backslashreplace").decode(encoding, errors="replace")
 
 
 def t2_ms_to_pore_diameter_um(t2_ms: float | np.ndarray, rho_um_per_ms: float) -> float | np.ndarray:
@@ -185,6 +197,7 @@ def save_overlay_plot(
     xlim_max_ms: float | None = None,
     top_axis_min_um: float | None = None,
     top_axis_max_um: float | None = None,
+    additional_spectra: list[pd.DataFrame] | None = None,
 ) -> pd.DataFrame:
     pores = pores.copy()
     pores["equivalent_t2_ms"] = pore_diameter_um_to_t2_ms(pores["pore_diameter_um"].to_numpy(float), rho_um_per_ms)
@@ -271,8 +284,21 @@ def save_overlay_plot(
         simulation["normalized_amplitude"],
         color="#1f2937",
         linewidth=2.2,
-        label="simulation average T2",
+        label=str(simulation["series"].iloc[0]) if "series" in simulation.columns and not simulation.empty else "2D simulation T2 inversion",
     )
+    extra_styles = [
+        {"color": "#b45309", "linestyle": "--", "linewidth": 2.2},
+        {"color": "#7c3aed", "linestyle": "-.", "linewidth": 2.0},
+    ]
+    for i, spectrum in enumerate(additional_spectra or []):
+        label = str(spectrum["series"].iloc[0]) if "series" in spectrum.columns and not spectrum.empty else f"additional T2 {i + 1}"
+        style = extra_styles[i % len(extra_styles)]
+        ax.plot(
+            spectrum["t2_ms"],
+            spectrum["normalized_amplitude"],
+            label=label,
+            **style,
+        )
     ax.set_xscale("log")
     bottom_xlim = (xlim_min_ms if xlim_min_ms is not None else t2_min, xlim_max_ms if xlim_max_ms is not None else t2_max)
     ax.set_xlim(*bottom_xlim)
@@ -335,6 +361,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--pnextract-exe", type=Path, default=DEFAULT_PNEXTRACT_EXE)
     parser.add_argument("--experiment-spectrum", type=Path, default=DEFAULT_EXPERIMENT_SPECTRUM)
     parser.add_argument("--simulation-spectrum", type=Path, default=DEFAULT_SIM_SPECTRUM)
+    parser.add_argument("--simulation-3d-spectrum", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=Path("simulation_outputs/sample_16_pnextract_t2_overlay"))
     parser.add_argument("--pore-value", type=int, default=2)
     parser.add_argument("--solid-value", type=int, default=1)
@@ -385,7 +412,11 @@ def main() -> None:
     pores.to_csv(pores_csv, index=False)
 
     experiment = load_spectrum(args.experiment_spectrum, "experimental T2 inversion")
-    simulation = load_spectrum(args.simulation_spectrum, "simulation average T2")
+    simulation = load_spectrum(args.simulation_spectrum, "2D simulation T2 inversion")
+    additional_spectra = []
+    if args.simulation_3d_spectrum is not None:
+        simulation_3d = load_spectrum(args.simulation_3d_spectrum, "3D pyGIMLi T2 inversion")
+        additional_spectra.append(simulation_3d)
     figure_path = args.output_dir / "sample16_pnextract_pore_histogram_vs_t2.png"
     hist_frame = save_overlay_plot(
         pores,
@@ -401,6 +432,7 @@ def main() -> None:
         xlim_max_ms=args.xlim_max_ms,
         top_axis_min_um=args.top_axis_min_um,
         top_axis_max_um=args.top_axis_max_um,
+        additional_spectra=additional_spectra,
     )
     hist_csv = args.output_dir / "pnextract_pore_histogram_equivalent_t2.csv"
     hist_frame.to_csv(hist_csv, index=False)
@@ -413,6 +445,7 @@ def main() -> None:
         "node2_path": str(node2_path.resolve()),
         "experiment_spectrum": str(args.experiment_spectrum.resolve()),
         "simulation_spectrum": str(args.simulation_spectrum.resolve()),
+        "simulation_3d_spectrum": str(args.simulation_3d_spectrum.resolve()) if args.simulation_3d_spectrum else None,
         "output_figure": str(figure_path.resolve()),
         "pore_table_csv": str(pores_csv.resolve()),
         "histogram_csv": str(hist_csv.resolve()),
@@ -443,7 +476,7 @@ def main() -> None:
     }
     (args.output_dir / "run_manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Pores parsed: {len(pores)}")
-    print(f"Figure: {figure_path.resolve()}")
+    print(f"Figure: {safe_console_text(figure_path.resolve())}")
 
 
 if __name__ == "__main__":

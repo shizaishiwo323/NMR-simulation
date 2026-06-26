@@ -46,12 +46,25 @@ def parse_optional_int(value: str) -> int | None:
     return int(value)
 
 
+def parse_slice_indices(value: str | None) -> list[int] | None:
+    if value is None or not value.strip():
+        return None
+    return [int(part.strip()) for part in value.split(",") if part.strip()]
+
+
 def slice_stem(sample_name: str, slice_index: int) -> str:
     return f"{sample_name}_slice_{slice_index:04d}"
 
 
 def average_signal_name(sample_name: str, num_slices: int) -> str:
     return f"{sample_name}_average_{num_slices}_slices"
+
+
+def model_dimension_note(num_slices: int) -> str:
+    return (
+        "Each selected plane is simulated as an independent 2D slice extracted from a 3D segmented digital rock. "
+        f"The result is therefore a {num_slices}-slice 2D ensemble summary, not a full 3D NMR solve."
+    )
 
 
 def binary_slice_to_phase_png(slice_array: np.ndarray, output_path: Path, pore_value: int, solid_value: int) -> dict[str, int]:
@@ -225,6 +238,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=Path, default=Path("simulation_outputs/sample_89_random10_nmr"))
     parser.add_argument("--sample-name", default="sample89")
     parser.add_argument("--num-slices", type=int, default=10)
+    parser.add_argument(
+        "--slice-indices",
+        default=None,
+        help="Comma-separated 0-based slice indices. When set, these explicit slices replace random sampling.",
+    )
     parser.add_argument("--seed", type=int, default=20260605)
     parser.add_argument("--pore-value", type=int, default=0)
     parser.add_argument("--solid-value", type=int, default=255)
@@ -266,10 +284,17 @@ def main() -> None:
 
     with tifffile.TiffFile(str(args.input_tiff)) as tif:
         total_slices = len(tif.pages)
-        if args.num_slices > total_slices:
-            raise ValueError(f"Requested {args.num_slices} slices but TIFF only contains {total_slices}.")
-        rng = np.random.default_rng(args.seed)
-        selected_indices = sorted(int(i) for i in rng.choice(total_slices, size=args.num_slices, replace=False))
+        explicit_indices = parse_slice_indices(args.slice_indices)
+        if explicit_indices is not None:
+            selected_indices = explicit_indices
+            if any(index < 0 or index >= total_slices for index in selected_indices):
+                raise ValueError(f"--slice-indices must be between 0 and {total_slices - 1}.")
+            args.num_slices = len(selected_indices)
+        else:
+            if args.num_slices > total_slices:
+                raise ValueError(f"Requested {args.num_slices} slices but TIFF only contains {total_slices}.")
+            rng = np.random.default_rng(args.seed)
+            selected_indices = sorted(int(i) for i in rng.choice(total_slices, size=args.num_slices, replace=False))
 
         params = SimulationParams(
             pixel_size_x_um=args.pixel_size_um,
@@ -396,6 +421,7 @@ def main() -> None:
             str(args.solid_value): "solid matrix",
         },
         "random_seed": int(args.seed),
+        "slice_selection_mode": "explicit" if args.slice_indices else "random_without_replacement",
         "selected_slice_indices_0_based": [int(row["slice_index_0_based"]) for row in slice_rows],
         "selected_slice_indices_1_based": [int(row["slice_index_1_based"]) for row in slice_rows],
         "simulation_params": params.__dict__,
@@ -405,10 +431,7 @@ def main() -> None:
         "average_outputs": {**average_outputs, **plot_outputs},
         "mesh_summary_csv": str((args.output_dir / "mesh_summary.csv").resolve()),
         "per_slice_summaries": summaries,
-        "model_dimension_note": (
-            "Each selected plane is simulated as an independent 2D slice extracted from a 3D segmented digital rock. "
-            "The result is therefore a 10-slice 2D ensemble summary, not a full 3D NMR solve."
-        ),
+        "model_dimension_note": model_dimension_note(args.num_slices),
         "scientific_assumptions": [
             "All 0-valued pore pixels are treated as water-filled NMR-active pore space.",
             "255-valued pixels are treated as solid matrix.",

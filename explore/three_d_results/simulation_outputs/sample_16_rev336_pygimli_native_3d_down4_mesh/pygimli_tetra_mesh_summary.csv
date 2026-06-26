@@ -1,0 +1,2 @@
+﻿pore_domain,responsive_pore_voxels,total_pore_voxels,open_voxels,closed_pore_voxels,node_count,tetra_cell_count,tetra_per_open_voxel,all_boundary_triangles,solid_boundary_triangles,external_boundary_triangles,solid_boundary_voxel_faces,external_boundary_voxel_faces,voxel_size_um,external_boundary,stiffness_nonzeros,timing_tetra_array_build_s,timing_mesh_preview_s
+all,113239,113239,111457,1782,135541,508027,4.558053778587258,1118394,1118205,189,1118205,189,7.68,no_flux,,40.74759489999997,1.8914662000006501

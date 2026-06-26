@@ -134,6 +134,43 @@ Agent 可以协助生成图表、摘要和解释，但应避免过度推断。�
 - 网格和参数选择对结果的影响；
 - 不同静态状态之间的响应差异。
 
+### pnextract 孔径分布与 NMR T2 双轴对比图
+
+当需要把 pnextract 孔径分布直方图与实验或模拟 NMR T2 反演谱画在一起时，优先复用 `advanced_tools/pnextract_t2_dual_axis_overlay.py`，详细说明见 `docs/pnextract_t2_dual_axis_overlay.md`。
+
+默认图式应使用 `--histogram-axis-mode top_pore_diameter`：
+
+- 下方横轴只显示 `T2 (ms)`，用于实验 T2 和模拟 T2 曲线；
+- 上方横轴只显示孔径 `pore diameter (um)`，用于 pnextract 体积加权孔径直方图；
+- 两个横轴均使用 log scale；
+- 只允许通过微调上方孔径轴显示范围，让孔径主峰和 T2 主峰在视觉位置上对应；
+- 不应为了对齐主峰而实际缩放、平移或改写孔径值或 T2 值，除非用户明确要求做 display-only alignment；
+- 如果使用孔径到 T2 的物理换算，必须记录公式、surface relaxivity 参数及来源，并在图注或说明中明确这是换算图，不是双独立横轴图。
+
+pnextract 相关约定应保持可复查：
+
+- segmentation 中孔隙相映射为 `0`，固体相映射为 `1`；
+- MHD 中使用 `threshold 0 0`；
+- `_node2.dat` 中 radius 和 volume 按 SI 单位读取后转换为 `um` 和 `um3`；
+- 孔径直方图使用 pore volume 加权，而不是简单 pore count；
+- 输出 manifest 应记录输入 TIFF、phase label、voxel size、pnextract 可执行文件、T2 谱路径、上下横轴范围、显示模式和输出图路径。
+
+### 孔隙率分组代表切片的近似三维 NMR
+
+当前推荐的“近似三维”方案不是直接使用不成熟的 tetra/voxel 真实 3D 求解，而是复用稳定的 2D 切片 NMR workflow，对三维 CT stack 做连续切片分组：
+
+- 先逐张切片计算孔隙率；
+- 按 z 向连续性分组，使每组内 `max(porosity)-min(porosity)` 不超过给定阈值，默认阈值可用 `0.01`；
+- 每组只取中间代表切片做 2D NMR 模拟；
+- 每组的切片数量作为权重，对代表切片的 normalized decay 做加权平均；
+- 对加权平均 decay 使用统一 fixed-alpha NNLS 反演；
+- 最终仍使用双横轴图式：下轴 `T2 (ms)`，上轴 `pore diameter (um)`，叠加 pnextract 孔径直方图、实验 T2 和模拟 T2；
+- 每个分组代表切片的 mesh 图必须统一导出，并保留分组表、代表切片、权重、模拟参数和 manifest。
+
+该流程的当前入口是 `advanced_tools/sample16_grouped_porosity_nmr.py`。它是“porosity-grouped 2D representative-slice approximation to the 3D stack”，可以用于管理和比较整套 CT stack 的代表切片响应，但不得表述为真实 3D NMR solve。
+
+真实 3D / pyGIMLi / tetra / voxel 相关代码和历史输出目前归为探索性、不成熟测试，应放在 `explore/` 目录下。除非用户明确要求继续开发真实 3D solver，否则 agent 不应优先调用这些探索脚本或用其结果作为正式结论。
+
 ## 动态过程处理
 
 对于溶解、脱水、吸水或饱和度变化等动态过程，当前推荐思路是将 dynamic process 拆分为多个 static states。每个静态状态分别完成几何、网格、边界条件和 NMR 求解，然后再比较多个状态之间的演化趋势。

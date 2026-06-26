@@ -1,0 +1,98 @@
+{
+  "run_status": "paused_resource_guard",
+  "pause_reason": "Native pyGIMLi surface extraction produced 8923690 surface triangles, exceeding --native-max-surface-triangles=4000000. This run is paused instead of downsampling or simplifying the CT geometry.",
+  "pause_details": {
+    "pause_stage": "surface_triangle_guard",
+    "surface_vertices": 4439683,
+    "surface_triangles": 8923690,
+    "max_surface_triangles": 4000000,
+    "downsampling": "none",
+    "geometry_simplification": "none"
+  },
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data_inventory\\ct_backed_samples_raw_copy_20260605\\sample_16_Grainstone\\CT_slices\\1-CTseg\\5-16seged.tiff",
+  "source_label_convention": {
+    "2": "pore voxel before open/closed filtering",
+    "1": "solid matrix"
+  },
+  "original_volume_shape_zyx": [
+    800,
+    666,
+    666
+  ],
+  "volume_shape_zyx": [
+    400,
+    333,
+    333
+  ],
+  "downsample_factor": 2,
+  "downsampling": "volume_preserving_binary",
+  "downsampling_stats": {
+    "method": "volume_preserving_binary",
+    "factor": 2,
+    "original_shape_zyx": [
+      800,
+      666,
+      666
+    ],
+    "coarse_shape_zyx": [
+      400,
+      333,
+      333
+    ],
+    "original_voxel_size_um": 1.92,
+    "coarse_voxel_size_um": 3.84,
+    "original_pore_voxels": 67796248,
+    "target_coarse_pore_voxels": 8474531,
+    "represented_original_pore_voxels": 67796248,
+    "absolute_pore_voxel_error": 0,
+    "relative_pore_volume_error": 0.0,
+    "original_porosity_fraction": 0.19105887418950482,
+    "coarse_porosity_fraction": 0.19105887418950482,
+    "porosity_absolute_error": 0.0,
+    "tie_break": "descending pore occupancy, then increasing z-y-x block index"
+  },
+  "geometry_simplification": "none",
+  "model_dimension_note": "This run attempted native pyGIMLi 3D tetrahedral meshing on the saturated 3D pore domain. If downsample_factor > 1, volume-preserving binary resampling was applied before meshing and the working voxel size records the coarser physical voxel size.",
+  "meshing_backend": "pygimli_native",
+  "connectivity": 6,
+  "pore_domain": "all",
+  "nmr_params": {
+    "voxel_size_um": 3.84,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_external_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "external_boundary": "no_flux"
+  },
+  "detection_summary": {
+    "z_slices": 400,
+    "rows": 333,
+    "cols": 333,
+    "total_voxels": 44355600,
+    "voxel_size_um": 3.84,
+    "voxel_volume_um3": 56.62310399999999,
+    "total_pore_voxels": 8474531,
+    "open_pore_voxels": 8133422,
+    "closed_pore_voxels": 341109,
+    "total_porosity_fraction": 0.19105887418950482,
+    "open_porosity_fraction": 0.1833685487289091,
+    "closed_porosity_fraction": 0.007690325460595731,
+    "open_fraction_of_pore_voxels": 0.9597489229787466,
+    "pore_component_count": 15301,
+    "open_component_count": 916,
+    "closed_component_count": 14385,
+    "open_pore_volume_um3": 460539599.78188795,
+    "closed_pore_volume_um3": 19314650.382335998
+  },
+  "timings_s": {
+    "tetra_array_build": 1.7790386000015133,
+    "total": 7.130207299998801
+  },
+  "outputs": {
+    "open_closed_pore_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down2_mesh_probe\\open_closed_pore_summary.csv",
+    "pore_component_table_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down2_mesh_probe\\pore_component_table.csv",
+    "projection_preview_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\sample_16_5-16seged_pygimli_native_3d_down2_mesh_probe\\all_pore_3d_projection_preview.png"
+  }
+}
