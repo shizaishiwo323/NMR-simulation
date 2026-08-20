@@ -1,0 +1,18 @@
+{
+  "t2_spectrum": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_mesh96_alpha0p1_quality0\\lcurve_inversion\\lcurve_optimal_t2_spectrum.csv",
+  "pore_table": "C:\\Users\\imgw\\Documents\\Codex\\SIP\u6a21\u62df\\sip\u6a21\u62df\\results\\niu2020_berea_reproduction3\\pore_network\\pnextract\\network_parsed\\pores.csv",
+  "pore_count": 2125,
+  "weighting": "pore_volume_m3",
+  "binning": "80 linear bins",
+  "t2_peak_ms": 1162.322468679852,
+  "pore_diameter_distribution_peak_um": 71.1564060375,
+  "bottom_t2_axis_ms": [
+    0.0,
+    2000.0
+  ],
+  "top_pore_diameter_axis_um": [
+    0.0,
+    122.4383214725572
+  ],
+  "alignment": "display-axis alignment only; T2 and pore diameter values are unchanged"
+}

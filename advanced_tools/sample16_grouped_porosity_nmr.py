@@ -14,6 +14,7 @@ import matplotlib
 
 matplotlib.use("Agg", force=True)
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import tifffile
@@ -139,6 +140,88 @@ def normalized_spectrum_frame(result) -> pd.DataFrame:
     )
 
 
+def is_missing_experiment(path: Path) -> bool:
+    return str(path).strip().lower() in {"", "none", "null", "na"} or not path.exists()
+
+
+def load_pore_size_table(path: Path) -> pd.DataFrame:
+    pores = pd.read_csv(path) if path.suffix.lower() == ".csv" else load_node2_pore_table(path)
+    pores = pores.copy()
+    if "pore_diameter_um" not in pores.columns:
+        if "pore_radius_um" in pores.columns:
+            pores["pore_diameter_um"] = 2.0 * pores["pore_radius_um"]
+        elif "pore_radius_m" in pores.columns:
+            pores["pore_diameter_um"] = 2.0 * pores["pore_radius_m"] * 1e6
+        else:
+            raise ValueError("Pore table needs pore_diameter_um, pore_radius_um, or pore_radius_m.")
+    if "pore_volume_um3" not in pores.columns:
+        if "pore_volume_m3" in pores.columns:
+            pores["pore_volume_um3"] = pores["pore_volume_m3"] * 1e18
+        else:
+            pores["pore_volume_um3"] = 1.0
+    pores = pores.replace([np.inf, -np.inf], np.nan).dropna(subset=["pore_diameter_um", "pore_volume_um3"])
+    return pores[(pores["pore_diameter_um"] > 0) & (pores["pore_volume_um3"] > 0)].copy()
+
+
+def save_simulation_only_topaxis_plot(
+    pores: pd.DataFrame,
+    simulation: pd.DataFrame,
+    output_path: Path,
+    bins: int,
+    xlim_min_ms: float,
+    xlim_max_ms: float,
+) -> pd.DataFrame:
+    diameter_edges = np.logspace(
+        np.log10(max(float(pores["pore_diameter_um"].min()) * 0.8, 1e-9)),
+        np.log10(float(pores["pore_diameter_um"].max()) * 1.2),
+        bins + 1,
+    )
+    hist, diameter_edges = np.histogram(
+        pores["pore_diameter_um"].to_numpy(float),
+        bins=diameter_edges,
+        weights=pores["pore_volume_um3"].to_numpy(float),
+    )
+    centers = np.sqrt(diameter_edges[:-1] * diameter_edges[1:])
+    hist_norm = hist / max(float(hist.max()), 1e-30)
+    hist_frame = pd.DataFrame(
+        {
+            "pore_diameter_um_center": centers,
+            "volume_weighted_count": hist,
+            "normalized_volume_weighted_count": hist_norm,
+        }
+    )
+
+    fig, ax = plt.subplots(figsize=(9.2, 5.2))
+    top_ax = ax.twiny()
+    top_ax.set_xscale("log")
+    top_ax.stairs(hist_norm, diameter_edges, color="#5b6f95", linewidth=2.0, label="pore-network pore diameter histogram")
+    ax.plot(
+        simulation["t2_ms"],
+        simulation["normalized_amplitude"],
+        color="#1f2937",
+        linewidth=2.2,
+        label="porosity-grouped 2D NMR approximation",
+    )
+    ax.set_xscale("log")
+    ax.set_xlim(xlim_min_ms, xlim_max_ms)
+    ax.set_ylim(bottom=-0.02, top=1.08)
+    ax.set_xlabel("T2 (ms)")
+    ax.set_ylabel("normalized amplitude / volume-weighted frequency")
+    ax.set_title("Berea CT: pore-network distribution vs simulated T2")
+    ax.grid(alpha=0.25, which="both")
+    top_ax.set_xlim(float(diameter_edges[0]), float(diameter_edges[-1]))
+    top_ax.set_xlabel("pore diameter (um)")
+    lines, labels = ax.get_legend_handles_labels()
+    top_lines, top_labels = top_ax.get_legend_handles_labels()
+    ax.legend(top_lines + lines, top_labels + labels, loc="best")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    hist_frame["top_axis_min_um"] = float(diameter_edges[0])
+    hist_frame["top_axis_max_um"] = float(diameter_edges[-1])
+    return hist_frame
+
+
 def run_one_slice(args: argparse.Namespace, group: SliceGroup, slice_index: int, group_dir: Path) -> bool:
     command = [
         sys.executable,
@@ -149,7 +232,7 @@ def run_one_slice(args: argparse.Namespace, group: SliceGroup, slice_index: int,
         "--output-dir",
         str(group_dir),
         "--sample-name",
-        f"sample16_group{group.group_id:03d}",
+        f"{args.sample_name}_group{group.group_id:03d}",
         "--slice-indices",
         str(slice_index),
         "--pore-value",
@@ -189,9 +272,30 @@ def run_one_slice(args: argparse.Namespace, group: SliceGroup, slice_index: int,
         "--fixed-alpha",
         str(args.fixed_alpha),
     ]
-    completed = subprocess.run(command, cwd=Path.cwd(), text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    (group_dir / "subprocess_stdout.log").write_text(completed.stdout, encoding="utf-8", errors="replace")
-    return completed.returncode == 0
+    try:
+        completed = subprocess.run(
+            command,
+            cwd=Path.cwd(),
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            timeout=args.slice_timeout_s,
+        )
+        output = completed.stdout
+        ok = completed.returncode == 0
+    except subprocess.TimeoutExpired as exc:
+        output = (exc.stdout or "") + f"\nTimed out after {args.slice_timeout_s} s.\n"
+        ok = False
+    (group_dir / "subprocess_stdout.log").write_text(output, encoding="utf-8", errors="replace")
+    return ok
+
+
+def completed_group_run(group_dir: Path) -> bool:
+    return (
+        (group_dir / "run_manifest.json").is_file()
+        and (group_dir / "average_normalized_decay.csv").is_file()
+        and any(group_dir.glob("*triangular_mesh.png"))
+    )
 
 
 def parse_args() -> argparse.Namespace:
@@ -200,6 +304,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--experiment-decay", type=Path, default=DEFAULT_EXPERIMENT_DECAY)
     parser.add_argument("--pore-table", type=Path, default=DEFAULT_PORE_TABLE)
     parser.add_argument("--output-dir", type=Path, default=Path("simulation_outputs/sample_16_porosity_grouped_nmr_topaxis"))
+    parser.add_argument("--sample-name", default="sample16")
     parser.add_argument("--porosity-threshold", type=float, default=0.01)
     parser.add_argument("--pore-value", type=int, default=2)
     parser.add_argument("--solid-value", type=int, default=1)
@@ -214,6 +319,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--mesh-bulk-size-um", type=float, default=12.0)
     parser.add_argument("--mesh-boundary-size-um", type=float, default=5.0)
     parser.add_argument("--mesh-max-points", type=int, default=50000)
+    parser.add_argument("--slice-timeout-s", type=float, default=None)
+    parser.add_argument("--skip-failed-groups", action="store_true")
+    parser.add_argument("--skip-group-ids", default="", help="Comma-separated 0-based group IDs to skip.")
     parser.add_argument("--fixed-alpha", type=float, default=476.4)
     parser.add_argument("--t2-bins", type=int, default=200)
     parser.add_argument("--t2-min-ms", type=float, default=1e-2)
@@ -242,15 +350,32 @@ def main() -> None:
     signals = []
     rows = []
     mesh_rows = []
+    skipped_rows = []
     time_axis = None
+    skip_group_ids = {int(value) for value in args.skip_group_ids.split(",") if value.strip()}
     for group in groups:
+        if group.group_id in skip_group_ids:
+            skipped_rows.append({**asdict(group), "attempted_representatives": "", "reason": "explicitly skipped"})
+            print(f"[{group.group_id + 1}/{len(groups)}] skipped group {group.group_id}")
+            continue
         success = False
         attempts = []
-        for candidate in candidate_indices_for_group(group.start_index, group.end_index):
+        candidates = candidate_indices_for_group(group.start_index, group.end_index)
+        completed_candidates = [
+            candidate
+            for candidate in candidates
+            if completed_group_run(group_runs_dir / f"group_{group.group_id:03d}_slice_{candidate:04d}")
+        ]
+        if completed_candidates:
+            candidates = completed_candidates[:1]
+        elif args.skip_failed_groups:
+            candidates = candidates[:1]
+        for candidate in candidates:
             group_dir = group_runs_dir / f"group_{group.group_id:03d}_slice_{candidate:04d}"
             group_dir.mkdir(parents=True, exist_ok=True)
             attempts.append(candidate)
-            if not run_one_slice(args, group, candidate, group_dir):
+            reused = completed_group_run(group_dir)
+            if not reused and not run_one_slice(args, group, candidate, group_dir):
                 continue
             decay = pd.read_csv(group_dir / "average_normalized_decay.csv")
             current_time = decay["time_ms"].to_numpy(dtype=float)
@@ -270,6 +395,7 @@ def main() -> None:
                     "used_representative_1_based": candidate + 1,
                     "weight_slice_count": group.slice_count,
                     "attempted_representatives": ",".join(str(v) for v in attempts),
+                    "reused_existing_run": reused,
                     "group_output_dir": str(group_dir.resolve()),
                     "decay_csv": str((group_dir / "average_normalized_decay.csv").resolve()),
                     "mesh_png": str(mesh_dest.resolve()),
@@ -289,6 +415,12 @@ def main() -> None:
             print(f"[{group.group_id + 1}/{len(groups)}] group {group.group_id} used slice {candidate}, count={group.slice_count}")
             break
         if not success:
+            if args.skip_failed_groups:
+                skipped_rows.append(
+                    {**asdict(group), "attempted_representatives": ",".join(str(v) for v in attempts), "reason": "representative failed"}
+                )
+                print(f"[{group.group_id + 1}/{len(groups)}] skipped failed group {group.group_id}")
+                continue
             raise RuntimeError(f"All representative candidates failed for group {group.group_id}: {attempts}")
 
     if time_axis is None:
@@ -298,6 +430,8 @@ def main() -> None:
     weighted_decay_path = args.output_dir / "group_weighted_normalized_decay.csv"
     pd.DataFrame({"time_ms": time_axis, "group_weighted_normalized_signal": weighted_signal}).to_csv(weighted_decay_path, index=False)
     pd.DataFrame(rows).to_csv(args.output_dir / "porosity_groups_and_representatives.csv", index=False, encoding="utf-8-sig")
+    skipped_path = args.output_dir / "skipped_porosity_groups.csv"
+    pd.DataFrame(skipped_rows).to_csv(skipped_path, index=False, encoding="utf-8-sig")
     groups_frame.to_csv(args.output_dir / "porosity_groups_initial.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(mesh_rows).to_csv(mesh_dir / "representative_mesh_figures_manifest.csv", index=False, encoding="utf-8-sig")
 
@@ -307,41 +441,59 @@ def main() -> None:
         t2_min_ms=args.t2_min_ms,
         t2_max_ms=args.t2_max_ms,
     )
-    exp_time, exp_signal, _ = load_experiment_decay(args.experiment_decay)
-    exp_result = invert_single_signal_nnls(exp_time, exp_signal, signal_name="sample16_experiment_fixed", config=cfg)
-    sim_result = invert_single_signal_nnls(time_axis, weighted_signal, signal_name="sample16_porosity_group_weighted", config=cfg)
-    exp_spectrum = normalized_spectrum_frame(exp_result)
+    sim_result = invert_single_signal_nnls(time_axis, weighted_signal, signal_name=f"{args.sample_name}_porosity_group_weighted", config=cfg)
     sim_spectrum = normalized_spectrum_frame(sim_result)
-    exp_spectrum_path = args.output_dir / "experiment_t2_inversion_fixed_alpha_476p4.csv"
-    sim_spectrum_path = args.output_dir / "porosity_group_weighted_t2_inversion_fixed_alpha_476p4.csv"
-    exp_spectrum.to_csv(exp_spectrum_path, index=False)
+    alpha_token = f"{args.fixed_alpha:g}".replace(".", "p")
+    sim_spectrum_path = args.output_dir / f"porosity_group_weighted_t2_inversion_fixed_alpha_{alpha_token}.csv"
     sim_spectrum.to_csv(sim_spectrum_path, index=False)
 
-    pores = pd.read_csv(args.pore_table) if args.pore_table.suffix.lower() == ".csv" else load_node2_pore_table(args.pore_table)
-    figure_path = args.output_dir / "sample16_porosity_grouped_vs_experiment_t2_topaxis.png"
-    hist = save_overlay_plot(
-        pores,
-        exp_spectrum,
-        sim_spectrum,
-        figure_path,
-        rho_um_per_ms=args.rho_um_per_ms,
-        bins=args.histogram_bins,
-        histogram_axis_mode="top_pore_diameter",
-        xlim_min_ms=args.t2_min_ms,
-        xlim_max_ms=args.t2_max_ms,
-        top_axis_max_um=3000.0,
-    )
+    pores = load_pore_size_table(args.pore_table)
+    exp_spectrum_path = None
+    experiment_available = not is_missing_experiment(args.experiment_decay)
+    if experiment_available:
+        exp_time, exp_signal, _ = load_experiment_decay(args.experiment_decay)
+        exp_result = invert_single_signal_nnls(exp_time, exp_signal, signal_name="sample16_experiment_fixed", config=cfg)
+        exp_spectrum = normalized_spectrum_frame(exp_result)
+        exp_spectrum_path = args.output_dir / f"experiment_t2_inversion_fixed_alpha_{alpha_token}.csv"
+        exp_spectrum.to_csv(exp_spectrum_path, index=False)
+        figure_path = args.output_dir / "sample16_porosity_grouped_vs_experiment_t2_topaxis.png"
+        hist = save_overlay_plot(
+            pores,
+            exp_spectrum,
+            sim_spectrum,
+            figure_path,
+            rho_um_per_ms=args.rho_um_per_ms,
+            bins=args.histogram_bins,
+            histogram_axis_mode="top_pore_diameter",
+            xlim_min_ms=args.t2_min_ms,
+            xlim_max_ms=args.t2_max_ms,
+            top_axis_max_um=3000.0,
+        )
+    else:
+        figure_path = args.output_dir / "porosity_grouped_simulated_t2_vs_pore_network_topaxis.png"
+        hist = save_simulation_only_topaxis_plot(
+            pores,
+            sim_spectrum,
+            figure_path,
+            bins=args.histogram_bins,
+            xlim_min_ms=args.t2_min_ms,
+            xlim_max_ms=args.t2_max_ms,
+        )
     hist_path = args.output_dir / "pnextract_pore_histogram_for_grouped_overlay.csv"
     hist.to_csv(hist_path, index=False)
 
     manifest = {
         "method": "Contiguous CT slices were grouped so each group has max(porosity)-min(porosity) <= threshold. One middle representative slice was simulated per group; group slice counts weight the averaged decay before fixed-alpha NNLS inversion.",
         "input_tiff": str(args.input_tiff.resolve()),
-        "experiment_decay": str(args.experiment_decay.resolve()),
+        "experiment_decay": str(args.experiment_decay.resolve()) if experiment_available else None,
+        "experiment_available": experiment_available,
+        "pore_table": str(args.pore_table.resolve()),
         "output_dir": str(args.output_dir.resolve()),
         "porosity_threshold": args.porosity_threshold,
         "num_input_slices": int(len(porosity_frame)),
         "num_groups": int(len(groups)),
+        "num_completed_groups": int(len(rows)),
+        "skipped_group_ids": [int(row["group_id"]) for row in skipped_rows],
         "total_weighted_slices": int(total_weight),
         "simulation_params": {
             "pixel_size_um": args.pixel_size_um,
@@ -360,8 +512,9 @@ def main() -> None:
         "outputs": {
             "slice_porosity_profile_csv": str(porosity_path.resolve()),
             "groups_csv": str((args.output_dir / "porosity_groups_and_representatives.csv").resolve()),
+            "skipped_groups_csv": str(skipped_path.resolve()),
             "weighted_decay_csv": str(weighted_decay_path.resolve()),
-            "experiment_spectrum_csv": str(exp_spectrum_path.resolve()),
+            "experiment_spectrum_csv": str(exp_spectrum_path.resolve()) if exp_spectrum_path is not None else None,
             "simulation_spectrum_csv": str(sim_spectrum_path.resolve()),
             "overlay_figure_png": str(figure_path.resolve()),
             "mesh_dir": str(mesh_dir.resolve()),

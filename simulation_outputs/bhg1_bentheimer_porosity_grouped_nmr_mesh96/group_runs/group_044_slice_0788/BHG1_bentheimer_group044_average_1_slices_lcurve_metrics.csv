@@ -1,0 +1,2 @@
+alpha_regularization,residual_norm,roughness_norm,zeta,eta,slope_reciprocal,is_best,inversion_mode
+0.1,7.1222025659751305,1.0459611626049679,50.72576939078273,1.094034753677936,,True,fixed

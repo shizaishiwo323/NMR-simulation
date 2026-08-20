@@ -1,0 +1,13 @@
+{
+  "best_alpha": 39.194067748472214,
+  "best_index": 56,
+  "selected_reciprocal_slope": 0.2358724984877217,
+  "used_valid_range_filter": true,
+  "peak_t2_ms": 1162.322468679852,
+  "alpha_scan": {
+    "min": 1e-06,
+    "max": 100.0,
+    "count": 60
+  },
+  "selection_method": "closest reciprocal L-curve slope to 0.25 within [0.1, 10]"
+}

@@ -1,0 +1,158 @@
+{
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\data\\Niu 2020data\\microCT_Berea.tiff",
+  "source_label_convention": {
+    "256": "pore space treated as water-filled simulation domain",
+    "512": "solid matrix"
+  },
+  "random_seed": 20260605,
+  "slice_selection_mode": "explicit",
+  "selected_slice_indices_0_based": [
+    84
+  ],
+  "selected_slice_indices_1_based": [
+    85
+  ],
+  "simulation_params": {
+    "pixel_size_x_um": 2.8,
+    "pixel_size_y_um": 2.8,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_gas_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "max_grid_size": 32,
+    "solver": "triangular",
+    "mesh_bulk_size_um": 48.0,
+    "mesh_boundary_size_um": 24.0,
+    "mesh_max_points": 3000
+  },
+  "inversion_mode": "fixed",
+  "lcurve_config": {
+    "num_bins": 200,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "alpha_min": 1e-06,
+    "alpha_max": 100.0,
+    "alpha_count": 60,
+    "slope_reciprocal_target": 0.25,
+    "slope_reciprocal_valid_range": [
+      0.1,
+      10.0
+    ],
+    "min_points_after_trim": 10
+  },
+  "fixed_inversion_config": {
+    "num_bins": 200,
+    "regularization": 476.4,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "min_points_after_trim": 10
+  },
+  "average_outputs": {
+    "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_average_1_slices_t2_inversion.csv",
+    "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_average_1_slices_lcurve_metrics.csv",
+    "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_average_1_slices_lcurve_fit.csv",
+    "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_average_1_slices_t2_inversion.png",
+    "best_regularization": 476.4,
+    "best_index": 0,
+    "average_decay_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\average_and_slice_decay_curves.png",
+    "average_inversion_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\average_t2_inversion.png"
+  },
+  "mesh_summary_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\mesh_summary.csv",
+  "per_slice_summaries": [
+    {
+      "input_path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\phase_png\\berea_group025_slice_0084.png",
+      "curve_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_nmr_decay.csv",
+      "curve_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_nmr_decay.png",
+      "raw_shape": [
+        350,
+        350
+      ],
+      "simulation_shape": [
+        32,
+        32
+      ],
+      "downsample_scale": 10.9375,
+      "params_used": {
+        "pixel_size_x_um": 30.624999999999996,
+        "pixel_size_y_um": 30.624999999999996,
+        "diffusion_um2_per_ms": 2.0,
+        "bulk_t2_ms": 3000.0,
+        "rho_solid_um_per_ms": 0.005,
+        "rho_gas_um_per_ms": 0.0,
+        "dt_ms": 5.0,
+        "t_max_ms": 1500.0,
+        "max_grid_size": 32,
+        "solver": "triangular",
+        "mesh_bulk_size_um": 48.0,
+        "mesh_boundary_size_um": 24.0,
+        "mesh_max_points": 3000
+      },
+      "phase_counts_full_resolution": {
+        "outside_px": 0,
+        "water_px": 31691,
+        "solid_px": 90809
+      },
+      "mesh_or_boundary_summary": {
+        "mesh_nodes": 475,
+        "mesh_triangles": 435,
+        "plc_outer_contours": 53,
+        "plc_hole_contours": 0,
+        "unused_pygimli_nodes_dropped": 218,
+        "triangle_max_area_um2": 997.6612651596732,
+        "solid_liquid_boundary_length_um": 11668.66430188585,
+        "gas_liquid_boundary_length_um": 0.0,
+        "mesh_bulk_size_um": 48.0,
+        "mesh_boundary_size_um": 24.0,
+        "pygimli_bms_written": false,
+        "mesh_vertices": 475,
+        "boundary_edges": 459,
+        "min_element_quality": 0.10277393139946525,
+        "mean_element_quality": 0.9250975836510602,
+        "median_element_quality": 0.9514816196288715,
+        "p05_element_quality": 0.7851831895509938,
+        "p95_element_quality": 0.9979607536833703,
+        "min_element_area_um2": 13.2126503079096,
+        "mean_element_area_um2": 304.5576289782656,
+        "max_element_area_um2": 770.1327821021921,
+        "element_area_ratio_min_over_max": 0.01715632760346041,
+        "mesh_area_um2": 132482.56860554553,
+        "max_aspect_edge_ratio": 11.255017942259864,
+        "mean_aspect_edge_ratio": 1.394029919494474,
+        "triangular_factorization_jitter": 0.0
+      },
+      "mesh_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_triangular_mesh.png",
+      "pygimli_mesh_bms": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_triangular_mesh.bms",
+      "mesh_quality_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_mesh_quality.csv",
+      "mesh_quality_histogram_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_mesh_quality_histogram.png",
+      "boundary_interpretation": {
+        "red": "water/liquid-filled pore domain solved by the Bloch-Torrey T2 decay approximation",
+        "yellow": "solid matrix; red-yellow contacts use solid-liquid surface relaxation",
+        "white_left_right": "gas-liquid boundary; rho_gas is applied only if nonzero",
+        "white_top_bottom": "fixed solid-liquid boundary using rho_solid"
+      },
+      "slice_index_0_based": 84,
+      "phase_pixel_counts_from_tiff": {
+        "pore_px": 31691,
+        "solid_px": 90809,
+        "total_px": 122500
+      },
+      "inversion_outputs": {
+        "spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_t2_inversion.csv",
+        "metrics_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_lcurve_metrics.csv",
+        "fit_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_lcurve_fit.csv",
+        "figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\niu2020_berea_porosity_grouped_nmr_topaxis_down32_jitter\\group_runs\\group_025_slice_0084\\berea_group025_slice_0084_t2_inversion.png",
+        "best_regularization": 476.4,
+        "best_index": 0
+      }
+    }
+  ],
+  "model_dimension_note": "Each selected plane is simulated as an independent 2D slice extracted from a 3D segmented digital rock. The result is therefore a 1-slice 2D ensemble summary, not a full 3D NMR solve.",
+  "scientific_assumptions": [
+    "All 0-valued pore pixels are treated as water-filled NMR-active pore space.",
+    "255-valued pixels are treated as solid matrix.",
+    "No gas phase or separate outside/container label is present in this binary input.",
+    "rho_gas is kept at the explicit default 0.0 um/ms; solid-water surface relaxation uses rho_solid."
+  ]
+}

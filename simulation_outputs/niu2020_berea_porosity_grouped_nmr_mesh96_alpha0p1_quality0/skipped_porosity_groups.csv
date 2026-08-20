@@ -1,0 +1,3 @@
+﻿group_id,start_index,end_index,representative_index,slice_count,porosity_min,porosity_max,porosity_mean,attempted_representatives,reason
+77,334,335,334,2,0.23245714285714286,0.23755102040816325,0.23500408163265307,,explicitly skipped
+78,336,338,337,3,0.2377877551020408,0.24489795918367346,0.2419972789115646,,explicitly skipped

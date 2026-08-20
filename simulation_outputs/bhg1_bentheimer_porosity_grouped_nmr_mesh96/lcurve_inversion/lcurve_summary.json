@@ -1,0 +1,16 @@
+{
+  "best_alpha": 94.33732216299794,
+  "best_index": 63,
+  "selected_reciprocal_slope": 0.22923634226824252,
+  "used_valid_range_filter": true,
+  "peak_t2_ms": 1482.020705798857,
+  "alpha_scan": {
+    "min": 1e-06,
+    "max": 10000.0,
+    "count": 80
+  },
+  "selected_at_scan_boundary": false,
+  "selection_method": "closest reciprocal L-curve slope to 0.25 within [0.1, 10]",
+  "run_dir": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96",
+  "fixed_spectrum": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\porosity_group_weighted_t2_inversion_fixed_alpha_0p1.csv"
+}

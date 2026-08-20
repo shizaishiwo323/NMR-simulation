@@ -1,0 +1,47 @@
+{
+  "method": "Contiguous CT slices were grouped so each group has max(porosity)-min(porosity) <= threshold. One middle representative slice was simulated per group; group slice counts weight the averaged decay before fixed-alpha NNLS inversion.",
+  "input_tiff": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\results\\bhg1_bentheimer_pore_network_nmr\\segmented_core\\BHG1_macro_pore0_solid255.tiff",
+  "experiment_decay": null,
+  "experiment_available": false,
+  "pore_table": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\results\\bhg1_bentheimer_pore_network_nmr\\pore_network\\pnextract\\network_parsed\\pores.csv",
+  "output_dir": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96",
+  "porosity_threshold": 0.01,
+  "num_input_slices": 800,
+  "num_groups": 46,
+  "num_completed_groups": 46,
+  "skipped_group_ids": [],
+  "total_weighted_slices": 800,
+  "simulation_params": {
+    "pixel_size_um": 2.15926671028137,
+    "diffusion_um2_per_ms": 2.0,
+    "bulk_t2_ms": 3000.0,
+    "rho_solid_um_per_ms": 0.005,
+    "rho_gas_um_per_ms": 0.0,
+    "dt_ms": 5.0,
+    "t_max_ms": 1500.0,
+    "max_grid_size": "96",
+    "mesh_bulk_size_um": 16.0,
+    "mesh_boundary_size_um": 8.0,
+    "mesh_max_points": 20000
+  },
+  "inversion_config": {
+    "num_bins": 200,
+    "regularization": 0.1,
+    "t2_min_ms": 0.01,
+    "t2_max_ms": 100000.0,
+    "min_points_after_trim": 10
+  },
+  "outputs": {
+    "slice_porosity_profile_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\slice_porosity_profile.csv",
+    "groups_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\porosity_groups_and_representatives.csv",
+    "skipped_groups_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\skipped_porosity_groups.csv",
+    "weighted_decay_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\group_weighted_normalized_decay.csv",
+    "experiment_spectrum_csv": null,
+    "simulation_spectrum_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\porosity_group_weighted_t2_inversion_fixed_alpha_0p1.csv",
+    "overlay_figure_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\porosity_grouped_simulated_t2_vs_pore_network_topaxis.png",
+    "mesh_dir": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\representative_mesh_figures",
+    "mesh_manifest_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\representative_mesh_figures\\representative_mesh_figures_manifest.csv",
+    "histogram_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\pnextract_pore_histogram_for_grouped_overlay.csv"
+  },
+  "model_dimension_note": "This is a porosity-grouped 2D representative-slice approximation to the 3D stack, not a full 3D NMR solve."
+}

@@ -1,0 +1,22 @@
+{
+  "t2_spectrum": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\lcurve_inversion\\lcurve_optimal_t2_spectrum.csv",
+  "pore_table": "C:\\Users\\imgw\\Documents\\Codex\\SIP\u6a21\u62df\\sip\u6a21\u62df\\results\\bhg1_bentheimer_pore_network_nmr\\pore_network\\pnextract\\network_parsed\\pores.csv",
+  "pore_radius_field": "pore_radius_m",
+  "pore_count": 4653,
+  "excluded_nonpositive_or_nonfinite_pores": 1,
+  "weighting": "pore_volume_m3",
+  "binning": "80 logarithmic pore-diameter bins",
+  "physical_mapping": "1/T2 = 1/T2_bulk + 6*rho2/D (spherical pore body)",
+  "rho2_um_per_ms": 0.005,
+  "t2_bulk_ms": 3000.0,
+  "geometry_factor_for_diameter": 6.0,
+  "t2_peak_ms": 1482.020705798857,
+  "lcurve_alpha": 94.33732216299794,
+  "t2_peak_equivalent_pore_diameter_um": 87.86803880094502,
+  "pore_diameter_distribution_peak_um": 69.69060029298772,
+  "pore_peak_mapped_t2_ms": 1309.2304775320194,
+  "axes": "bottom T2 log axis; top physically coupled pore-diameter log axis",
+  "alignment": "physical mapping only; no display shifting or peak forcing",
+  "histogram_csv": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\lcurve_inversion\\spherical_pore_diameter_log_volume_weighted_histogram.csv",
+  "output_png": "C:\\Users\\imgw\\Documents\\Codex\\NMR\u6a21\u62df\\simulation_outputs\\bhg1_bentheimer_porosity_grouped_nmr_mesh96\\lcurve_inversion\\lcurve_t2_vs_spherical_pore_physical_log.png"
+}

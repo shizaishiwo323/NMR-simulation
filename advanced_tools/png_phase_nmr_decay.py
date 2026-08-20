@@ -400,7 +400,7 @@ def build_triangular_water_mesh(labels: np.ndarray, params: SimulationParams) ->
     plc = mt.mergePLC(plcs, tol=max(params.mesh_boundary_size_um * 0.05, 1e-6))
     mesh = mt.createMesh(
         plc,
-        quality=32,
+        quality=0,
         area=max_area,
         smooth=[1, 4],
         preserveBoundary=True,
@@ -415,6 +415,7 @@ def build_triangular_water_mesh(labels: np.ndarray, params: SimulationParams) ->
     out["plc_outer_contours"] = outer_count
     out["plc_hole_contours"] = hole_count
     out["triangle_max_area_um2"] = max_area
+    out["triangle_quality_target_deg"] = 0
     return out
 
 
@@ -494,6 +495,7 @@ def assemble_triangular_operator(labels: np.ndarray, params: SimulationParams):
         "plc_hole_contours": int(mesh.get("plc_hole_contours", 0)),
         "unused_pygimli_nodes_dropped": int(mesh.get("unused_pygimli_nodes_dropped", 0)),
         "triangle_max_area_um2": float(mesh.get("triangle_max_area_um2", np.nan)),
+        "triangle_quality_target_deg": int(mesh.get("triangle_quality_target_deg", 32)),
         "solid_liquid_boundary_length_um": float(solid_length),
         "gas_liquid_boundary_length_um": float(gas_length),
         "mesh_bulk_size_um": float(params.mesh_bulk_size_um),
@@ -597,17 +599,20 @@ def save_mesh_quality_histogram(quality_frame: pd.DataFrame, output_path: Path) 
 def save_pygimli_mesh(mesh: dict[str, object], output_path: Path) -> bool:
     if pg is None:
         return False
-    if "pygimli_mesh" in mesh:
-        mesh["pygimli_mesh"].save(str(output_path))
+    try:
+        if "pygimli_mesh" in mesh:
+            mesh["pygimli_mesh"].save(str(output_path))
+            return True
+        points = mesh["points"]
+        triangles = mesh["triangles"]
+        pg_mesh = pg.Mesh(2)
+        nodes = [pg_mesh.createNode(float(x), float(y), 0.0) for x, y in points]
+        for tri in triangles:
+            pg_mesh.createTriangle(nodes[int(tri[0])], nodes[int(tri[1])], nodes[int(tri[2])])
+        pg_mesh.save(str(output_path))
         return True
-    points = mesh["points"]
-    triangles = mesh["triangles"]
-    pg_mesh = pg.Mesh(2)
-    nodes = [pg_mesh.createNode(float(x), float(y), 0.0) for x, y in points]
-    for tri in triangles:
-        pg_mesh.createTriangle(nodes[int(tri[0])], nodes[int(tri[1])], nodes[int(tri[2])])
-    pg_mesh.save(str(output_path))
-    return True
+    except RuntimeError:
+        return False
 
 
 def solve_decay_triangular(
@@ -640,7 +645,13 @@ def solve_decay_triangular(
         + diags(params.rho_solid_um_per_ms * dt * solid_robin, format="csr")
         + diags(params.rho_gas_um_per_ms * dt * gas_robin, format="csr")
     )
-    solve = factorized(lhs.tocsc())
+    try:
+        solve = factorized(lhs.tocsc())
+        stats["triangular_factorization_jitter"] = 0.0
+    except RuntimeError:
+        jitter = max(float(np.max(np.abs(lhs.diagonal()))), 1.0) * 1e-12
+        solve = factorized((lhs + eye(lhs.shape[0], format="csr") * jitter).tocsc())
+        stats["triangular_factorization_jitter"] = jitter
     times = np.arange(0.0, params.t_max_ms + 0.5 * dt, dt)
     magnetization = np.ones_like(mass, dtype=float)
     amplitude = np.empty_like(times)
