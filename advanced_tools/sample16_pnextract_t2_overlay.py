@@ -198,15 +198,26 @@ def save_overlay_plot(
     top_axis_min_um: float | None = None,
     top_axis_max_um: float | None = None,
     additional_spectra: list[pd.DataFrame] | None = None,
+    throats: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     pores = pores.copy()
     pores["equivalent_t2_ms"] = pore_diameter_um_to_t2_ms(pores["pore_diameter_um"].to_numpy(float), rho_um_per_ms)
+    if throats is not None:
+        throats = throats.copy()
+        throats["equivalent_t2_ms"] = pore_diameter_um_to_t2_ms(
+            throats["throat_diameter_um"].to_numpy(float), rho_um_per_ms
+        )
     t2_min = 1e-2
     t2_max = max(1e5, float(pores["equivalent_t2_ms"].max()) * 1.2)
     if histogram_axis_mode == "top_pore_diameter":
+        diameter_min = float(pores["pore_diameter_um"].min())
+        diameter_max = float(pores["pore_diameter_um"].max())
+        if throats is not None:
+            diameter_min = min(diameter_min, float(throats["throat_diameter_um"].min()))
+            diameter_max = max(diameter_max, float(throats["throat_diameter_um"].max()))
         diameter_edges = np.logspace(
-            np.log10(max(float(pores["pore_diameter_um"].min()) * 0.8, 1e-9)),
-            np.log10(float(pores["pore_diameter_um"].max()) * 1.2),
+            np.log10(max(diameter_min * 0.8, 1e-9)),
+            np.log10(diameter_max * 1.2),
             bins + 1,
         )
         hist, diameter_edges = np.histogram(
@@ -216,6 +227,13 @@ def save_overlay_plot(
         )
         centers = np.sqrt(diameter_edges[:-1] * diameter_edges[1:])
         edges = pore_diameter_um_to_t2_ms(diameter_edges, rho_um_per_ms)
+        throat_hist = (
+            np.histogram(
+                throats["throat_diameter_um"], bins=diameter_edges, weights=throats["throat_volume_um3"]
+            )[0]
+            if throats is not None
+            else None
+        )
     else:
         edges = np.logspace(np.log10(t2_min), np.log10(t2_max), bins + 1)
         hist, edges = np.histogram(
@@ -224,6 +242,13 @@ def save_overlay_plot(
             weights=pores["pore_volume_um3"],
         )
         centers = np.sqrt(edges[:-1] * edges[1:])
+        throat_hist = (
+            np.histogram(
+                throats["equivalent_t2_ms"], bins=edges, weights=throats["throat_volume_um3"]
+            )[0]
+            if throats is not None
+            else None
+        )
     hist_norm = hist / max(float(hist.max()), 1e-30)
     hist_frame = pd.DataFrame(
         {
@@ -237,6 +262,9 @@ def save_overlay_plot(
             "normalized_volume_weighted_count": hist_norm,
         }
     )
+    if throat_hist is not None:
+        hist_frame["throat_volume_weighted_count"] = throat_hist
+        hist_frame["throat_normalized_volume_weighted_count"] = throat_hist / max(float(throat_hist.max()), 1e-30)
     alignment_scale = 1.0
     alignment_shift_ms = 0.0
     target_peak_t2_ms = np.nan
@@ -262,7 +290,12 @@ def save_overlay_plot(
     hist_frame["display_alignment_shift_ms"] = alignment_shift_ms
 
     fig, ax = plt.subplots(figsize=(9.2, 5.4))
-    hist_label = "pnextract pore diameter histogram"
+    pore_peak_um = float(centers[int(np.argmax(hist_norm))]) if histogram_axis_mode == "top_pore_diameter" else np.nan
+    hist_label = (
+        f"pore diameter (volume weighted; peak {pore_peak_um:.0f} μm)"
+        if histogram_axis_mode == "top_pore_diameter"
+        else "pnextract pore diameter histogram"
+    )
     if align_peaks_for_display and histogram_axis_mode != "top_pore_diameter":
         hist_label += f" (display-{display_alignment_mode})"
     top_ax = None
@@ -270,6 +303,18 @@ def save_overlay_plot(
         top_ax = ax.twiny()
         top_ax.set_xscale("log")
         top_ax.stairs(hist_norm, diameter_edges, color="#5b6f95", linewidth=2.0, label=hist_label)
+        top_ax.axvline(pore_peak_um, color="#5b6f95", linewidth=1.0, linestyle=":", alpha=0.55)
+        if throat_hist is not None:
+            throat_peak_um = float(centers[int(np.argmax(throat_hist))])
+            top_ax.stairs(
+                throat_hist / max(float(throat_hist.max()), 1e-30),
+                diameter_edges,
+                color="#b45309",
+                linewidth=1.8,
+                linestyle="--",
+                label=f"throat diameter (volume weighted; peak {throat_peak_um:.0f} μm)",
+            )
+            top_ax.axvline(throat_peak_um, color="#b45309", linewidth=1.0, linestyle=":", alpha=0.55)
     else:
         ax.stairs(display_hist_norm, display_edges, color="#5b6f95", linewidth=2.0, label=hist_label)
     ax.plot(
@@ -319,7 +364,7 @@ def save_overlay_plot(
     else:
         ax.set_xlabel(f"T2 (ms), pore diameter converted by d = 2 rho2 T2, rho2={rho_um_per_ms:g} um/ms")
     ax.set_ylabel("normalized amplitude / volume-weighted frequency")
-    ax.set_title("Sample 16 pore-size distribution vs T2 spectra")
+    ax.set_title("Sample 16 pore/throat-size distributions vs T2 spectra" if throats is not None else "Sample 16 pore-size distribution vs T2 spectra")
     ax.grid(alpha=0.25, which="both")
     if top_ax is not None:
         target_peak_t2_ms = spectrum_peak_t2_ms(experiment)
@@ -331,7 +376,7 @@ def save_overlay_plot(
             else aligned_log_axis_min_for_peak(bottom_xlim, target_peak_t2_ms, top_peak_um, top_max_um)
         )
         top_ax.set_xlim(top_min_um, top_max_um)
-        top_ax.set_xlabel("pore diameter (um)")
+        top_ax.set_xlabel("pore / throat diameter (um)" if throats is not None else "pore diameter (um)")
         lines, labels = ax.get_legend_handles_labels()
         top_lines, top_labels = top_ax.get_legend_handles_labels()
         ax.legend(top_lines + lines, top_labels + labels, loc="best")
@@ -350,7 +395,7 @@ def save_overlay_plot(
         hist_frame["top_axis_min_um"] = np.nan
         hist_frame["top_axis_max_um"] = np.nan
     fig.tight_layout()
-    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    fig.savefig(output_path, dpi=600, bbox_inches="tight")
     plt.close(fig)
     return hist_frame
 

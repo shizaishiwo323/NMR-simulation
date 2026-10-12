@@ -4,7 +4,9 @@ from advanced_tools.sample16_grouped_porosity_nmr import (
     candidate_indices_for_group,
     completed_group_run,
     group_porosity_series,
+    is_physical_normalized_decay,
     load_pore_size_table,
+    load_throat_size_table,
 )
 
 
@@ -45,3 +47,22 @@ def test_completed_group_run_requires_decay_manifest_and_mesh(tmp_path):
     (tmp_path / "slice_triangular_mesh.png").write_bytes(b"png")
 
     assert completed_group_run(tmp_path)
+
+
+def test_physical_decay_rejects_growth_and_accepts_monotonic_signal():
+    assert is_physical_normalized_decay(np.array([1.0, 0.8, 0.5]))
+    assert not is_physical_normalized_decay(np.array([1.0, 0.8, 1.2]))
+
+
+def test_load_throat_size_table_accepts_pnextract_parsed_csv(tmp_path):
+    throats_csv = tmp_path / "throats.csv"
+    throats_csv.write_text(
+        "throat_id,throat_radius_m,throat_volume_m3\n"
+        "1,2e-6,3e-18\n",
+        encoding="utf-8",
+    )
+
+    throats = load_throat_size_table(throats_csv)
+
+    assert np.isclose(throats.loc[0, "throat_diameter_um"], 4.0)
+    assert np.isclose(throats.loc[0, "throat_volume_um3"], 3.0)

@@ -123,6 +123,12 @@ def test_overlay_plot_accepts_additional_3d_spectrum(tmp_path: Path):
             "series": ["3D pyGIMLi T2 inversion"] * 3,
         }
     )
+    throats = pd.DataFrame(
+        {
+            "throat_diameter_um": [0.8, 1.6, 3.2],
+            "throat_volume_um3": [1.0, 2.0, 1.0],
+        }
+    )
     output_path = tmp_path / "overlay.png"
 
     hist = save_overlay_plot(
@@ -133,11 +139,14 @@ def test_overlay_plot_accepts_additional_3d_spectrum(tmp_path: Path):
         rho_um_per_ms=0.015,
         bins=4,
         additional_spectra=[simulation_3d],
+        histogram_axis_mode="top_pore_diameter",
+        throats=throats,
     )
 
     assert output_path.exists()
     assert output_path.stat().st_size > 0
     assert "equivalent_t2_ms_center" in hist.columns
+    assert "throat_normalized_volume_weighted_count" in hist.columns
 
 
 def test_generic_dual_axis_overlay_entrypoint_reuses_sample16_workflow():

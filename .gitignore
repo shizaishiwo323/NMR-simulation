@@ -16,3 +16,15 @@ Thumbs.db
 *.tmp
 *.temp
 *.log
+
+# Local generated outputs (including exploratory simulation_outputs directories).
+simulation_outputs/
+/正式结果/
+
+# Local scratch files and test/tool caches.
+/tmp/
+/临时.md
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/

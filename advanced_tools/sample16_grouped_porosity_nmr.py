@@ -163,6 +163,26 @@ def load_pore_size_table(path: Path) -> pd.DataFrame:
     return pores[(pores["pore_diameter_um"] > 0) & (pores["pore_volume_um3"] > 0)].copy()
 
 
+def load_throat_size_table(path: Path) -> pd.DataFrame:
+    throats = pd.read_csv(path).copy()
+    if "throat_diameter_um" not in throats.columns:
+        if "throat_radius_um" in throats.columns:
+            throats["throat_diameter_um"] = 2.0 * throats["throat_radius_um"]
+        elif "throat_radius_m" in throats.columns:
+            throats["throat_diameter_um"] = 2.0 * throats["throat_radius_m"] * 1e6
+        else:
+            raise ValueError("Throat table needs throat_diameter_um, throat_radius_um, or throat_radius_m.")
+    if "throat_volume_um3" not in throats.columns:
+        if "throat_volume_m3" in throats.columns:
+            throats["throat_volume_um3"] = throats["throat_volume_m3"] * 1e18
+        else:
+            throats["throat_volume_um3"] = 1.0
+    throats = throats.replace([np.inf, -np.inf], np.nan).dropna(
+        subset=["throat_diameter_um", "throat_volume_um3"]
+    )
+    return throats[(throats["throat_diameter_um"] > 0) & (throats["throat_volume_um3"] > 0)].copy()
+
+
 def save_simulation_only_topaxis_plot(
     pores: pd.DataFrame,
     simulation: pd.DataFrame,
@@ -298,11 +318,26 @@ def completed_group_run(group_dir: Path) -> bool:
     )
 
 
+def is_physical_normalized_decay(signal: np.ndarray, tolerance: float = 1e-8) -> bool:
+    values = np.asarray(signal, dtype=float)
+    return bool(
+        values.ndim == 1
+        and values.size > 1
+        and np.all(np.isfinite(values))
+        and abs(values[0] - 1.0) <= 1e-6
+        and np.min(values) >= -tolerance
+        and np.max(values) <= 1.0 + tolerance
+        and np.all(np.diff(values) <= tolerance)
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-tiff", type=Path, default=DEFAULT_TIFF)
+    parser.add_argument("--sample-properties-xlsx", type=Path, default=None)
     parser.add_argument("--experiment-decay", type=Path, default=DEFAULT_EXPERIMENT_DECAY)
     parser.add_argument("--pore-table", type=Path, default=DEFAULT_PORE_TABLE)
+    parser.add_argument("--throat-table", type=Path, default=None)
     parser.add_argument("--output-dir", type=Path, default=Path("simulation_outputs/sample_16_porosity_grouped_nmr_topaxis"))
     parser.add_argument("--sample-name", default="sample16")
     parser.add_argument("--porosity-threshold", type=float, default=0.01)
@@ -367,7 +402,9 @@ def main() -> None:
             if completed_group_run(group_runs_dir / f"group_{group.group_id:03d}_slice_{candidate:04d}")
         ]
         if completed_candidates:
-            candidates = completed_candidates[:1]
+            candidates = completed_candidates + [
+                candidate for candidate in candidates if candidate not in completed_candidates
+            ]
         elif args.skip_failed_groups:
             candidates = candidates[:1]
         for candidate in candidates:
@@ -380,6 +417,12 @@ def main() -> None:
             decay = pd.read_csv(group_dir / "average_normalized_decay.csv")
             current_time = decay["time_ms"].to_numpy(dtype=float)
             signal = decay["average_normalized_signal"].to_numpy(dtype=float)
+            if not is_physical_normalized_decay(signal):
+                print(
+                    f"[{group.group_id + 1}/{len(groups)}] rejected nonphysical decay "
+                    f"from slice {candidate}"
+                )
+                continue
             if time_axis is None:
                 time_axis = current_time
             elif not np.allclose(time_axis, current_time):
@@ -443,11 +486,13 @@ def main() -> None:
     )
     sim_result = invert_single_signal_nnls(time_axis, weighted_signal, signal_name=f"{args.sample_name}_porosity_group_weighted", config=cfg)
     sim_spectrum = normalized_spectrum_frame(sim_result)
+    sim_spectrum["series"] = "porosity-grouped 2D NMR approximation"
     alpha_token = f"{args.fixed_alpha:g}".replace(".", "p")
     sim_spectrum_path = args.output_dir / f"porosity_group_weighted_t2_inversion_fixed_alpha_{alpha_token}.csv"
     sim_spectrum.to_csv(sim_spectrum_path, index=False)
 
     pores = load_pore_size_table(args.pore_table)
+    throats = load_throat_size_table(args.throat_table) if args.throat_table is not None else None
     exp_spectrum_path = None
     experiment_available = not is_missing_experiment(args.experiment_decay)
     if experiment_available:
@@ -456,7 +501,7 @@ def main() -> None:
         exp_spectrum = normalized_spectrum_frame(exp_result)
         exp_spectrum_path = args.output_dir / f"experiment_t2_inversion_fixed_alpha_{alpha_token}.csv"
         exp_spectrum.to_csv(exp_spectrum_path, index=False)
-        figure_path = args.output_dir / "sample16_porosity_grouped_vs_experiment_t2_topaxis.png"
+        figure_path = args.output_dir / "sample16_porosity_grouped_vs_experiment_t2_topaxis_diameter_annotated.png"
         hist = save_overlay_plot(
             pores,
             exp_spectrum,
@@ -468,6 +513,7 @@ def main() -> None:
             xlim_min_ms=args.t2_min_ms,
             xlim_max_ms=args.t2_max_ms,
             top_axis_max_um=3000.0,
+            throats=throats,
         )
     else:
         figure_path = args.output_dir / "porosity_grouped_simulated_t2_vs_pore_network_topaxis.png"
@@ -479,15 +525,20 @@ def main() -> None:
             xlim_min_ms=args.t2_min_ms,
             xlim_max_ms=args.t2_max_ms,
         )
-    hist_path = args.output_dir / "pnextract_pore_histogram_for_grouped_overlay.csv"
+    hist_path = args.output_dir / "pnextract_pore_throat_histograms_for_grouped_overlay.csv"
     hist.to_csv(hist_path, index=False)
 
     manifest = {
         "method": "Contiguous CT slices were grouped so each group has max(porosity)-min(porosity) <= threshold. One middle representative slice was simulated per group; group slice counts weight the averaged decay before fixed-alpha NNLS inversion.",
         "input_tiff": str(args.input_tiff.resolve()),
+        "sample_properties_xlsx": (
+            str(args.sample_properties_xlsx.resolve()) if args.sample_properties_xlsx is not None else None
+        ),
+        "source_label_convention": {str(args.pore_value): "pore", str(args.solid_value): "solid"},
         "experiment_decay": str(args.experiment_decay.resolve()) if experiment_available else None,
         "experiment_available": experiment_available,
         "pore_table": str(args.pore_table.resolve()),
+        "throat_table": str(args.throat_table.resolve()) if args.throat_table is not None else None,
         "output_dir": str(args.output_dir.resolve()),
         "porosity_threshold": args.porosity_threshold,
         "num_input_slices": int(len(porosity_frame)),
@@ -496,6 +547,8 @@ def main() -> None:
         "skipped_group_ids": [int(row["group_id"]) for row in skipped_rows],
         "total_weighted_slices": int(total_weight),
         "simulation_params": {
+            "python_executable": sys.executable,
+            "runtime_note": "The dedicated nmr-simulation environment supplied pyGIMLi because the base environment had no working pyGIMLi runtime.",
             "pixel_size_um": args.pixel_size_um,
             "diffusion_um2_per_ms": args.diffusion_um2_per_ms,
             "bulk_t2_ms": args.bulk_t2_ms,
@@ -508,7 +561,38 @@ def main() -> None:
             "mesh_boundary_size_um": args.mesh_boundary_size_um,
             "mesh_max_points": args.mesh_max_points,
         },
+        "parameter_source_notes": {
+            "pixel_size_um": "sample properties workbook, property_from_figure sheet, sample_id 16: CT_voxel_edge_um = 1.92",
+            "rho_solid_um_per_ms": (
+                f"run parameter rho2 = {1000.0 * args.rho_solid_um_per_ms:g} um/s, "
+                f"converted to {args.rho_solid_um_per_ms:g} um/ms"
+            ),
+            "other_simulation_parameters": "existing grouped representative-slice workflow defaults; sensitivity analysis was not requested",
+        },
         "inversion_config": cfg.__dict__,
+        "overlay_config": {
+            "histogram_axis_mode": "top_pore_diameter",
+            "bottom_t2_xlim_ms": [args.t2_min_ms, args.t2_max_ms],
+            "top_diameter_xlim_um": [float(hist["top_axis_min_um"].iloc[0]), float(hist["top_axis_max_um"].iloc[0])],
+            "pore_histogram_weight": "pore_volume_um3",
+            "throat_histogram_weight": "throat_volume_um3" if "throat_normalized_volume_weighted_count" in hist else None,
+            "alignment_note": (
+                "Only the top-axis display range aligns the pore-distribution peak with the experimental T2 peak; no diameter or T2 values are transformed."
+                if experiment_available else "Simulation-only overlay; no experimental peak alignment."
+            ),
+        },
+        "peak_metrics": {
+            "experimental_t2_ms": float(exp_spectrum.loc[exp_spectrum["normalized_amplitude"].idxmax(), "t2_ms"])
+            if experiment_available
+            else None,
+            "simulated_t2_ms": float(sim_spectrum.loc[sim_spectrum["normalized_amplitude"].idxmax(), "t2_ms"]),
+            "pore_diameter_um": float(hist.loc[hist["normalized_volume_weighted_count"].idxmax(), "pore_diameter_um_center"]),
+            "throat_diameter_um": float(
+                hist.loc[hist["throat_normalized_volume_weighted_count"].idxmax(), "pore_diameter_um_center"]
+            )
+            if "throat_normalized_volume_weighted_count" in hist
+            else None,
+        },
         "outputs": {
             "slice_porosity_profile_csv": str(porosity_path.resolve()),
             "groups_csv": str((args.output_dir / "porosity_groups_and_representatives.csv").resolve()),

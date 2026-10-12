@@ -155,6 +155,29 @@ pnextract 相关约定应保持可复查：
 - 孔径直方图使用 pore volume 加权，而不是简单 pore count；
 - 输出 manifest 应记录输入 TIFF、phase label、voxel size、pnextract 可执行文件、T2 谱路径、上下横轴范围、显示模式和输出图路径。
 
+### CT–NMR–SIP 累积孔径曲线与顺序标定
+
+当需要比较 Avizo 或 pnextract 的 CT 孔体、实验 NMR 和 SIP 等效孔喉累积分布时，优先复用 `advanced_tools/plot_sample16_sip_nmr_avizo_cumulative_vc.py`。它支持 `--ct-source avizo|pnextract`、`--experiment-alpha`、`--no-trim` 和 `--output-dir`；分别为两种 CT 来源指定独立输出目录，重复运行时改用新目录以免覆盖已有结果。图的横轴是**等效半径** `r (um)`，不是直径；横轴用对数刻度，`V_c` 纵轴用 0–1 的线性刻度。此流程与上面的 T2/孔径双独立横轴图不同，确实对 NMR 和 SIP 的横坐标进行了条件性换算与显示对齐。
+
+标定顺序和数据来源必须记录清楚：
+
+1. 明确 NMR 输入是仪器已有的 `Spectra/spectrum.csv`，还是从原始 CPMG `data.csv` 重新反演。后者先按首个有效信号归一化，再做 fixed-alpha NNLS；记录 `alpha`、`T2` 分箱数与范围。样品 16 的 `alpha=1630` 结果使用 200 个分箱、`0.01–100000 ms`，不能称为仪器原有谱。只以选定谱的正幅值计算升序累积幅值 `F_NMR(T2)=cumsum(A)/sum(A)`，并保留反演谱 CSV。
+2. CT 使用 Avizo 或 pnextract 提取的**孔体体积**加权累积分布，不用孔数加权。若将 CT 可分辨孔隙率 `phi_CT` 放入实验 NMR 总孔隙率 `phi_total` 的体积坐标，采用 `f=phi_CT/phi_total`、`V_c,CT(r)=1-f+f F_CT,resolved(r)`。其中 `1-f` 仅是未分辨体积的账面基线，不是重建出的微孔，也不能单凭此式将 CT 曲线称为完整孔径分布。分别保存两种 CT 来源的曲线与参数。
+3. 若采用样品 16 已确认的裁剪方案，CT 从未分辨基线继续增长 `0.01 V_c` 的首个半径起保留；SIP 只取实测频率支持的等效半径区间，再删除末端归一化单箱质量低于 `10^-4` 的近零增长尾段。裁剪对象、阈值、原始范围和保留范围都写入 manifest；该视觉裁剪阈值不是其他样品的通用物理分辨率。NMR 不随 CT/SIP 裁剪而擅自截断。
+4. 先将 NMR 的 `V_c=1` 最大正幅值点对齐至**所选 CT** 的 `V_c=1` 最大保留半径。当前无体弛豫校正、球形快速扩散近似下，`r_NMR=3 rho2* T2`（`rho2*` 用 `um/s`、`T2` 用 `s`），因此 `rho2*=r_CT,max/(3 T2,max)`。分别对 Avizo 和 pnextract 计算，不沿用另一种 CT 的系数；记录正幅值上限如何确定。该 `rho2*` 是依赖谱尾端与终点对齐规则的**有效显示标定系数**，不是独立测得的表面弛豫率。若物理模型包含体弛豫或其他项，必须明确改用相应换算式，不能暗中套用此式。
+5. SIP 源分布是基于 Debye 分解及 `r=sqrt(2 tau D(+))` 的等效孔喉半径；所用 `D(+)` 是文献假设时，不能写成该样品实测参数。在裁剪后的 SIP 支持区间内，先以体积权重归一化 SIP 曲线形状，再将其最大点的 `V_c` 设为 CT 在 SIP 原始最大半径处的 `V_c`。若该半径小于 CT 保留范围，下端插值只返回 CT 左端基线，必须标注这是外推锚点而非 CT/SIP 的实测重叠。最后在已经对齐的 NMR 曲线上按此 `V_c`（对数半径内插）找到半径，将 SIP 最大原始半径横向对齐到该点；保存 SIP 原始和显示对齐后的半径，不得混称。
+
+样品 16 的一次复现命令（在安装了项目依赖的 Python 环境中运行）：
+
+```powershell
+python -m advanced_tools.plot_sample16_sip_nmr_avizo_cumulative_vc --ct-source avizo --experiment-alpha 1630 --output-dir simulation_outputs/sample_16_avizo_ct_nmr_alpha1630_sip_reproduction
+python -m advanced_tools.plot_sample16_sip_nmr_avizo_cumulative_vc --ct-source pnextract --experiment-alpha 1630 --output-dir simulation_outputs/sample_16_pnextract_ct_nmr_alpha1630_sip_reproduction
+```
+
+默认执行上述裁剪；需要裁剪前对照图时加 `--no-trim` 并使用新的输出目录。该次 `alpha=1630` 反演的正幅值 `T2` 范围为 `0.01–3612.34 ms`；`0.01 ms` 是反演网格端点，不能宣称对应的亚纳米半径是 NMR 可靠分辨下限。裁剪后 Avizo CT、pnextract CT 和 SIP 原始半径分别为 `9.893–226.979`、`4.980–200.682`、`0.121–2.871 um`；两种 CT 的终点系数分别约为 `20.94` 与 `18.52 um/s`，仅用于复查这次输入和规则是否一致。
+
+每张图均应导出 600 dpi PNG、合并的 `sample16_trimmed_sequential_alignment_source_data.csv`、实验反演谱（若重新反演）和 `run_manifest.json`；核对每条曲线按半径排序后 `V_c` 单调不降、CT/NMR 终点为 1、SIP 终点等于其锚定 `V_c`。说明中始终区分 CT 孔体几何、NMR 模型等效孔体和 SIP 模型等效孔喉；缺少独立 MIP 等标定时，不把 SIP 的条件性横/纵向对齐解释为绝对孔隙率或真实孔喉尺寸测量。
+
 ### 孔隙率分组代表切片的近似三维 NMR
 
 当前推荐的“近似三维”方案不是直接使用不成熟的 tetra/voxel 真实 3D 求解，而是复用稳定的 2D 切片 NMR workflow，对三维 CT stack 做连续切片分组：
