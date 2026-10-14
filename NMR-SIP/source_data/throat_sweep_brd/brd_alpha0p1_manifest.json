@@ -1,0 +1,15 @@
+{
+  "method": "T2process MATLAB brd1.p (P-code), fixed alpha",
+  "alpha": 0.1,
+  "brd_dir": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\tmp\\T2process_20261013\\brd\\matlab",
+  "brd1_p_sha256": "85d7f77f92317961f8b9bbbd8ea5ea3f3418a9bd9316fc88463ce3ca40495ade",
+  "t2process_repo": "https://github.com/shizaishiwo323/T2process (commit 47461a7)",
+  "steps": "first-echo normalization; AmplitudeSample(t, y, 200, 0); T2 grid logspace(-2, 5, 200) ms; kernel exp(-t/T2); brd1(kernel, y, alpha)",
+  "input_noise": {
+    "relative_sigma": 0.001,
+    "seed": 20261012,
+    "echo_spacing_ms": 0.25
+  },
+  "cases": 20,
+  "matlab_log": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\simulation_outputs\\ideal_two_pore_throat_sweep_nmr_brd_20261013\\brd_alpha0p1_matlab.log"
+}

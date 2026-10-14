@@ -1,0 +1,75 @@
+{
+  "geometry": {
+    "big_radius_m": 2e-05,
+    "small_radius_m": 5e-06,
+    "throat_width_m": 1e-07,
+    "throat_length_m": 1.5e-05,
+    "solid_margin_m": 2e-06
+  },
+  "grid": {
+    "coarse_step_m": 1.25e-07,
+    "throat_cells": 8,
+    "growth": 1.2
+  },
+  "electrical": {
+    "water_conductivity_s_m": 0.043,
+    "solid_conductivity_s_m": 0.0,
+    "water_relative_permittivity": 80.0,
+    "solid_relative_permittivity": 7.0,
+    "epsilon_0_f_m": 8.85e-12
+  },
+  "polarization": {
+    "surface_conductance_s": 1.3e-09,
+    "stern_diffusion_m2_s": 3.8e-12,
+    "membrane_diffusion_m2_s": 1.3e-09,
+    "membrane_polarizability": 0.01,
+    "throat_stern_polarization": true
+  },
+  "sweep": {
+    "frequency_min_hz": 0.0001,
+    "frequency_max_hz": 100000.0,
+    "points_per_decade": 10,
+    "direction": "x",
+    "workers": 6,
+    "runs": [
+      {
+        "name": "interfacial",
+        "mechanism": "interfacial",
+        "pore_mode": "regional"
+      },
+      {
+        "name": "pore_regional",
+        "mechanism": "pore",
+        "pore_mode": "regional"
+      },
+      {
+        "name": "pore_uniform_niu",
+        "mechanism": "pore",
+        "pore_mode": "uniform"
+      },
+      {
+        "name": "membrane",
+        "mechanism": "membrane",
+        "pore_mode": "regional"
+      },
+      {
+        "name": "all_regional",
+        "mechanism": "all",
+        "pore_mode": "regional"
+      },
+      {
+        "name": "all_uniform_niu",
+        "mechanism": "all",
+        "pore_mode": "uniform"
+      }
+    ]
+  },
+  "debye": {
+    "relaxation_frequency_min_hz": 1e-05,
+    "relaxation_frequency_max_hz": 1000000.0,
+    "bins": 111,
+    "regularization": 0.001,
+    "include_permittivity": true,
+    "radius_diffusion_m2_s": 3.8e-12
+  }
+}

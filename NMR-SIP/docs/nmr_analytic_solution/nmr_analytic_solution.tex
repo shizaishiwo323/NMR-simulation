@@ -1,0 +1,312 @@
+% 理想二维孔隙 NMR T2：精确解析解与快扩散近似（含实际模拟参数）
+% 编译：xelatex nmr_analytic_solution.tex（两次）
+\documentclass[11pt,a4paper]{article}
+% ctex/zhnumber not installed locally; xeCJK + Windows fonts give the same Chinese typesetting.
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{Microsoft YaHei}
+\setCJKsansfont{Microsoft YaHei}
+\renewcommand{\tablename}{表}
+\renewcommand{\refname}{参考文献}
+\renewcommand{\contentsname}{目录}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[round,semicolon]{natbib}
+\setcitestyle{aysep={,}}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\sisetup{per-mode=symbol,group-digits=false}
+\newcommand{\TB}{T_{2B}}
+\newcommand{\Ts}{T_{2S}}
+
+\title{理想二维孔隙中 NMR $T_2$ 的精确解析解与快扩散近似\\[2pt]
+\large ——以“大孔–狭长喉道–小孔”模拟案例的参数代入为例}
+\author{}
+\date{}
+
+\urlstyle{same}
+\begin{document}
+\maketitle
+
+\section{物理模型与参数}
+
+本节对应数值模拟中的孤立孔参照（isolated-pore reference）：大孔、小孔分别为二维圆盘（半径 $R$），
+喉道为宽 $w=2h$ 的二维狭缝（平板，长度远大于宽度）。模型为二维（每单位纵深），即沿 $z$ 方向无限平移不变的挤出体，
+因此圆盘对应无限长圆柱截面，狭缝对应无限大平行平板。
+
+\begin{table}[h]
+\centering
+\caption{模拟输入参数（与 \texttt{Auto\_NMR.py} 默认值一致，\citealp{Zhou2025}）}
+\begin{tabular}{llll}
+\toprule
+符号 & 含义 & 取值 & 计算单位 \\
+\midrule
+$D$ & 水的自扩散系数 & \SI{2.0e-9}{m^2/s} & \SI{2.0}{\micro m^2/ms} \\
+$\rho_2$ & 横向表面弛豫率 & \SI{5}{\micro m/s} & \SI{0.005}{\micro m/ms} \\
+$\TB$ & 体弛豫时间 & \SI{3}{s} & \SI{3000}{ms} \\
+$R_B$ & 大孔半径 & \SI{20}{\micro m} & \\
+$R_S$ & 小孔半径 & \SI{5}{\micro m} & \\
+$h$ & 喉道半宽（$w=\SI{0.1}{\micro m}$） & \SI{0.05}{\micro m} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{控制方程与边界条件}
+
+无外加梯度时，横向磁化 $M(\bm r,t)$ 满足 Bloch–Torrey 扩散–弛豫方程\citep{Torrey1956}
+\begin{equation}
+\frac{\partial M}{\partial t}=D\nabla^{2}M-\frac{M}{\TB},\qquad \bm r\in\Omega ,
+\label{eq:bt}
+\end{equation}
+孔壁 $\partial\Omega$ 上为表面弛豫的 Robin 边界条件\citep{Senturia1970,BrownsteinTarr1979}
+\begin{equation}
+D\,\bm n\cdot\nabla M+\rho_2 M=0,\qquad \bm r\in\partial\Omega ,
+\label{eq:robin}
+\end{equation}
+其中 $\bm n$ 为外法向。初始条件为均匀磁化 $M(\bm r,0)=M_0$；测得信号为孔内积分
+\begin{equation}
+S(t)=\int_\Omega M(\bm r,t)\,\mathrm d\Omega .
+\end{equation}
+
+\section{分离变量与通解}
+
+令 $M(\bm r,t)=e^{-t/\TB}\,m(\bm r,t)$，则体弛豫完全分离，$m$ 满足纯扩散方程 $\partial_t m=D\nabla^2 m$
+及同样的 Robin 条件 \eqref{eq:robin}。再令 $m=\phi(\bm r)\,e^{-t/\Ts}$，得到本征值问题
+\begin{equation}
+\nabla^{2}\phi_n+\frac{\xi_n^{2}}{a^{2}}\phi_n=0,\qquad
+D\,\bm n\cdot\nabla\phi_n+\rho_2\phi_n=0,
+\label{eq:eig}
+\end{equation}
+其中 $a$ 为特征长度（圆盘取 $a=R$，平板取 $a=h$）。定义无量纲表面弛豫数（Brownstein–Tarr 数）
+\begin{equation}
+\kappa=\frac{\rho_2\,a}{D}.
+\end{equation}
+第 $n$ 个模态的弛豫速率与归一化信号为\citep{BrownsteinTarr1979,Grebenkov2007}
+\begin{equation}
+\frac{1}{T_{2,n}}=\frac{1}{\TB}+\frac{D\,\xi_n^{2}}{a^{2}},\qquad
+\frac{S(t)}{S(0)}=\sum_{n=0}^{\infty}A_n\exp\!\left(-\frac{t}{T_{2,n}}\right),\qquad \sum_n A_n=1 .
+\label{eq:modes}
+\end{equation}
+
+\subsection{二维圆盘（孔体）}
+
+轴对称本征函数为 $\phi_n(r)=J_0(\xi_n r/R)$。由 $J_0'(x)=-J_1(x)$，Robin 条件在 $r=R$ 处给出特征方程
+\begin{equation}
+\boxed{\;\xi_n\,\frac{J_1(\xi_n)}{J_0(\xi_n)}=\kappa=\frac{\rho_2 R}{D}\;}
+\label{eq:disk}
+\end{equation}
+各模态的信号权重为\citep{BrownsteinTarr1979,CarslawJaeger1959}
+\begin{equation}
+A_n=\frac{4J_1^{2}(\xi_n)}{\xi_n^{2}\left[J_0^{2}(\xi_n)+J_1^{2}(\xi_n)\right]}
+=\frac{4\kappa^{2}}{\xi_n^{2}\left(\xi_n^{2}+\kappa^{2}\right)} .
+\end{equation}
+
+\subsection{二维狭缝（喉道，平行平板）}
+
+以狭缝中线为 $y=0$，偶对称本征函数为 $\phi_n(y)=\cos(\xi_n y/h)$，Robin 条件在 $y=\pm h$ 处给出
+\begin{equation}
+\boxed{\;\xi_n\tan\xi_n=\kappa=\frac{\rho_2 h}{D}\;},\qquad
+A_n=\frac{2\sin^{2}\xi_n}{\xi_n\left(\xi_n+\sin\xi_n\cos\xi_n\right)} .
+\label{eq:slab}
+\end{equation}
+
+\section{快扩散极限}
+
+当 $\kappa\ll1$ 时，扩散穿越孔隙的时间 $a^2/D$ 远短于表面弛豫时间 $a/\rho_2$，孔内磁化保持近似均匀，
+信号几乎只含最低模态（$A_0\to1$），这就是 Brownstein–Tarr 快扩散区\citep{BrownsteinTarr1979}。
+
+对圆盘，利用 $J_1(x)/J_0(x)=\tfrac{x}{2}+\tfrac{x^{3}}{16}+O(x^{5})$，式 \eqref{eq:disk} 变为
+$\tfrac{\xi_0^{2}}{2}+\tfrac{\xi_0^{4}}{16}\approx\kappa$，故
+\begin{equation}
+\xi_0^{2}=2\kappa\left(1-\frac{\kappa}{4}\right)+O(\kappa^{3})
+\;\;\Longrightarrow\;\;
+\frac{1}{\Ts}=\frac{D\xi_0^{2}}{R^{2}}\approx\frac{2\rho_2}{R}\left(1-\frac{\kappa}{4}\right).
+\end{equation}
+对平板，利用 $x\tan x=x^{2}+\tfrac{x^{4}}{3}+O(x^{6})$，得 $\xi_0^{2}\approx\kappa(1-\kappa/3)$，
+$1/\Ts\approx(\rho_2/h)(1-\kappa/3)$。保留首项即得经典的快扩散关系\citep{BrownsteinTarr1979,Kleinberg1994,Coates1999}
+\begin{equation}
+\boxed{\;\frac{1}{T_2}\approx\frac{1}{\TB}+\rho_2\frac{S}{V}\;},\qquad
+\frac{S}{V}=
+\begin{cases}
+2/R, & \text{二维圆盘（无限长圆柱）},\\[2pt]
+1/h, & \text{二维狭缝（平行平板）}.
+\end{cases}
+\label{eq:fd}
+\end{equation}
+反过来，由测得的 $T_2$ 可换算孔隙尺寸：
+\begin{equation}
+R=\frac{2\rho_2}{\dfrac{1}{T_2}-\dfrac{1}{\TB}},\qquad
+h=\frac{\rho_2}{\dfrac{1}{T_2}-\dfrac{1}{\TB}} .
+\label{eq:inverse}
+\end{equation}
+同一 $T_2$ 若按圆盘公式换算，平板（喉道）会得到 $R=2h$，即狭缝模态在“圆孔换算轴”上被放大为其半宽的两倍。
+
+\section{代入模拟参数的完整求解过程}
+
+\subsection{大孔 $R_B=\SI{20}{\micro m}$}
+
+\textbf{第 1 步：判断扩散区。}
+\[
+\kappa=\frac{\rho_2R}{D}=\frac{0.005\times 20}{2.0}=0.05\ll 1\quad\text{（快扩散区）}.
+\]
+\textbf{第 2 步：数值求解特征方程 \eqref{eq:disk}。}
+\[
+\xi_0\,\frac{J_1(\xi_0)}{J_0(\xi_0)}=0.05
+\;\Longrightarrow\;
+\xi_0=0.314262,\qquad \xi_0^{2}=0.0987604 .
+\]
+\textbf{第 3 步：表面弛豫与总弛豫时间。}
+\begin{align*}
+\frac{1}{\Ts}&=\frac{D\xi_0^{2}}{R^{2}}=\frac{2.0\times0.0987604}{20^{2}}=\SI{4.93802e-4}{ms^{-1}},
+&\Ts&=\SI{2025.10}{ms},\\
+\frac{1}{T_2}&=\frac{1}{\Ts}+\frac{1}{\TB}=4.93802\times10^{-4}+3.33333\times10^{-4}=\SI{8.27135e-4}{ms^{-1}},
+&T_2&=\SI{1208.99}{ms}.
+\end{align*}
+\textbf{第 4 步：模态权重（检验单指数假设）。}
+\[
+A_0=\frac{4\kappa^2}{\xi_0^2(\xi_0^2+\kappa^2)}=0.999949;\qquad
+\xi_1=3.84473,\;\; T_{2,1}=\SI{13.47}{ms},\;\; A_1=4.6\times10^{-5}.
+\]
+\textbf{第 5 步：快扩散近似对照。}
+\begin{align*}
+\frac{1}{\Ts}&\approx\frac{2\rho_2}{R}=\frac{2\times0.005}{20}=\SI{5.0e-4}{ms^{-1}},
+&\Ts&\approx\SI{2000}{ms},\\
+\frac{1}{T_2}&\approx5.0\times10^{-4}+3.33333\times10^{-4}=\SI{8.33333e-4}{ms^{-1}},
+&T_2&\approx\SI{1200.0}{ms}.
+\end{align*}
+相对精确解偏差 $-0.74\%$；加一阶修正 $(1-\kappa/4)$ 后 $\Ts\approx\SI{2025.3}{ms}$，偏差降至 $0.01\%$。
+
+\subsection{小孔 $R_S=\SI{5}{\micro m}$}
+
+\begin{align*}
+\kappa&=\frac{0.005\times5}{2.0}=0.0125,
+&\xi_0&=0.157867,\quad \xi_0^{2}=0.0249220,\\
+\frac{1}{\Ts}&=\frac{2.0\times0.0249220}{5^{2}}=\SI{1.99376e-3}{ms^{-1}},
+&\Ts&=\SI{501.56}{ms},\\
+\frac{1}{T_2}&=\frac{1}{501.56}+\frac{1}{3000}=\SI{2.32709e-3}{ms^{-1}},
+&T_2&=\SI{429.72}{ms},\quad A_0=0.999997 .
+\end{align*}
+快扩散近似：$1/\Ts\approx 2\times0.005/5=\SI{2.0e-3}{ms^{-1}}$，$\Ts\approx\SI{500}{ms}$，
+$T_2\approx\SI{428.57}{ms}$，偏差 $-0.27\%$。
+
+\subsection{喉道（狭缝）$h=\SI{0.05}{\micro m}$}
+
+\begin{align*}
+\kappa&=\frac{0.005\times0.05}{2.0}=1.25\times10^{-4},
+&\xi_0\tan\xi_0&=\kappa\;\Rightarrow\;\xi_0=0.0111801,\\
+\frac{1}{\Ts}&=\frac{D\xi_0^{2}}{h^{2}}=\frac{2.0\times1.24995\times10^{-4}}{0.05^{2}}=\SI{0.0999958}{ms^{-1}},
+&\Ts&=\SI{10.0004}{ms},\quad T_2=\SI{9.9672}{ms}.
+\end{align*}
+快扩散近似：$1/\Ts\approx\rho_2/h=0.005/0.05=\SI{0.1}{ms^{-1}}$，$T_2\approx\SI{9.9668}{ms}$，偏差 $-0.004\%$。
+
+\subsection{汇总与数值模拟对照}
+
+\begin{table}[h]
+\centering
+\caption{孤立孔 $T_2$：精确解、快扩散近似与 pyGIMLi 数值解（单位 ms）}
+\begin{tabular}{lcccccc}
+\toprule
+孔隙 & $\kappa=\rho_2a/D$ & $\xi_0$ & 精确 $T_2$ & 快扩散 $T_2$ & 偏差 & \shortstack{数值模拟 $T_2$\\（单指数拟合）} \\
+\midrule
+大孔 $R=\SI{20}{\micro m}$ & 0.05 & 0.314262 & 1208.99 & 1200.00 & $-0.74\%$ & 1209.26 \\
+小孔 $R=\SI{5}{\micro m}$ & 0.0125 & 0.157867 & 429.72 & 428.57 & $-0.27\%$ & 429.83 \\
+喉道 $h=\SI{0.05}{\micro m}$ & $1.25\times10^{-4}$ & 0.0111801 & 9.9672 & 9.9668 & $-0.004\%$ & 10.03 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+数值模拟为 pyGIMLi 三角网格上的隐式 Euler 有限元解（$\Delta t=\SI{0.25}{ms}$），对归一化衰减在 $0.9$–$0.05$ 区间做单指数拟合；
+与精确解的偏差分别为 $+0.02\%$、$+0.03\%$、$+0.6\%$（喉道偏差主要来自时间步长 $\Delta t/T_2\approx2.5\%$ 的隐式 Euler 截断误差）。
+
+\subsection{由模拟 $T_2$ 反算孔隙尺寸}
+
+数值模拟直接输出的是回波衰减 $M(t)$，$T_2$ 需要从中提取。表 2 的“数值模拟 $T_2$”是对每个孤立孔\emph{自身}的衰减做单指数拟合
+（$M/M_0$ 在 $0.9$–$0.05$ 区间对 $\ln M$ 线性拟合）得到的，未经 NNLS 反演；孤立孔主模态权重 $A_0>0.9999$，故可视为单指数。
+代入式 \eqref{eq:inverse}：
+\begin{align*}
+R_B&=\frac{2\times0.005}{1/1209.26-1/3000}=\frac{0.01}{4.93622\times10^{-4}}=\SI{20.26}{\micro m}\quad(+1.3\%),\\
+R_S&=\frac{2\times0.005}{1/429.83-1/3000}=\frac{0.01}{1.99315\times10^{-3}}=\SI{5.017}{\micro m}\quad(+0.3\%),\\
+h&=\frac{0.005}{1/10.03-1/3000}=\frac{0.005}{9.94047\times10^{-2}}=\SI{0.0503}{\micro m}\quad(+0.6\%).
+\end{align*}
+大孔反算偏大 $1.3\%$，即快扩散近似本身的误差（$\kappa/4\approx1.25\%$）。
+
+\subsection{$T_2$ 提取方式对反算尺寸的影响}
+
+同一组模拟回波可以用以下四种方式（方式 1–4）提取 $T_2$。NNLS 反演均采用 \texttt{nmr\_t2} 的 L-curve 准则（SNR $=1000$，200 个分箱，$1$–$10^5$ ms），
+$T_{2\mathrm{lm}}$ 取该峰（连续非零支撑区）内的对数平均：
+\begin{enumerate}
+\item 直接单指数拟合孤立孔自身衰减；
+\item 孤立孔自身衰减单独做 NNLS 反演；
+\item 将三种孤立孔的衰减按面积相加（$B+S+$ 两段喉道）后做 NNLS 反演；
+\item 连通链（考虑孔间扩散耦合）的衰减做 NNLS 反演。
+\end{enumerate}
+
+\begin{table}[h]
+\centering
+\caption{四种 $T_2$ 提取方式的反算尺寸（单位 \si{\micro m}；括号内为相对真值偏差；NNLS 列为“主峰 / $T_{2\mathrm{lm}}$”）}
+\small
+\begin{tabular}{lcccc}
+\toprule
+孔隙（真值） & \shortstack{方式 1\\直接拟合} & \shortstack{方式 2\\单独 NNLS} & \shortstack{方式 3\\合成信号 NNLS} & \shortstack{方式 4\\连通链 NNLS} \\
+\midrule
+大孔（20） & \shortstack{20.26\\($+1.3\%$)} & \shortstack{20.89 / 20.24\\($+4.5\%$ / $+1.2\%$)} & \shortstack{20.89 / 19.88\\($+4.5\%$ / $-0.6\%$)} & \shortstack{17.29 / 17.71\\($-13.5\%$ / $-11.4\%$)} \\[3pt]
+小孔（5） & \shortstack{5.017\\($+0.3\%$)} & \shortstack{5.08 / 5.013\\($+1.7\%$ / $+0.3\%$)} & \shortstack{4.16 / 4.19\\($-16.8\%$ / $-16.2\%$)} & \shortstack{3.01 / 2.96\\($-39.8\%$ / $-40.9\%$)} \\[3pt]
+喉道（0.05） & \shortstack{0.0503\\($+0.6\%$)} & \shortstack{0.0508 / 0.0505\\($+1.5\%$ / $+1.1\%$)} & 未分辨 & 未分辨 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item 方式 1 与方式 2 的 $T_{2\mathrm{lm}}$ 几乎一致：孤立孔本身可以被准确反算；方式 2 的主峰取分箱中心（每箱约 $2.4\%$），因此略偏大。
+\item 方式 3 中小孔分量只占 $5.9\%$，且与占 $94\%$ 的大孔 $T_2$ 仅差约 $2.8$ 倍，正则化平滑把小峰推向短 $T_2$，孔径偏小约 $16\%$。
+  这是反演方法造成的偏差，不是物理效应。
+\item 方式 4 在反演偏差之外，还叠加了孔间扩散耦合与喉道壁的弛豫“汇”：直接拟合连通链中小孔区域的磁化得 $T_2=\SI{312}{ms}$（孤立时 \SI{430}{ms}），
+  反算孔径偏小约 $40\%$。
+\item 喉道仅占孔面积的 $0.22\%$，在方式 3、4 中未被分辨。
+\end{itemize}
+
+\section{适用边界}
+
+\begin{itemize}
+\item 以上为孤立孔的解；连通体系中孔隙之间通过喉道的扩散交换以及喉道壁的“弛豫汇”会使小孔 $T_2$ 变短（本案例数值模拟中由 \SI{430}{ms} 降至约 \SI{312}{ms}），不能直接套用孤立孔公式换算尺寸。
+\item 二维圆盘对应无限长圆柱，$S/V=2/R$；三维球形孔为 $S/V=3/R$，二者换算系数不同。
+\item 快扩散判据 $\kappa=\rho_2a/D\ll1$；本案例 $\kappa\le0.05$，故快扩散近似误差 $<1\%$。
+\end{itemize}
+
+\begin{thebibliography}{8}
+\setlength{\itemsep}{2pt}
+
+\bibitem[Brownstein \& Tarr(1979)]{BrownsteinTarr1979}
+Brownstein, K. R., \& Tarr, C. E. (1979). Importance of classical diffusion in NMR studies of water in biological cells.
+\emph{Physical Review A}, \emph{19}(6), 2446--2453. \url{https://doi.org/10.1103/PhysRevA.19.2446}
+
+\bibitem[Carslaw \& Jaeger(1959)]{CarslawJaeger1959}
+Carslaw, H. S., \& Jaeger, J. C. (1959). \emph{Conduction of heat in solids} (2nd ed.). Oxford, UK: Clarendon Press.
+
+\bibitem[Coates et~al.(1999)]{Coates1999}
+Coates, G. R., Xiao, L., \& Prammer, M. G. (1999). \emph{NMR logging: Principles and applications}.
+Houston, TX: Halliburton Energy Services.
+
+\bibitem[Grebenkov(2007)]{Grebenkov2007}
+Grebenkov, D. S. (2007). NMR survey of reflected Brownian motion. \emph{Reviews of Modern Physics}, \emph{79}(3), 1077--1137.
+\url{https://doi.org/10.1103/RevModPhys.79.1077}
+
+\bibitem[Kleinberg et~al.(1994)]{Kleinberg1994}
+Kleinberg, R. L., Kenyon, W. E., \& Mitra, P. P. (1994). Mechanism of NMR relaxation of fluids in rock.
+\emph{Journal of Magnetic Resonance, Series A}, \emph{108}(2), 206--214. \url{https://doi.org/10.1006/jmra.1994.1112}
+
+\bibitem[Senturia \& Robinson(1970)]{Senturia1970}
+Senturia, S. D., \& Robinson, J. D. (1970). Nuclear spin-lattice relaxation of liquids confined in porous solids.
+\emph{Society of Petroleum Engineers Journal}, \emph{10}(3), 237--244. \url{https://doi.org/10.2118/2870-PA}
+
+\bibitem[Torrey(1956)]{Torrey1956}
+Torrey, H. C. (1956). Bloch equations with diffusion terms. \emph{Physical Review}, \emph{104}(3), 563--565.
+\url{https://doi.org/10.1103/PhysRev.104.563}
+
+\bibitem[Zhou \& Zhang(2025)]{Zhou2025}
+Zhou, \& Zhang (2025). How does pore structure affect the NMR relaxation in unsaturated porous media.
+\emph{Water Resources Research}. （作者全名、卷期与 DOI 请按原文核对；$D$、$\TB$、$\rho_2$ 的参数来源。）
+\end{thebibliography}
+
+\end{document}

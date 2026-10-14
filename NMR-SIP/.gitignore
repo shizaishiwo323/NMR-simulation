@@ -1,0 +1,18 @@
+# LaTeX intermediates
+*.aux
+*.out
+*.toc
+*.blg
+*.bbl
+*.synctex.gz
+build.log
+# temporary -jobname builds and page renders used for visual QA
+c3_build.*
+qa/
+page_*.png
+v2_page_*.png
+# figure QA audit reports written next to each PNG by the plotting helpers
+*.collision-audit.json
+*.alignment.json
+# Office lock files
+~$*

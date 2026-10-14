@@ -1,0 +1,40 @@
+\documentclass[border=3pt,multi=eqpage]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}
+\newenvironment{eqpage}{$\displaystyle}{$}
+\begin{document}
+\begin{eqpage}A_i\frac{\mathrm dc_i}{\mathrm dt}=-R_iA_ic_i-J_i,\qquad R_i=\frac{\rho_2P_i}{A_i}+\frac{1}{T_{2B}},\quad i\in\{S,B\}\end{eqpage}
+\begin{eqpage}\frac{\partial u}{\partial t}=D\frac{\partial^2u}{\partial x^2}-R_tu,\qquad R_t=\frac{\rho_2}{h}+\frac{1}{T_{2B}},\qquad u(0)=c_S,\ u(L)=c_B\end{eqpage}
+\begin{eqpage}U(x)=\frac{c_S\sinh q(L-x)+c_B\sinh qx}{\sinh qL},\qquad J_S=Dwq\left(c_S\coth qL-c_B\,\mathrm{csch}\,qL\right),\qquad q^2=\frac{R_t-\lambda}{D}\end{eqpage}
+\begin{eqpage}\boxed{\;\big[(R_S-\lambda)A_SS+DwC\big]\big[(R_B-\lambda)A_BS+DwC\big]-(Dw)^2=0,\quad S=\frac{\sinh qL}{q},\ C=\cosh qL\;}\end{eqpage}
+\begin{eqpage}A_n=\frac{\left(\int_\Omega\phi_n\,\mathrm d\Omega\right)^2}{|\Omega|\int_\Omega\phi_n^2\,\mathrm d\Omega},\qquad \int_\Omega\phi_n=A_Sc_S+A_Bc_B+w\int_0^LU\,\mathrm dx\end{eqpage}
+\begin{eqpage}G_x=\frac{Dwq}{\sinh qL},\qquad G_s=Dwq\tanh\frac{qL}{2},\qquad q\simeq\sqrt{R_t/D}\quad(\lambda\ll R_t)\end{eqpage}
+\begin{eqpage}\frac{\mathrm d}{\mathrm dt}\begin{pmatrix}m_S\\ m_B\end{pmatrix}=-\begin{pmatrix}R'_S+k_S&-k_B\\-k_S&R'_B+k_B\end{pmatrix}\begin{pmatrix}m_S\\ m_B\end{pmatrix},\qquad R'_i=R_i+\frac{G_s}{A_i},\quad k_i=\frac{G_x}{A_i}\end{eqpage}
+\begin{eqpage}qL\ll1:\quad G_x\to\frac{Dw}{L},\qquad G_s\to\tfrac12\,wLR_t\end{eqpage}
+\begin{eqpage}qL\gg1:\quad G_x\to2Dwq\,e^{-qL}\to0,\qquad G_s\to w\sqrt{DR_t}\end{eqpage}
+\begin{eqpage}\lambda_{f,s}=\frac{a+d\pm\sqrt{(a-d)^2+4k_Sk_B}}{2},\qquad a=R'_S+k_S,\quad d=R'_B+k_B\end{eqpage}
+\begin{eqpage}A_f=\frac{\bar R'-\lambda_s}{\lambda_f-\lambda_s},\qquad \bar R'=p_SR'_S+p_BR'_B,\qquad A_s=1-A_f\end{eqpage}
+\begin{eqpage}\Psi=\frac{Dw/L}{A_S(R_S-R_B)},\qquad \Psi_{\mathrm{eff}}=\frac{k_S}{R'_S-R'_B},\qquad \eta=\frac{A_f}{p_S}\end{eqpage}
+\begin{eqpage}\Psi_{\mathrm{eff}}\to0:\quad \lambda_f\to R'_S,\quad \lambda_s\to R'_B,\quad A_f\to p_S\end{eqpage}
+\begin{eqpage}\Psi_{\mathrm{eff}}\gg1:\quad \lambda_s\to\bar R',\quad \lambda_f\to\frac{k_S}{p_B},\quad A_f\approx\frac{p_Sp_B^3}{\Psi_{\mathrm{eff}}^2}\end{eqpage}
+\begin{eqpage}R_{\mathrm{eff}}=\frac{2\rho_2}{\bar R-1/T_{2B}}=\frac{2(A_S+A_B)}{P_S+P_B}=\frac{r_B^2+r_S^2}{r_B+r_S}\end{eqpage}
+\begin{eqpage}r=\frac{2\rho_2}{1/T_{2\mathrm{lm}}-1/T_{2B}}\end{eqpage}
+\begin{eqpage}p_S=\frac{r_S^2}{r_S^2+r_B^2}\approx f_S\;\Longrightarrow\;r_S=r_B\sqrt{f_S/f_B}\end{eqpage}
+\begin{eqpage}(r_S,r_B,G)\;\leftarrow\;(\lambda_f,\lambda_s,A_f)\quad\text{两点交换（无汇）}\end{eqpage}
+\begin{eqpage}\min_{r_S,r_B}\ \big\|(\ln\lambda_f,\ln\lambda_s,\ln A_f)_{\mathrm{TL}}-(\cdot)_{\mathrm{NNLS}}\big\|,\quad w,L\ \text{已知}\end{eqpage}
+\begin{eqpage}A_S=78.540,\ P_S=30.414,\ A_B=1256.64,\ P_B=124.664\;\Rightarrow\;R_S=2.270\times10^{-3},\ R_B=8.294\times10^{-4}\ \mathrm{ms^{-1}}\end{eqpage}
+\begin{eqpage}R_t=\frac{0.005}{0.5}+\frac{1}{3000}=0.01033,\qquad q=\sqrt{R_t/D}=0.07188\ \mu\mathrm{m}^{-1},\qquad qL=1.0804\end{eqpage}
+\begin{eqpage}G_x=\frac{2.0\times1\times0.07188}{\sinh 1.0804}=0.1103,\qquad G_s=Dwq\tanh\frac{qL}{2}=0.07090\ \mu\mathrm{m^2/ms}\end{eqpage}
+\begin{eqpage}R'_S=2.270\times10^{-3}+\frac{0.07090}{78.54}=3.172\times10^{-3},\quad R'_B=8.858\times10^{-4},\quad k_S=1.404\times10^{-3},\quad k_B=8.778\times10^{-5}\end{eqpage}
+\begin{eqpage}\Psi_{\mathrm{eff}}=\frac{k_S}{R'_S-R'_B}=\frac{1.404\times10^{-3}}{2.286\times10^{-3}}=0.6143\quad(\text{区 II})\end{eqpage}
+\begin{eqpage}\lambda_{f,s}=\frac{5.550\times10^{-3}\pm3.671\times10^{-3}}{2}\;\Rightarrow\;T_{2,f}=216.9\ \mathrm{ms},\quad T_{2,s}=1064.2\ \mathrm{ms}\end{eqpage}
+\begin{eqpage}\bar R'=1.020\times10^{-3},\qquad A_f=\frac{\bar R'-\lambda_s}{\lambda_f-\lambda_s}=0.0220,\qquad \eta=0.373\end{eqpage}
+\begin{eqpage}\text{TL：}T_{2,f}=228.8\ \mathrm{ms},\ A_f=0.0225;\qquad \text{NNLS：}T_{2\mathrm{lm}}=214.8\ \mathrm{ms},\ 0.0231\end{eqpage}
+\begin{eqpage}\Psi_{\mathrm{eff}}=28.37,\qquad A_f\approx\frac{p_Sp_B^3}{\Psi_{\mathrm{eff}}^2}=6.09\times10^{-5}\quad(\text{TL}\ 5.50\times10^{-5})\end{eqpage}
+\begin{eqpage}T_{2,f}\approx\frac{p_BA_S}{G_x}=\frac{0.9412\times78.54}{3.1728}=23.3\ \mathrm{ms}\quad(\text{TL}\ 23.0,\ \text{NNLS}\ 15.7\ \mathrm{ms})\end{eqpage}
+\begin{eqpage}r_{\text{伪}}=\frac{0.01}{1/15.70-1/3000}=0.16\ \mu\mathrm{m}\quad(\text{真值}\ 5\ \mu\mathrm{m})\end{eqpage}
+\begin{eqpage}r_S=\frac{0.01}{1/214.79-1/3000}=2.31\ \mu\mathrm{m},\qquad r_B=\frac{0.01}{1/1086.72-1/3000}=17.04\ \mu\mathrm{m}\end{eqpage}
+\begin{eqpage}r_S=18.76\times\sqrt{\frac{0.0495}{0.9505}}=4.28\ \mu\mathrm{m}\end{eqpage}
+\begin{eqpage}R_{\mathrm{eff}}=\frac{0.01}{1/1121.08-1/3000}=17.90\ \mu\mathrm{m}\quad\text{vs.}\quad\frac{400+25}{25}=17.00\ \mu\mathrm{m}\end{eqpage}
+\end{document}

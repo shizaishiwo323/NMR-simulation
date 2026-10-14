@@ -1,0 +1,300 @@
+{
+  "status": "complete",
+  "model_dimension": "2D (per unit depth; translationally invariant extrusion)",
+  "command": "python.exe code/scripts/sip_simulation/run_ideal_two_pore_channel_sip2d.py --output-dir results/ideal_two_pore_channel_sip2d_20261012 --workers 6",
+  "geometry": {
+    "big_radius_m": 2e-05,
+    "small_radius_m": 5e-06,
+    "throat_width_m": 1e-07,
+    "throat_length_m": 1.5e-05,
+    "solid_margin_m": 2e-06,
+    "period_m": 8e-05,
+    "height_m": 4.4000000000000006e-05,
+    "big_center_m": [
+      2.75e-05,
+      2.2000000000000003e-05
+    ],
+    "small_center_m": [
+      6.75e-05,
+      2.2000000000000003e-05
+    ]
+  },
+  "grid": {
+    "coarse_step_m": 1.25e-07,
+    "throat_cells": 8,
+    "growth": 1.2,
+    "shape_ny_nx": [
+      388,
+      640
+    ],
+    "min_dy_m": 1.2500000000000021e-08,
+    "dx_m": 1.2500000000000002e-07
+  },
+  "parameters": {
+    "water_conductivity_s_m": 0.043,
+    "solid_conductivity_s_m": 0.0,
+    "water_relative_permittivity": 80.0,
+    "solid_relative_permittivity": 7.0,
+    "epsilon_0_f_m": 8.85e-12,
+    "surface_conductance_s": 1.3e-09,
+    "stern_diffusion_m2_s": 3.8e-12,
+    "membrane_diffusion_m2_s": 1.3e-09,
+    "membrane_polarizability": 0.01,
+    "throat_stern_polarization": true
+  },
+  "regions": {
+    "big_pore_body": {
+      "label": 1,
+      "kind": "pore_body",
+      "relaxation_radius_m": 2e-05,
+      "dynamic_pore_size_m": 2.256331166697942e-06,
+      "membrane_length_m": null,
+      "stern_polarization": true,
+      "stern_relaxation_time_s": 52.63157894736843,
+      "stern_peak_frequency_hz": 0.0030239439187460114,
+      "membrane_relaxation_time_s": null
+    },
+    "small_pore_body": {
+      "label": 2,
+      "kind": "pore_body",
+      "relaxation_radius_m": 5e-06,
+      "dynamic_pore_size_m": 1.957669803114089e-06,
+      "membrane_length_m": null,
+      "stern_polarization": true,
+      "stern_relaxation_time_s": 3.289473684210527,
+      "stern_peak_frequency_hz": 0.04838310269993618,
+      "membrane_relaxation_time_s": null
+    },
+    "throat_big_to_small": {
+      "label": 3,
+      "kind": "throat",
+      "relaxation_radius_m": 5e-08,
+      "dynamic_pore_size_m": 9.995709686413402e-08,
+      "membrane_length_m": 1.5e-05,
+      "stern_polarization": true,
+      "stern_relaxation_time_s": 0.00032894736842105257,
+      "stern_peak_frequency_hz": 483.8310269993619,
+      "membrane_relaxation_time_s": 0.04326923076923077
+    },
+    "throat_small_to_big_periodic": {
+      "label": 4,
+      "kind": "throat",
+      "relaxation_radius_m": 5e-08,
+      "dynamic_pore_size_m": 9.995709686413391e-08,
+      "membrane_length_m": 1.5e-05,
+      "stern_polarization": true,
+      "stern_relaxation_time_s": 0.00032894736842105257,
+      "stern_peak_frequency_hz": 483.8310269993619,
+      "membrane_relaxation_time_s": 0.04326923076923077
+    }
+  },
+  "global_dynamic_pore_size_m": 1.0286729453799315e-07,
+  "dc_pore_only_sigma_eff_s_m": 0.0002524119867439298,
+  "dc_formation_factor": 170.35641038562562,
+  "frequencies_hz": [
+    0.0001,
+    100000.0,
+    91
+  ],
+  "runs": [
+    {
+      "name": "interfacial",
+      "mechanism": "interfacial",
+      "pore_mode": "regional"
+    },
+    {
+      "name": "pore_regional",
+      "mechanism": "pore",
+      "pore_mode": "regional"
+    },
+    {
+      "name": "pore_uniform_niu",
+      "mechanism": "pore",
+      "pore_mode": "uniform"
+    },
+    {
+      "name": "membrane",
+      "mechanism": "membrane",
+      "pore_mode": "regional"
+    },
+    {
+      "name": "all_regional",
+      "mechanism": "all",
+      "pore_mode": "regional"
+    },
+    {
+      "name": "all_uniform_niu",
+      "mechanism": "all",
+      "pore_mode": "uniform"
+    }
+  ],
+  "max_relative_residual": {
+    "interfacial": 2.2375267594222453e-12,
+    "pore_regional": 1.826068164049717e-12,
+    "pore_uniform_niu": 1.6203288486582411e-12,
+    "membrane": 1.2572529080119108e-12,
+    "all_regional": 2.103094459906967e-12,
+    "all_uniform_niu": 2.4161796282342436e-12
+  },
+  "debye": {
+    "settings": {
+      "relaxation_frequency_min_hz": 1e-05,
+      "relaxation_frequency_max_hz": 1000000.0,
+      "bins": 111,
+      "regularization": 0.001,
+      "include_permittivity": true,
+      "radius_diffusion_m2_s": 3.8e-12
+    },
+    "summaries": {
+      "interfacial": {
+        "sigma_0_s_m": 0.0002524119811030862,
+        "epsilon_inf_f_m": 1.2007933201659235e-10,
+        "epsilon_inf_relative": 13.568286103569756,
+        "total_chargeability": 0.029743648466968805,
+        "real_rmse_s_m": 3.324659904105501e-11,
+        "imag_rmse_s_m": 4.5643922518476494e-10,
+        "imag_rmse_over_max_imag": 5.985286177020149e-06,
+        "success": true,
+        "peaks": []
+      },
+      "pore_regional": {
+        "sigma_0_s_m": 0.0002523571324305533,
+        "epsilon_inf_f_m": 2.8207825844231306e-99,
+        "epsilon_inf_relative": 3.18732495415043e-88,
+        "total_chargeability": 0.3664298958478273,
+        "real_rmse_s_m": 1.8291971451268895e-07,
+        "imag_rmse_s_m": 1.6004493410595366e-07,
+        "imag_rmse_over_max_imag": 0.00220378373242615,
+        "success": true,
+        "peaks": [
+          {
+            "radius_um": 0.0491266174030056,
+            "amplitude_fraction": 1.0,
+            "weighted_log_mean_radius_um": 0.05081931268927954
+          }
+        ]
+      },
+      "pore_uniform_niu": {
+        "sigma_0_s_m": 0.00025219395434438,
+        "epsilon_inf_f_m": 3.2755734332686105e-16,
+        "epsilon_inf_relative": 3.7012129189475826e-05,
+        "total_chargeability": 0.37075260084197686,
+        "real_rmse_s_m": 1.3492866081075361e-07,
+        "imag_rmse_s_m": 1.3329201729802744e-07,
+        "imag_rmse_over_max_imag": 0.0018997358405039673,
+        "success": true,
+        "peaks": [
+          {
+            "radius_um": 4.9126617403005595,
+            "amplitude_fraction": 0.055636118710970156,
+            "weighted_log_mean_radius_um": 3.988634129595118
+          },
+          {
+            "radius_um": 19.557658653174755,
+            "amplitude_fraction": 0.9443638812890299,
+            "weighted_log_mean_radius_um": 19.942241677135723
+          }
+        ]
+      },
+      "membrane": {
+        "sigma_0_s_m": 0.00025241371986877743,
+        "epsilon_inf_f_m": 5.923557408228942e-17,
+        "epsilon_inf_relative": 6.693285207038353e-06,
+        "total_chargeability": 0.009673465892028821,
+        "real_rmse_s_m": 8.219825329542479e-12,
+        "imag_rmse_s_m": 8.219688057033905e-12,
+        "imag_rmse_over_max_imag": 1.3014004805699268e-05,
+        "success": true,
+        "peaks": [
+          {
+            "radius_um": 0.017430781622341573,
+            "amplitude_fraction": 0.009933715308618443,
+            "weighted_log_mean_radius_um": 0.008092108798461532
+          },
+          {
+            "radius_um": 0.030996800059894875,
+            "amplitude_fraction": 0.010536279247383333,
+            "weighted_log_mean_radius_um": 0.027455732909317392
+          },
+          {
+            "radius_um": 0.06184674704413332,
+            "amplitude_fraction": 0.02131183458468746,
+            "weighted_log_mean_radius_um": 0.05503293657564955
+          },
+          {
+            "radius_um": 0.12340048368057212,
+            "amplitude_fraction": 0.056883935184098795,
+            "weighted_log_mean_radius_um": 0.11963803077200551
+          },
+          {
+            "radius_um": 0.49126617403005596,
+            "amplitude_fraction": 0.9013342356752118,
+            "weighted_log_mean_radius_um": 0.9703041102957524
+          }
+        ]
+      },
+      "all_regional": {
+        "sigma_0_s_m": 0.00025237564758429705,
+        "epsilon_inf_f_m": 1.2066677345365033e-10,
+        "epsilon_inf_relative": 13.634663667079133,
+        "total_chargeability": 0.37007724498811556,
+        "real_rmse_s_m": 1.5448369705617814e-07,
+        "imag_rmse_s_m": 1.446746165454079e-07,
+        "imag_rmse_over_max_imag": 0.001889578386040197,
+        "success": true,
+        "peaks": [
+          {
+            "radius_um": 0.0491266174030056,
+            "amplitude_fraction": 1.0,
+            "weighted_log_mean_radius_um": 0.05315657813571379
+          }
+        ]
+      },
+      "all_uniform_niu": {
+        "sigma_0_s_m": 0.0002522202681171592,
+        "epsilon_inf_f_m": 1.2078181080245054e-10,
+        "epsilon_inf_relative": 13.647662237565033,
+        "total_chargeability": 0.3786090781714307,
+        "real_rmse_s_m": 1.307856425396759e-07,
+        "imag_rmse_s_m": 1.2987964049038352e-07,
+        "imag_rmse_over_max_imag": 0.0017030420133044577,
+        "success": true,
+        "peaks": [
+          {
+            "radius_um": 4.9126617403005595,
+            "amplitude_fraction": 0.08599127791908136,
+            "weighted_log_mean_radius_um": 0.5718901297355594
+          },
+          {
+            "radius_um": 19.557658653174755,
+            "amplitude_fraction": 0.9140087220809187,
+            "weighted_log_mean_radius_um": 19.93604427282548
+          }
+        ]
+      }
+    }
+  },
+  "timing_s": {
+    "sweeps": 1357.1462201997638,
+    "total": 1373.1062642000616
+  },
+  "not_applicable": [
+    "3D digital-rock HTML",
+    "pnextract pore-network HTML (analytic 2D geometry; no CT volume or extracted network)"
+  ],
+  "provenance": {
+    "python": "3.11.15 | packaged by Anaconda, Inc. | (main, Jun 11 2026, 15:12:53) [MSC v.1942 64 bit (AMD64)]",
+    "script": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\code\\scripts\\sip_simulation\\run_ideal_two_pore_channel_sip2d.py",
+    "script_sha256": "91944fe0b333e03bd30c54176f036315262ef2ebc933a4f4e9102a00fd3429c3",
+    "config": "C:\\Users\\imgw\\Documents\\Codex\\SIP模拟\\sip模拟\\configs\\sip_simulation\\ideal_two_pore_channel_sip2d_config.py",
+    "config_sha256": "0e57760f65798c7405a89642fb85e7cae15ce9b8c5f349638c214f8238852b14",
+    "solver_package_sha256": {
+      "__init__.py": "8e7fd7cfbdcae56277445337adff88321a0c1fa639d953b99b79f545d2bc23ac",
+      "debye.py": "a4c5d3e11e0889979c70f5582e447b517707733582e9556f573f69bc064a2002",
+      "geometry.py": "c14347b44dfce91de42f7f3602fd6b844c3c030e76eef016747d422ba5dd435b",
+      "polarization.py": "f3d1c26a4fac4df83b7de6bd51f8450e49fa7e3ab361042890e2bfdc954b56e7",
+      "solver.py": "f78e22fcfed818e8b3147c9182ea51441f67716440cfc6d833f2d1b69147791e"
+    },
+    "git_commit": "6911920e725f4cbbe2f5097bfaf5dea7fb07e86c"
+  }
+}
