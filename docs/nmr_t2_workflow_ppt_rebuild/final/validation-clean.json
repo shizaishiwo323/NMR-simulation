@@ -1,0 +1,25 @@
+{
+  "pptx": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_ppt_rebuild\\final\\nmr_t2_workflow_editable.pptx",
+  "slide_count": 5,
+  "slide_xml": [
+    "ppt/slides/slide1.xml",
+    "ppt/slides/slide2.xml",
+    "ppt/slides/slide3.xml",
+    "ppt/slides/slide4.xml",
+    "ppt/slides/slide5.xml"
+  ],
+  "editable_text_runs": 118,
+  "embedded_pictures": 13,
+  "editable_charts": 8,
+  "editable_shapes": 195,
+  "forbidden_internal_artifact_hits": [],
+  "rendered_slide_count": 5,
+  "required_qa_files_present": {
+    "preview.png": true,
+    "overlay.png": true,
+    "difference.png": true,
+    "source-preview-contact-sheet.png": true,
+    "visual-qa.json": true
+  },
+  "status": "pass"
+}

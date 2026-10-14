@@ -40,9 +40,11 @@ SIP 二维求解器在 SIP 仓库（见该仓库的 `HANDOFF.md`）。NMR 脚本
 - `advanced_tools/` 下 8 个新脚本：`ideal_two_pore_*`、`plot_ideal_two_pore_channel_nmr_overlay.py`、`*coupled_two_pore_backcalc.py`、`ideal_two_pore_brd_batch.m`。
 - 本文件 `HANDOFF.md`。
 
-**故意未提交**（属于其他工作线，或状态不明）：
-- `advanced_tools/png_nmr_workflow.ipynb` 的本地修改；
-- `docs/nmr_t2_workflow_figures/`、`docs/nmr_t2_workflow_ppt_rebuild/`（另一条 T2 工作流 PPT 重建工作，约 70 MB，含 zip）。
+2026-10-14 追加提交（按用户要求）：`docs/nmr_t2_workflow_figures/`（5 张 16:9 的 T2 工作流示意图）和
+`docs/nmr_t2_workflow_ppt_rebuild/`。后者是另一条工作线：T2 工作流 PPT 的可编辑重建，包括 `final/` 下的
+`nmr_t2_workflow_editable.pptx`、独立素材及其 zip、QA 校验，以及 `work/` 下的生成与渲染脚本，共约 70 MB。
+
+**故意未提交**：`advanced_tools/png_nmr_workflow.ipynb` 的本地修改（状态不明）。
 
 ## 4. 待办 / 需用户确认
 

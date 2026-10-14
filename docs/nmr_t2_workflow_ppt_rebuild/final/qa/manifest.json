@@ -1,0 +1,230 @@
+{
+  "deliverable": "five-slide 16:9 editable PowerPoint rebuild",
+  "inputs": [
+    {
+      "path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\01_workflow_overview_16x9.png",
+      "sha256": "666f53d52e86a23df2effc89c52139941a1397ee5c797d6d757cad3336351c3e"
+    },
+    {
+      "path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\02_model_reduction_16x9.png",
+      "sha256": "2621932fb24791f4a49cccb5d3030195e31c15ac24ef206212b08a5d50863f7b"
+    },
+    {
+      "path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\03_ct_to_fem_16x9.png",
+      "sha256": "dedb171d973090de7860904349a3612a794678f4a994e0f88ec351cccb9eae66"
+    },
+    {
+      "path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\04_magnetization_to_decay_16x9.png",
+      "sha256": "2dd463591fae0b371078892fc45f44d2d5506261adc2e02b01d39ffed18b63ea"
+    },
+    {
+      "path": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\05_weighted_inversion_16x9.png",
+      "sha256": "5db2f7a014c59d0f672294e8dd656ae3b6829080277d57d972ab452bf966e828"
+    }
+  ],
+  "primary_output": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_ppt_rebuild\\final\\nmr_t2_workflow_editable.pptx",
+  "renderer": "WPS Presentation 12.1 COM slide.Export at 1600x900",
+  "validation_status": "pass",
+  "outputs": [
+    {
+      "path": "independent-assets\\reconstructed\\ct_stack.png",
+      "bytes": 2055906,
+      "sha256": "b22c470e65495d4f5068e5248633a7252f7e5f8332b5378c33deb8bba688177e"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\fem_mesh.png",
+      "bytes": 1861369,
+      "sha256": "feaabcd78ca5a956e7b5114345395da5d5118974dc994245d76457e14a9f43ab"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\interface_authoritative_fallback.png",
+      "bytes": 139854,
+      "sha256": "8dff5384c70c73a153543889f20e9bb014c7d8c687b785f1b61358fd0f3273ee"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\interface_generated_attempt.png",
+      "bytes": 1155240,
+      "sha256": "f830932d15568ea9b45c1b62de66a1bd5203e2b0e4275170ec7282ab39dbee99"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\mag_t0_authoritative_fallback.png",
+      "bytes": 259861,
+      "sha256": "6f6524cc7b6dd8db0c9194f6fd1942531ae57faa50321fd5c5e407a2834f6dde"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\mag_t1_authoritative_fallback.png",
+      "bytes": 278202,
+      "sha256": "096d4732db5316f7888970062072374b233df6f70e48379dba4a0ccec2c4b042"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\mag_t2_authoritative_fallback.png",
+      "bytes": 264044,
+      "sha256": "e0393b92f223ea21a8a1fd1ce2dd02c3432c0694df26404a88e5a70616a34207"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\magnetization_field.png",
+      "bytes": 1304243,
+      "sha256": "5c8fdcdb96fbd8eb6871f2de53fba99da47fa42ff482c8ab45e0e8ae50d70b6a"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\porosity_groups.png",
+      "bytes": 1696975,
+      "sha256": "e8f54dac41bb15e95c211720b857e683c87386d7701fffe6ff0be614c3ea3a2e"
+    },
+    {
+      "path": "independent-assets\\reconstructed\\segmented_slice.png",
+      "bytes": 2482036,
+      "sha256": "6be3f8f96abceecbc401dd6eaee7784adeb3bef67aa22476ed408caee8f29fd9"
+    },
+    {
+      "path": "independent-assets.zip",
+      "bytes": 11415121,
+      "sha256": "e8ab30064157953647df59cfed70bf72f3489cdbd82c87f464de5c9a7cb846b0"
+    },
+    {
+      "path": "nmr_t2_workflow_editable.pptx",
+      "bytes": 17273904,
+      "sha256": "41969d58210a639017f4b6c6c58363eccce1dafdc00e34507164f82704a2f2cc"
+    },
+    {
+      "path": "qa\\audit-final.md",
+      "bytes": 2175,
+      "sha256": "ca435a6e0482930c9de53effd5110b79bf7f3889541982dc4157a5170e0a9385"
+    },
+    {
+      "path": "qa\\difference.png",
+      "bytes": 1114264,
+      "sha256": "6f6b8652ed90de3402aafa6614054b0f05754f0b7fded24bf1fbd63edec47d75"
+    },
+    {
+      "path": "qa\\overlay.png",
+      "bytes": 834570,
+      "sha256": "51e21bdb5c31e824c01eee57a9b3ac68b0372a89d85700d9d852ae59de9cc306"
+    },
+    {
+      "path": "qa\\preview.png",
+      "bytes": 435883,
+      "sha256": "b363da562091d6dcea4a6eace80fdf43078741ed73228a9b5d617d4b980ea03c"
+    },
+    {
+      "path": "qa\\scientific-provenance.json",
+      "bytes": 3487,
+      "sha256": "200326eb897000b19e22d8a7deb79438057cfa3d86e80092249c66dd4d84f1cc"
+    },
+    {
+      "path": "qa\\slides\\slide-01-difference.png",
+      "bytes": 1020337,
+      "sha256": "c83fc680dd96c2c8b7ddb153a171e34b6dd20d8d5369724c1de06abec4cb8cf3"
+    },
+    {
+      "path": "qa\\slides\\slide-01-overlay.png",
+      "bytes": 1010476,
+      "sha256": "f88005a6d838fd095bac1ce54dee70b414db7abd357f471f8931b7f471049302"
+    },
+    {
+      "path": "qa\\slides\\slide-01-preview.png",
+      "bytes": 418466,
+      "sha256": "0ee7b1773a1cbb9de3751ba7bbd8a95c1a3f6ea02c2c71b1c78b8350dd66ccc6"
+    },
+    {
+      "path": "qa\\slides\\slide-01-source.png",
+      "bytes": 1150310,
+      "sha256": "294ce72ee29adc99d534c2354a36516a56a37db1694acb9d4ab7d893c9d64d61"
+    },
+    {
+      "path": "qa\\slides\\slide-02-difference.png",
+      "bytes": 992332,
+      "sha256": "5c93c03202e3cc2127a9afe7abc1c32f7db617ff6a977cf5926d14ed932088d8"
+    },
+    {
+      "path": "qa\\slides\\slide-02-overlay.png",
+      "bytes": 783521,
+      "sha256": "6d0aed4fd339f77fc75aa9b14fd58262027e7f902f930eae6e5bf5f0e5740371"
+    },
+    {
+      "path": "qa\\slides\\slide-02-preview.png",
+      "bytes": 92591,
+      "sha256": "39ce0668cb7236cea3f9059defbd20815e025952fd9e983a18cb4ee60e137540"
+    },
+    {
+      "path": "qa\\slides\\slide-02-source.png",
+      "bytes": 1101018,
+      "sha256": "7975bbe9e3dca21c7a0e4ecab578fcdbbd15bd8015829d1c3d641c9dfbd6b7f6"
+    },
+    {
+      "path": "qa\\slides\\slide-03-difference.png",
+      "bytes": 1181402,
+      "sha256": "842387ee14cd58aa3a3d1d254879c55cb705b776f2dd6de01be3ebfe78285674"
+    },
+    {
+      "path": "qa\\slides\\slide-03-overlay.png",
+      "bytes": 1256328,
+      "sha256": "452cd11b3b56e9fc79103d7ade137edbe53f3396734e5f73b77b403338342cdc"
+    },
+    {
+      "path": "qa\\slides\\slide-03-preview.png",
+      "bytes": 656161,
+      "sha256": "b13b09dac39e2d900aaf3d132454b4d3ac6d36515e1d68a8fabb6570b33b137d"
+    },
+    {
+      "path": "qa\\slides\\slide-03-source.png",
+      "bytes": 1429938,
+      "sha256": "f2789b177f66d7317c94f3c6778c6085e1066e3409175b5fdfcf81e71259e1e1"
+    },
+    {
+      "path": "qa\\slides\\slide-04-difference.png",
+      "bytes": 1376498,
+      "sha256": "17c05e5dc94255d71b9158ecf4204429a65d85452e55638f31027fb2638d2737"
+    },
+    {
+      "path": "qa\\slides\\slide-04-overlay.png",
+      "bytes": 1485371,
+      "sha256": "d688f705559b322e9e4278f204e0891b84731aea7fd83c26d99e05d9e868eb89"
+    },
+    {
+      "path": "qa\\slides\\slide-04-preview.png",
+      "bytes": 835660,
+      "sha256": "f11eb2b45a5af92980fe76ea455a91ec6f78b8d0054b866c86c2e71c1fc406ca"
+    },
+    {
+      "path": "qa\\slides\\slide-04-source.png",
+      "bytes": 1561008,
+      "sha256": "96d689e96200bfc7089a589cec9fb774f6f4adcf6325340a59d4aa7987e84292"
+    },
+    {
+      "path": "qa\\slides\\slide-05-difference.png",
+      "bytes": 1082837,
+      "sha256": "abb96c5021c674cb92adffbd25d4e50a60cd3dabcce2e070978cc94de205a9c7"
+    },
+    {
+      "path": "qa\\slides\\slide-05-overlay.png",
+      "bytes": 1023626,
+      "sha256": "899ffe48b96249ada6480b4a14a5dd6669a1ea40785215335679d462893bc940"
+    },
+    {
+      "path": "qa\\slides\\slide-05-preview.png",
+      "bytes": 354744,
+      "sha256": "38f41759bd4450c71093b13e46f1dd7ed884c0b3d1db02616a0e00c6c568541a"
+    },
+    {
+      "path": "qa\\slides\\slide-05-source.png",
+      "bytes": 1201972,
+      "sha256": "f0b93b094d28d614d870cd0e1161484cd7ba0a4e2880ded86c7ab39be4c38033"
+    },
+    {
+      "path": "qa\\source-preview-contact-sheet.png",
+      "bytes": 829728,
+      "sha256": "8e1bfd7dd80cb796185afca9f1f5c01c89c1e4be1cf9ce4af62349ed700f1fe2"
+    },
+    {
+      "path": "qa\\visual-qa.json",
+      "bytes": 684,
+      "sha256": "0f1d045cb92c52d949e811e3bfc659dca0f2f94daa659666c872477e5a34763c"
+    },
+    {
+      "path": "validation-clean.json",
+      "bytes": 729,
+      "sha256": "6e105a908de3deb59bcd999925d36c73b5f7282491050af5afd7f90959adb564"
+    }
+  ]
+}

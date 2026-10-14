@@ -1,0 +1,95 @@
+{
+  "scope": "independent scientific visual assets and formula provenance for a five-slide editable rebuild",
+  "assets": [
+    {
+      "file": "reconstructed/ct_stack.png",
+      "method": "imagegen",
+      "status": "used",
+      "role": "schematic grayscale CT stack"
+    },
+    {
+      "file": "reconstructed/segmented_slice.png",
+      "method": "imagegen",
+      "status": "used",
+      "role": "three-phase segmented representative slice"
+    },
+    {
+      "file": "reconstructed/fem_mesh.png",
+      "method": "imagegen",
+      "status": "used",
+      "role": "boundary-refined triangular FEM mesh"
+    },
+    {
+      "file": "reconstructed/magnetization_field.png",
+      "method": "imagegen",
+      "status": "used",
+      "role": "normalized magnetization field schematic"
+    },
+    {
+      "file": "reconstructed/porosity_groups.png",
+      "method": "imagegen",
+      "status": "used",
+      "role": "porosity-group representative-slice schematic"
+    },
+    {
+      "file": "reconstructed/interface_generated_attempt.png",
+      "method": "imagegen",
+      "status": "rejected",
+      "reason": "solid-fluid and water-air boundary encodings were not cleanly separable"
+    },
+    {
+      "file": "reconstructed/interface_authoritative_fallback.png",
+      "method": "post-attempt source crop",
+      "status": "used",
+      "source": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\03_ct_to_fem_16x9.png",
+      "crop_pixels": [
+        875,
+        280,
+        330,
+        340
+      ],
+      "reason": "preserve the source-authoritative boundary classification after the generated attempt failed scientific audit"
+    },
+    {
+      "file": "reconstructed/mag_t0_authoritative_fallback.png",
+      "method": "post-attempt source crop",
+      "status": "used",
+      "source": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\04_magnetization_to_decay_16x9.png",
+      "crop_pixels": [
+        45,
+        270,
+        305,
+        380
+      ],
+      "reason": "preserve the exact t0-t2 topology and temporal progression after a generated magnetization-field attempt"
+    },
+    {
+      "file": "reconstructed/mag_t1_authoritative_fallback.png",
+      "method": "post-attempt source crop",
+      "status": "used",
+      "source": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\04_magnetization_to_decay_16x9.png",
+      "crop_pixels": [
+        405,
+        270,
+        305,
+        380
+      ],
+      "reason": "preserve the exact t0-t2 topology and temporal progression after a generated magnetization-field attempt"
+    },
+    {
+      "file": "reconstructed/mag_t2_authoritative_fallback.png",
+      "method": "post-attempt source crop",
+      "status": "used",
+      "source": "C:\\Users\\imgw\\Documents\\Codex\\NMR模拟\\docs\\nmr_t2_workflow_figures\\04_magnetization_to_decay_16x9.png",
+      "crop_pixels": [
+        765,
+        270,
+        305,
+        380
+      ],
+      "reason": "preserve the exact t0-t2 topology and temporal progression after a generated magnetization-field attempt"
+    }
+  ],
+  "formula_policy": "equations and scientific labels were transcribed from the five user-provided source figures; no new calibrated parameter values were introduced",
+  "model_dimension_statement": "2D representative-slice approximation, explicitly not a full 3D solve"
+}

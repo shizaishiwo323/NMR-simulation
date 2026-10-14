@@ -1,0 +1,31 @@
+{
+  "renderer": "WPS Presentation 12.1 COM slide.Export",
+  "slide_size_px": [
+    1600,
+    900
+  ],
+  "source_normalization": "resize-to-fill 1600x900 for comparison only",
+  "difference_visualization": "absolute RGB difference amplified 2x",
+  "metrics": [
+    {
+      "slide": 1,
+      "mean_absolute_pixel_difference_0_255": 22.156
+    },
+    {
+      "slide": 2,
+      "mean_absolute_pixel_difference_0_255": 22.425
+    },
+    {
+      "slide": 3,
+      "mean_absolute_pixel_difference_0_255": 29.128
+    },
+    {
+      "slide": 4,
+      "mean_absolute_pixel_difference_0_255": 25.804
+    },
+    {
+      "slide": 5,
+      "mean_absolute_pixel_difference_0_255": 23.841
+    }
+  ]
+}
